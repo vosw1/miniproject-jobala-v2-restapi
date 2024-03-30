@@ -1,18 +1,14 @@
 package com.example.jobala.resume;
 
-import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._user.User;
-import com.example.jobala.jobopen.JobopenRequest;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @DataJpaTest
 class ResumeJPARepositoryTest {
@@ -24,7 +20,7 @@ class ResumeJPARepositoryTest {
     private EntityManager em;
 
     @Test
-    public void findByUserId_test(){
+    public void findByUserId_test() {
         // given
         int userId = 1;
         // when
@@ -35,8 +31,9 @@ class ResumeJPARepositoryTest {
         // then
 
     }
+
     @Test
-    public void 이력서스킬_test(){
+    public void 이력서스킬_test() {
         // given
         String skillName = "HTML";
 
@@ -67,7 +64,7 @@ class ResumeJPARepositoryTest {
     }
 
     @Test
-    public void 스크랩한이력서보기_test(){
+    public void 스크랩한이력서보기_test() {
         // given
         int id = 10;
         // when
@@ -80,10 +77,10 @@ class ResumeJPARepositoryTest {
     }
 
     @Test
-        public void 이력서보기_test(){
-            // given
+    public void 이력서보기_test() {
+        // given
         int id = 1;
-            // when
+        // when
         Resume resume = resumeJPARepository.findById(id).get();
         System.out.println("resume.getSkills() = " + resume.getSkills());
 
@@ -94,12 +91,12 @@ class ResumeJPARepositoryTest {
 
         // then
 
-        }
+    }
 
     @Test
     public void 이력서등록_test() {
         // given
-        String hopeJob="백엔드";
+        String hopeJob = "백엔드";
         String edu = "고등학교 졸업";
         String resumeTitle = "테스트타이틀";
         String career = "신입";

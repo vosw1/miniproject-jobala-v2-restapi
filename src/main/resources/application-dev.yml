@@ -8,11 +8,6 @@ server:
   port: 8080
 
 spring:
-#  TODO: 머스태치 삭제예정
-  mustache:
-    servlet:
-      expose-session-attributes: true
-      expose-request-attributes: true
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:test;MODE=MySQL
@@ -34,5 +29,5 @@ spring:
         format_sql: true
         default_batch_fetch_size: 10
     defer-datasource-initialization: true
-#    TODO: 오픈인뷰 DTO 만들고 추가
-#    open-in-view: true
+    #    TODO: DTO로 만들고 false전환
+    open-in-view: true

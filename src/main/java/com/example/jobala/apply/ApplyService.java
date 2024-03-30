@@ -26,7 +26,7 @@ public class ApplyService {
     public void statusUpdate(Integer applyId, String status) {
         Apply apply = applyJPARepository.findById(applyId)
                 .orElseThrow(() -> new Exception404("해당 정보를 찾을 수 없습니다."));
-    
+
         apply.setState(status);
     }
 
@@ -38,7 +38,7 @@ public class ApplyService {
         Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())
                 .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다"));
 
-        applyJPARepository.save(reqDTO.toEntity(resume,jobopen,sessionUser));
+        applyJPARepository.save(reqDTO.toEntity(resume, jobopen, sessionUser));
     }
 
     public List<ApplyResponse.CompPositionDTO> findApplyCompByUserId(Integer id) {

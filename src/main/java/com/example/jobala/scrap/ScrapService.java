@@ -5,7 +5,6 @@ import com.example.jobala._user.User;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.jobopen.JobopenResponse;
-import com.example.jobala.reply.ReplyJPARepository;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeJPARepository;
 import com.example.jobala.resume.ResumeResponse;

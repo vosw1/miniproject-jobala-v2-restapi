@@ -11,8 +11,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class BoardService {
@@ -39,13 +37,13 @@ public class BoardService {
 
     // 글수정
     @Transactional
-    public void boardUpdate(int boardId, int sessionUserId, BoardRequest.UpdateDTO reqDTO){
+    public void boardUpdate(int boardId, int sessionUserId, BoardRequest.UpdateDTO reqDTO) {
         //조회 및 예외처리
         Board board = boardJPARepository.findById(boardId)
                 .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다."));
 
         // 권한체크
-        if(sessionUserId != board.getUser().getId()){
+        if (sessionUserId != board.getUser().getId()) {
             throw new Exception403("게시글을 수정할 권한이 없습니다.");
         }
 
@@ -56,7 +54,7 @@ public class BoardService {
     }
 
     // 글조회
-    public Board boardFindById(int boardId){
+    public Board boardFindById(int boardId) {
         Board board = boardJPARepository.findById(boardId)
                 .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다."));
 
@@ -65,13 +63,13 @@ public class BoardService {
 
     // 글쓰기
     @Transactional
-    public void boardSave(BoardRequest.SaveDTO reqDTO, User sessionUser){
-       boardJPARepository.save(reqDTO.toEntity(sessionUser));
+    public void boardSave(BoardRequest.SaveDTO reqDTO, User sessionUser) {
+        boardJPARepository.save(reqDTO.toEntity(sessionUser));
     }
 
     // 글목록조회
-    public Page<Board> 글목록조회(int page, int size){
-        Pageable pageable = (Pageable) PageRequest.of(page, size,Sort.by(Sort.Direction.DESC,"id"));
+    public Page<Board> 글목록조회(int page, int size) {
+        Pageable pageable = (Pageable) PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"));
 
         return boardJPARepository.findAll(pageable);
     }

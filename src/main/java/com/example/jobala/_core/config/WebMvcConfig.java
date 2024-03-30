@@ -14,8 +14,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor())
-                .addPathPatterns("/applyForm/","/positionForm/")
-                .excludePathPatterns("/guest/jobSearch","/comp/jobopen/{\\d+}");
+                //TODO: "/guest/**","/comp/**"추가시 오류 터짐.
+                .addPathPatterns("/guest/**", "/comp/**", "/applyForm/", "/positionForm/")
+                .excludePathPatterns("/guest/jobSearch", "/comp/jobopen/{\\d+}");
+
     }
 
     //외부이미지 경로설정
