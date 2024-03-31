@@ -8,10 +8,39 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
 public class ResumeResponse {
+    @Data
+    public static class ASaveDTO {
+        private Integer userId;
+        private Integer Id;
+        private String resumeTitle;
+        private String hopeJob;
+        private String career;
+        private String license;
+        private String content;
+        private String edu;
+
+        private List<String> skills = new ArrayList<>();
+
+        public ASaveDTO(Resume resume, User sessionUser) {
+            this.userId = sessionUser.getId();
+            this.Id = resume.getId();
+            this.resumeTitle = resume.getResumeTitle();
+            this.hopeJob = resume.getHopeJob();
+            this.career = resume.getCareer();
+            this.license = resume.getLicense();
+            this.content = resume.getContent();
+            this.edu = resume.getEdu();
+            this.skills = Arrays.asList(resume.getSkills());
+        }
+    }
+
+
 
     @Data//개인 - 마이페이지 이력서 관리 DTO
     public static class MngDTO {
@@ -178,6 +207,30 @@ public class ResumeResponse {
                 this.email = user.getEmail();
                 this.address = user.getAddress();
             }
+        }
+    }
+
+    @AllArgsConstructor
+    @Data
+    public static class UpdateDTO {
+        private Integer id;
+        private String resumeTitle;
+        private String hopeJob;
+        private String career;
+        private String license;
+        private String content;
+        private String edu;
+        private String skills;
+
+        public UpdateDTO(Resume resume) {
+            this.id = resume.getId();
+            this.resumeTitle = resume.getResumeTitle();
+            this.hopeJob = resume.getHopeJob();
+            this.career = resume.getCareer();
+            this.license = resume.getLicense();
+            this.content = resume.getContent();
+            this.edu = resume.getEdu();
+            this.skills = resume.getSkills();
         }
     }
 }

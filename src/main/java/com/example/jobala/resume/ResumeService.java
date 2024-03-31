@@ -11,6 +11,7 @@ import com.example.jobala.scrap.ScrapJPARepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,8 +27,9 @@ public class ResumeService {
 
     // 이력서등록
     @Transactional
-    public Resume resumeSave(ResumeRequest.SaveDTO reqDTO, User sessionUser) {
-        return resumeJPARepository.save(reqDTO.toEntity(sessionUser));
+    public ResumeResponse.ASaveDTO resumeSave(ResumeRequest.SaveDTO reqDTO, User sessionUser) {
+       Resume resume =  resumeJPARepository.save(reqDTO.toEntity(sessionUser));
+        return new ResumeResponse.ASaveDTO(resume,sessionUser);
     }
 
     // 이력서삭제
@@ -44,16 +46,14 @@ public class ResumeService {
 
     // 이력서수정
     @Transactional
-    public Resume resumeUpdate(Integer resumeId, ResumeRequest.UpdateDTO reqDTO, Integer sessionUserId) {
+    public ResumeResponse.UpdateDTO resumeUpdate(Integer resumeId, ResumeRequest.UpdateDTO reqDTO, Integer sessionUserId) {
         Resume resume = resumeJPARepository.findById(resumeId)
                 .orElseThrow(() -> new Exception404("이력서 정보를 찾을 수 없습니다."));
-        System.out.println(sessionUserId);
-        System.out.println(resume.getUser().getId());
         if (sessionUserId != resume.getUser().getId()) {
             throw new Exception403("이력서를 수정할 권한이 없습니다.");
         }
         resume.setResumeUpdateDTO(reqDTO);
-        return resume;
+        return new ResumeResponse.UpdateDTO(resume);
     }
 
     // 이력서보기

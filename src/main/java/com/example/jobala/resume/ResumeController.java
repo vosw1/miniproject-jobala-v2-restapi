@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -26,11 +27,11 @@ public class ResumeController {
     private final ResumeService resumeService;
 
     //이력서 업데이트
-    @PostMapping("/guest/resume/{id}/update")  // 주소 수정 필요
-    public String update(@PathVariable Integer id, ResumeRequest.UpdateDTO reqDTO) {
+    @PostMapping("api/guest/resume/{id}")  // 주소 수정 필요
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody ResumeRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        resumeService.resumeUpdate(id, reqDTO,sessionUser.getId());
-        return "redirect:/guest/mngForm";
+        ResumeResponse.UpdateDTO respDTO = resumeService.resumeUpdate(id, reqDTO,sessionUser.getId());
+        return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
     // TODO: 글조회로 변경예정
@@ -47,7 +48,7 @@ public class ResumeController {
 //    }
 
     //이력서 상세보기
-    @GetMapping("/guest/resume/{id}")
+    @GetMapping("/api/guest/resume/{id}")
     public ResponseEntity<?> detailForm(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ResumeResponse.DetailDTO respDTO = resumeService.resumeFindById(id, sessionUser);
@@ -55,15 +56,15 @@ public class ResumeController {
     }
 
     //이력서 등록
-    @PostMapping("/guest/resume/save")  // 주소 수정 필요
-    public String save(ResumeRequest.SaveDTO resumeSaveDTO) {
+    @PostMapping("/api/guest/resume")  // 주소 수정 필요
+    public ResponseEntity<?> save(@RequestBody ResumeRequest.SaveDTO resumeSaveDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        resumeService.resumeSave(resumeSaveDTO, sessionUser);
-        return "redirect:/guest/mngForm";
+        ResumeResponse.ASaveDTO respDTO = resumeService.resumeSave(resumeSaveDTO, sessionUser);
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
     //이력서 삭제
-    @PostMapping("/resume/{id}/delete")  // 주소 수정 필요
+    @GetMapping("/api/resume/{id}/delete")  // 주소 수정 필요
     public String delete(@PathVariable int id, ResumeRequest.DeleteDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         resumeService.resumeDelete(id, reqDTO.getId());
