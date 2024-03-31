@@ -37,11 +37,10 @@ public class UserController {
 
     // 회원가입
     @PostMapping("/join")
-    public ResponseEntity<?> join(@RequestBody UserRequest.JoinDTO reqDTO, HttpServletRequest req) {
-        System.out.println("reqDTO = " + reqDTO);
+    public ResponseEntity<?> join(@RequestBody UserRequest.JoinDTO reqDTO) {
         UserResponse.JoinDTO respDTO = userService.join(reqDTO);
+        // TODO : ?? - 찬혁
         return ResponseEntity.ok(new ApiUtil(respDTO.getCompDTO()));
-
     }
 
     //로그아웃
