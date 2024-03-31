@@ -8,6 +8,7 @@ import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 @Repository
@@ -15,7 +16,9 @@ import java.util.List;
 public class CompQueryRepository {
     private final EntityManager em;
 
-    public List<ResumeResponse.ListDTO> findAll(String skills, CompResponse.SearchDTO resDTO) {
+
+    //인재채용 검색필터
+    public List<ResumeResponse.ScoutListDTO> findAll(String skills, CompResponse.SearchDTO resDTO) {
         String skillQuery = """
                 SELECT rt.id, ut.name, rt.resume_title, rt.edu, rt.career, ut.img_filename
                 FROM resume_tb rt 
@@ -91,7 +94,7 @@ public class CompQueryRepository {
         query.setParameter(12, hopeJob[1]);
 
         JpaResultMapper rm = new JpaResultMapper();
-        List<ResumeResponse.ListDTO> resumeList = rm.list(query, ResumeResponse.ListDTO.class);
+        List<ResumeResponse.ScoutListDTO> resumeList = rm.list(query, ResumeResponse.ScoutListDTO.class);
 
         return resumeList;
     }
@@ -104,22 +107,21 @@ public class CompQueryRepository {
         return resumeList2;
     }
 
-    public List<ResumeResponse.ListDTO> findResumeAll() {
+    public List<ResumeResponse.ScoutListDTO> findResumeAll() {
         String q = """
-            SELECT rt.id, ut.name, rt.resume_title, rt.edu, rt.career, ut.img_filename
-            FROM resume_tb rt
-            JOIN user_tb ut ON rt.user_id = ut.id
-            WHERE (rt.id, rt.user_id) IN (
-                SELECT MAX(rt2.id), rt2.user_id
-                FROM resume_tb rt2
-                GROUP BY rt2.user_id
-            )
-            ORDER BY rt.id DESC;
-            """;
+                SELECT rt.id, ut.name, rt.resume_title, rt.edu, rt.career, ut.img_filename
+                FROM resume_tb rt
+                JOIN user_tb ut ON rt.user_id = ut.id
+                WHERE (rt.id, rt.user_id) IN (
+                    SELECT MAX(rt2.id), rt2.user_id
+                    FROM resume_tb rt2
+                    GROUP BY rt2.user_id
+                )
+                ORDER BY rt.id DESC;
+                """;
         Query query = em.createNativeQuery(q);
         JpaResultMapper rm = new JpaResultMapper();
-        List<ResumeResponse.ListDTO> resumeList = rm.list(query, ResumeResponse.ListDTO.class);
-        return resumeList;
+        return rm.list(query, ResumeResponse.ScoutListDTO.class);
     }
 
     public List<Jobopen> findJobopenById(int id) {

@@ -4,14 +4,41 @@ import com.example.jobala._user.User;
 import com.example.jobala.resume.Resume;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class JobopenResponse {
+
+
+    @Data//기업 - 마이페이지 공고 관리 DTO
+    public static class MngDTO {
+        private Integer userId;
+        private List<JobopenDTO> jobopenDTO = new ArrayList<>();
+
+        public MngDTO(Integer userId, List<Jobopen> jobopen) {
+            this.userId = userId;
+            this.jobopenDTO = jobopen.stream().map(JobopenDTO::new).toList();
+        }
+
+        @Data
+        public class JobopenDTO {
+            private Integer id;
+            private Integer role; // 역할 0 -> guest, 1 -> comp
+            private String jobopenTitle; //공고제목
+            private Integer applyCount;
+
+            public JobopenDTO(Jobopen jobopen) {
+                this.id = jobopen.getId();
+                this.role = jobopen.getRole();
+                this.jobopenTitle = jobopen.getJobopenTitle();
+                this.applyCount = jobopen.getId();
+
+            }
+        }
+    }
+
     @AllArgsConstructor
     @Data
     public static class ListDTO {
@@ -25,37 +52,26 @@ public class JobopenResponse {
 
     @Data
     public static class DTO {
-        private Integer id;
         private Integer userId;
-        private String compname; //회사명
-        private String jobopenTitle; //공고제목
-        private String content; //내용
-        private String career;// 경력
-        private String edu; // 학력
-        private String hopeJob; //희망직종
-        private String compLocation; //근무지역
-        private String jobType; // 고용형태
-        private String salary; //연봉
-        private java.sql.Date endTime; // 마감일
-        private Integer role; // 역할 0 -> guest, 1 -> comp
-        private int count;
-        @CreationTimestamp
-        private Timestamp createdAt; //생성일
+        private List<JobopenDTO> jobopenDTO = new ArrayList<>();
 
-        public DTO(Jobopen jobopen) {
-            this.id = jobopen.getId();
-            this.userId = jobopen.getUser().getId();
-            this.compname = jobopen.getUser().getCompname();
-            this.jobopenTitle = jobopen.getJobopenTitle();
-            this.career = jobopen.getCareer();
-            this.edu = jobopen.getEdu();
-            this.hopeJob = jobopen.getHopeJob();
-            this.compLocation = jobopen.getCompLocation();
-            this.jobType = jobopen.getJobType();
-            this.salary = jobopen.getSalary();
-            this.endTime = jobopen.getEndTime();
-            this.role = jobopen.getRole();
-            this.count = jobopen.getId();
+        public DTO(Integer userId, List<Jobopen> jobopen) {
+            this.userId = userId;
+            this.jobopenDTO = jobopen.stream().map(JobopenDTO::new).toList();
+        }
+
+        @Data
+        public class JobopenDTO {
+            private Integer id;
+            private Integer role; // 역할 0 -> guest, 1 -> comp
+            private String jobopenTitle; //공고제목
+            private Integer applyCount;
+
+            public JobopenDTO(Jobopen jobopen) {
+                this.id = jobopen.getId();
+                this.role = jobopen.getRole();
+                this.jobopenTitle = jobopen.getJobopenTitle();
+            }
         }
     }
 
@@ -90,12 +106,10 @@ public class JobopenResponse {
             this.skills = jobopen.getSkills();
             this.isScrap = false;
             this.isGuestScrap = false;
-
             this.userDTO = new UserDTO(jobopen.getUser());
 
             // 개인 지원하기 - 모달창 이력서 목록
             this.applyResumeList = resumeList.stream().map(r -> new ResumeDTO(r)).toList();
-
             if (sessionUser != null) {
                 if (sessionUser.getRole() == 0) {
                     this.isGuestScrap = true;
@@ -165,7 +179,7 @@ public class JobopenResponse {
 
     @AllArgsConstructor
     @Data
-    public static class ScrapDTO{
+    public static class ScrapDTO {
         private int id;
         private String compname;
         private String jobopenTitle;

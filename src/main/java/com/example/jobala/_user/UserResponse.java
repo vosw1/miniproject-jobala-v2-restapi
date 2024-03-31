@@ -6,6 +6,28 @@ import lombok.Data;
 
 public class UserResponse {
 
+
+    @Data
+    public static class GuestProfile {
+        private Integer id;
+        private String imgFilename;
+        private String name;
+        private String password;
+        private String phone;
+        private String email;
+        private String address;
+
+        public GuestProfile(User user) {
+            this.id = user.getId();
+            this.imgFilename = user.getImgFilename();
+            this.name = user.getName();
+            this.password = user.getPassword();
+            this.phone = user.getPhone();
+            this.email = user.getEmail();
+            this.address = user.getAddress();
+        }
+    }
+
     @Data
     public static class JoinDTO {
         private GuestDTO guestDTO; // 개인 회원가입

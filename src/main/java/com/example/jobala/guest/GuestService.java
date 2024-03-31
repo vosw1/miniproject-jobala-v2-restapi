@@ -1,15 +1,13 @@
 package com.example.jobala.guest;
 
 import com.example.jobala._core.errors.exception.Exception404;
+import com.example.jobala._core.utill.Paging;
 import com.example.jobala._user.User;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeJPARepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +26,7 @@ public class GuestService {
     private final GuestJPARepository guestJPARepository;
     private final GuestQueryRepository guestQueryRepository;
     private final ResumeJPARepository resumeJPARepository;
+    private final Paging paging;
 
     // 프로필업데이트
     @Transactional
@@ -41,7 +40,6 @@ public class GuestService {
         // 이미지 파일의 저장 경로 설정
         String GuestImgFilename = UUID.randomUUID() + "_" + imgFilename.getOriginalFilename();
         Path imgPath = Paths.get("./image/" + GuestImgFilename);
-
         try {
             Files.write(imgPath, imgFilename.getBytes());
             String webImgPath = imgPath.toString().replace("\\", "/");
@@ -59,18 +57,13 @@ public class GuestService {
         return guestQueryRepository.findAll(skills, resDTO);
     }
 
+
     public List<JobopenResponse.ListDTO> findAll() {
         return guestQueryRepository.findByJoboopenAll();
     }
 
-    public List<Resume> findResumeByUserId(Integer id) {
-        return resumeJPARepository.findByUserId(id);
-    }
-
     //이력서 페이징 하기 위한 목록 조회
-    public Page<Resume> resumesFindAll(int page, int size) {
-        Pageable pageable = (Pageable) PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"));
-
-        return guestJPARepository.findAll(pageable);
+    public Page<Resume> resumesFindAll(int page) {
+        return guestJPARepository.findAll(paging.guestPaging(page));
     }
 }
