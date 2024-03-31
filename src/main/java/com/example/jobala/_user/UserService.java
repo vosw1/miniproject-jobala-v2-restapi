@@ -3,7 +3,7 @@ package com.example.jobala._user;
 import com.example.jobala._core.errors.exception.Exception400;
 import com.example.jobala._core.errors.exception.Exception401;
 import com.example.jobala._core.errors.exception.Exception404;
-import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala._core.utill.Paging;
 import com.example.jobala.jobopen.JobopenJPARepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,13 +17,12 @@ import java.util.Optional;
 public class UserService {
     private final JobopenJPARepository jobopenJPARepository;
     private final UserJPARepository userJPARepository;
+    private final Paging paging;
 
-    public List<Jobopen> mainJobopenList() {
-        List<Jobopen> jobopenList = jobopenJPARepository.findAll();
-        if (jobopenList.isEmpty()) {
-            throw new Exception404("현재 등록 중인 공고가 없습니다.");
-        }
-        return jobopenList;
+    //메인 공고 목록조회
+    public List<UserResponse.MainDTO> mainJobopenList(Integer page, User sessionUser) {
+        return jobopenJPARepository.findAll(paging.boardPaging(page)).
+                stream().map(jobopen -> new UserResponse.MainDTO(jobopen, sessionUser)).toList();
     }
 
     // 로그인
@@ -54,10 +53,6 @@ public class UserService {
         return user;
     }
 
-    // 중복체크
-    public Optional<User> usernameSameCheck(String username) {
-        return userJPARepository.findByUsername(username);
-    }
 
     public User guestInfo(Integer id) {
         return userJPARepository.findById(id).orElseThrow(() -> new Exception404("유저의 정보를 찾을 수 없습니다."));

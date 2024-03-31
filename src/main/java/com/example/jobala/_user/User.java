@@ -26,7 +26,7 @@ public class User {
     private String password; //패스워드
 
     @Column(length = 15)
-    private String name; // 이름
+    private String name; // 담당자 이름
     private String compname; // 회사명
 
     @Column(nullable = false)//널 값 허용 안하는 어노테이션
@@ -43,17 +43,8 @@ public class User {
     private Date age;
 
 
-
     @CreationTimestamp
     private Timestamp createdAt;
-
-    // 사진이 null로 들어올때 디폴트 값 설정하기
-    @PrePersist // 엔티티가 저장되기 전에 실행되는 메서드, 필드에 기본값 설정
-    public void setDefaultImgFilename() {
-        if(imgFilename == null) {
-            imgFilename = "default.png";
-        }
-    }
 
     @Builder
     public User(Integer id, String username, String compNum, String password, String name, String compname, String email, String phone, String ceo, String address, Integer role, Date age, String imgFilename) {
@@ -70,6 +61,14 @@ public class User {
         this.role = role;
         this.age = age;
         this.imgFilename = imgFilename; // 생성자에서 imgFilename을 설정할 수 있도록 추가
+    }
+
+    // 사진이 null로 들어올때 디폴트 값 설정하기
+    @PrePersist // 엔티티가 저장되기 전에 실행되는 메서드, 필드에 기본값 설정
+    public void setDefaultImgFilename() {
+        if (imgFilename == null) {
+            imgFilename = "default.png";
+        }
     }
 
     //프로필 업데이트 setter
