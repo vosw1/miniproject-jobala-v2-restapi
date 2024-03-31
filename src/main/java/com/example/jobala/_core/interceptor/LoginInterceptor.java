@@ -1,6 +1,7 @@
 package com.example.jobala._core.interceptor;
 
 import com.example.jobala._core.errors.exception.Exception401;
+import com.example.jobala._user.UserResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -14,7 +15,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("preHandle............");
         HttpSession session = request.getSession();
-        User sessionUser = (User) session.getAttribute("sessionUser");
+        UserResponse.LoginResponseDTO sessionUser = (UserResponse.LoginResponseDTO) session.getAttribute("sessionUser");
         if (sessionUser == null) {
             throw new Exception401("로그인 하셔야 해요");
         }
