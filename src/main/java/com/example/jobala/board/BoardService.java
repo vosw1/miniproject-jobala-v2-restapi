@@ -11,6 +11,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BoardService {
@@ -37,7 +39,7 @@ public class BoardService {
 
     // 글수정
     @Transactional
-    public void boardUpdate(int boardId, int sessionUserId, BoardRequest.UpdateDTO reqDTO) {
+    public Board boardUpdate(int boardId, int sessionUserId, BoardRequest.UpdateDTO reqDTO) {
         //조회 및 예외처리
         Board board = boardJPARepository.findById(boardId)
                 .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다."));
@@ -48,9 +50,9 @@ public class BoardService {
         }
 
         // 글 수정
-
         board.setTitle(reqDTO.getTitle());
         board.setContent(reqDTO.getContent());
+        return board;
     }
 
     // 글조회
@@ -63,8 +65,9 @@ public class BoardService {
 
     // 글쓰기
     @Transactional
-    public void boardSave(BoardRequest.SaveDTO reqDTO, User sessionUser) {
-        boardJPARepository.save(reqDTO.toEntity(sessionUser));
+    public Board boardSave(BoardRequest.SaveDTO reqDTO, User sessionUser) {
+        Board board = boardJPARepository.save(reqDTO.toEntity(sessionUser));
+        return board;
     }
 
     // 글목록조회
@@ -74,4 +77,10 @@ public class BoardService {
         return boardJPARepository.findAll(pageable);
     }
 
+    public List<BoardResponse.MainDetailDTO> boardFindAll() { // 글목록조회
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        List<Board> boardList = boardJPARepository.findAll(sort);
+        return boardList.stream().map(board -> new BoardResponse.MainDetailDTO(board)).toList();
+        // return boardList.stream().map(BoardResponse.MainDTO::new).toList();와 같은 것
+    }
 }
