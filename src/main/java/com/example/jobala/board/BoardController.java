@@ -24,8 +24,8 @@ public class BoardController {
     // 글 상세보기 완료
     @GetMapping("/board/{id}")
     public ResponseEntity<?> boardDetailForm(@PathVariable int id) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        BoardResponse.DetailDTO respDTO = boardService.boardDetail(id, sessionUser);
+        UserResponse.LoginResponseDTO sessionUserDTO = (UserResponse.LoginResponseDTO) session.getAttribute("sessionUser");
+        BoardResponse.DetailDTO respDTO = boardService.boardDetail(id, sessionUserDTO.getUser());
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
