@@ -51,17 +51,17 @@ public class JobopenService {
 
     // 공고수정하기
     @Transactional
-    public Jobopen jobopenUpdate(int jobOpenId, int sessionUser, JobopenRequest.UpdateDTO reqDTO) {
+    public JobopenResponse.DetailDTO jobopenUpdate(int jobOpenId, User sessionUser, JobopenRequest.UpdateDTO reqDTO) {
         //1.조회 및 예외 처리
         Jobopen jobopen = jobopenJPARepository.findById(jobOpenId)
                 .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다."));
         //2.권한 처리
-        if (sessionUser != jobopen.getUser().getId()) {
+        if (sessionUser.getId() != jobopen.getUser().getId()) {
             throw new Exception403("공고를 수정할 권한이 없습니다.");
         }
         //3.공고 수정
         jobopen.setJobopenUpdate(reqDTO);
-        return jobopen;
+        return new JobopenResponse.DetailDTO(jobopen,sessionUser);
     }
 
     // 공고보기
