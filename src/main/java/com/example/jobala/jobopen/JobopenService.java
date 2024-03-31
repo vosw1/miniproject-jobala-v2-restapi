@@ -10,6 +10,7 @@ import com.example.jobala.scrap.ScrapJPARepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,9 +31,9 @@ public class JobopenService {
 
     // 공고등록
     @Transactional
-    public Jobopen jobopenSave(JobopenRequest.SaveDTO reqDTO, User sessionUser) {
+    public JobopenResponse.SaDTO jobopenSave(@RequestBody JobopenRequest.SaveDTO reqDTO, User sessionUser) {
         Jobopen jobopen = jobopenJPARepository.save(reqDTO.toEntity(sessionUser));
-        return jobopen;
+        return new JobopenResponse.SaDTO(jobopen,sessionUser);
     }
 
     // 공고삭제

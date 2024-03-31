@@ -7,13 +7,11 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
@@ -32,7 +30,7 @@ public class UserController {
 
     //로그인
     @PostMapping("/login")
-    public ResponseEntity<?> login(UserRequest.LoginDTO reqDTO, HttpSession session) {
+    public ResponseEntity<?> login(@RequestBody UserRequest.LoginDTO reqDTO, HttpSession session) {
         UserResponse.LoginResponseDTO respDTO = userService.login(reqDTO);
         session.setAttribute("sessionUser", respDTO);
         return ResponseEntity.ok(new ApiUtil(null));

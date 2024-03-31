@@ -4,12 +4,11 @@ import com.example.jobala._user.User;
 import com.example.jobala.resume.Resume;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hibernate.Session;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class JobopenResponse {
     @AllArgsConstructor
@@ -21,6 +20,35 @@ public class JobopenResponse {
         private String career;
         private String edu;
         private String imgFilename;
+    }
+
+    @Data
+    public static class SaDTO{
+        private Integer userId;
+        private Integer id;
+        private String edu;
+        private String jobopenTitle;
+        private String career;
+        private String jobType;
+        private String salary;
+        private String hopeJob;
+        private String compLocation;
+        private java.sql.Date endTime;
+        private List<String> skills = new ArrayList<>(); //내용
+
+        public SaDTO(Jobopen jobopen, User sessionUser) {
+            this.userId = sessionUser.getId();
+            this.id = jobopen.getId();
+            this.edu = jobopen.getEdu();
+            this.jobopenTitle = jobopen.getJobopenTitle();
+            this.career = jobopen.getCareer();
+            this.jobType = jobopen.getJobType();
+            this.salary = jobopen.getSalary();
+            this.hopeJob = jobopen.getHopeJob();
+            this.compLocation = jobopen.getCompLocation();
+            this.endTime = jobopen.getEndTime();
+            this.skills = Arrays.asList(jobopen.getSkills().split(",")); // 쉼표로 구분된 기술들을 리스트로 변환
+        }
     }
 
     @Data
