@@ -44,8 +44,7 @@ public class CompService {
         return resumes;
     }
 
-
-    // 기업 - 채용공고 목록
+    // 기업 - 마이페이지 공고 관리
     public List<JobopenResponse.MngDTO> searchjobopenList(Integer sessionUserId) {
         //공고와 유저를 조인해서 가져온 공고 리스트
         List<Jobopen> temp = compQueryRepository.findJobopenById(sessionUserId);
@@ -63,7 +62,7 @@ public class CompService {
     }
 
     // 기업 - 프로필관리
-    public UserResponse.GuestProfile getCompanyProfile(Integer userId) {
+    public UserResponse.GuestProfile compProfile(Integer userId) {
         User user = userJPARepository.findById(userId)
                 .orElseThrow(() -> new Exception404("유저를 찾을 수 없습니다."));
 

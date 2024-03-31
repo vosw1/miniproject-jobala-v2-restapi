@@ -60,7 +60,7 @@ public class CompController {
     @GetMapping("/comp/profileForm")
     public ResponseEntity<?> profileForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        UserResponse.GuestProfile respSTO = compService.getCompanyProfile(sessionUser.getId());
+        UserResponse.GuestProfile respSTO = compService.compProfile(sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil(respSTO));
     }
 
