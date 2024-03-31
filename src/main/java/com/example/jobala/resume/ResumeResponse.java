@@ -13,6 +13,28 @@ import java.util.List;
 
 public class ResumeResponse {
 
+    @Data//개인 - 마이페이지 이력서 관리 DTO
+    public static class MngDTO {
+        private Integer id;
+        private List<ResumeDTO> resumeDTO = new ArrayList<>();
+
+        public MngDTO(Integer userId, List<Resume> resumeList) {
+            this.id = userId;
+            this.resumeDTO = resumeList.stream().map(ResumeDTO::new).toList();
+        }
+
+        @Data
+        public class ResumeDTO {
+            private Integer id;
+            private String resumeTitle; //공고제목
+
+            public ResumeDTO(Resume resume) {
+                this.id = resume.getId();
+                this.resumeTitle = resume.getResumeTitle();
+            }
+        }
+    }
+
     @AllArgsConstructor
     @Data
     public static class ScrapDTO {

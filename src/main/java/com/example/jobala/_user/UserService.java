@@ -27,12 +27,11 @@ public class UserService {
     }
 
     // 로그인
-    public UserResponse.LoginResponseDTO login(UserRequest.LoginDTO reqDTO) {
+    public User login(UserRequest.LoginDTO reqDTO) {
         try {
-            User user = userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
+            return userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
                     .orElseThrow(() -> new ApiException401("인증되지 않았습니다."));
-            Boolean isCheck = user.getRole() == 0;
-            return new UserResponse.LoginResponseDTO(user, isCheck);
+            
         } catch (EmptyResultDataAccessException e) {
             throw new ApiException401("아이디,비밀번호가 틀렸어요");
         }

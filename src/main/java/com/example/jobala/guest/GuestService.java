@@ -8,8 +8,8 @@ import com.example.jobala._user.UserResponse;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeJPARepository;
+import com.example.jobala.resume.ResumeResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -67,13 +67,14 @@ public class GuestService {
     }
 
     // 개인 - 프로필관리
-    public UserResponse.CompProfile guestProgile(Integer id) {
+    public UserResponse.GuestProfile guestProgile(Integer id) {
         User user = userJPARepository.findById(id).orElseThrow(() -> new Exception404("유저의 정보를 찾을 수 없습니다."));
-        return new UserResponse.CompProfile(user);
+        return new UserResponse.GuestProfile(user);
     }
 
     //이력서 페이징 하기 위한 목록 조회
-    public Page<Resume> resumesFindAll(int page) {
-        return guestJPARepository.findAll(paging.guestPaging(page));
+    public ResumeResponse.MngDTO resumesFindAll(int page, Integer sessionUserId) {
+        List<Resume> resumes = guestJPARepository.findAll();
+        return new ResumeResponse.MngDTO(sessionUserId, resumes);
     }
 }
