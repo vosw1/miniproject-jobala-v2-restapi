@@ -30,27 +30,24 @@ public class UserController {
 
     //서비스 변경 완료
     @PostMapping("/login")
-    public String login(UserRequest.LoginDTO reqDTO, HttpSession session) {
+    public ResponseEntity<?> login(UserRequest.LoginDTO reqDTO, HttpSession session) {
         User sessionUser = userService.login(reqDTO);
         session.setAttribute("sessionUser", sessionUser);
-        Boolean isCheck = sessionUser.getRole() == 0;
-        session.setAttribute("isCheck", isCheck);
-        return "redirect:/";
+        return ResponseEntity.ok(new ApiUtil(null));
     }
 
     @PostMapping("/join")
-    public String join(UserRequest.JoinDTO reqDTO, HttpServletRequest req) {
-        User user = userService.join(reqDTO);
-        req.setAttribute("user", user);
-        return "/user/loginForm";
+    public ResponseEntity<?> join(UserRequest.JoinDTO reqDTO, HttpServletRequest req) {
+        UserResponse.JoinDTO respDTO = userService.join(reqDTO);
+        return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
     // TODO : 중복체크 로직 삭제
 
     @GetMapping("/logout")
-    public String logout() {
+    public ResponseEntity<?> logout() {
         session.invalidate();
-        return "redirect:/";
+        return ResponseEntity.ok(new ApiUtil(null));
     }
 
 }

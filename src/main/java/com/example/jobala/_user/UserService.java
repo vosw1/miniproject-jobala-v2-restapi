@@ -34,23 +34,30 @@ public class UserService {
         if (!user.getPassword().equals(reqDTO.getPassword())) {
             throw new Exception401("비밀번호가 틀렸습니다.");
         }
+
+
         return user;
     }
 
     // 회원가입
     @Transactional
-    public User join(UserRequest.JoinDTO reqDTO) {
+    public UserResponse.JoinDTO join(UserRequest.JoinDTO reqDTO) {
         Optional<User> userOP = userJPARepository.findByUsername(reqDTO.getUsername());
         if (userOP.isPresent()) {
             throw new Exception400("중복된 유저네임입니다.");
         }
+
         User user = null;
         if (reqDTO.getRole() == 1) {
             user = userJPARepository.save(reqDTO.toCompEntity());
         } else if (reqDTO.getRole() == 0) {
             user = userJPARepository.save(reqDTO.toGuestEntity());
         }
-        return user;
+
+        return new UserResponse.JoinDTO(
+                new UserResponse.JoinDTO.GuestDTO(user),
+                new UserResponse.JoinDTO.CompDTO(user)
+        );
     }
 
 
