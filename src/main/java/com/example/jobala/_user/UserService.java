@@ -6,6 +6,7 @@ import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenJPARepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,9 +28,17 @@ public class UserService {
     }
 
     // 로그인
-    public User login(UserRequest.LoginDTO reqDTO) {
-        return userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
-                .orElseThrow(() -> new Exception401("인증되지 않았습니다."));
+    public UserResponse.LoginResponseDTO login(UserRequest.LoginDTO reqDTO) {
+        try {
+            User user = userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
+                    .orElseThrow(() -> new EmptyResultDataAccessException(1));
+
+            Boolean isCheck = user.getRole() == 0;
+
+            return new UserResponse.LoginResponseDTO(user, isCheck);
+        } catch (EmptyResultDataAccessException e) {
+            throw new Exception401("유저네임 혹은 비밀번호가 틀렸어요");
+        }
     }
 
     // 회원가입
