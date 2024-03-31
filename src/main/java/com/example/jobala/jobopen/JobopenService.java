@@ -61,7 +61,7 @@ public class JobopenService {
         }
         //3.공고 수정
         jobopen.setJobopenUpdate(reqDTO);
-        return new JobopenResponse.UpdateDTO(jobopen,sessionUser);
+        return new JobopenResponse.UpdateDTO(jobopen);
     }
 
     // 공고보기
