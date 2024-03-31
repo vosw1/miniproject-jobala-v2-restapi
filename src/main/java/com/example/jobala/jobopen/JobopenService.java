@@ -51,7 +51,7 @@ public class JobopenService {
 
     // 공고수정하기
     @Transactional
-    public JobopenResponse.DetailDTO jobopenUpdate(int jobOpenId, User sessionUser, JobopenRequest.UpdateDTO reqDTO) {
+    public JobopenResponse.UpdateDTO jobopenUpdate(int jobOpenId, User sessionUser, JobopenRequest.UpdateDTO reqDTO) {
         //1.조회 및 예외 처리
         Jobopen jobopen = jobopenJPARepository.findById(jobOpenId)
                 .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다."));
@@ -61,7 +61,7 @@ public class JobopenService {
         }
         //3.공고 수정
         jobopen.setJobopenUpdate(reqDTO);
-        return new JobopenResponse.DetailDTO(jobopen,sessionUser);
+        return new JobopenResponse.UpdateDTO(jobopen,sessionUser);
     }
 
     // 공고보기

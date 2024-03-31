@@ -41,7 +41,7 @@ public class JobopenController {
     @PutMapping("/api/comp/jobopen/{id}")  // 주소 수정 필요
     public ResponseEntity<?> update(@PathVariable Integer id, JobopenRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        JobopenResponse.DetailDTO respDTO = jobopenService.jobopenUpdate(id, sessionUser, reqDTO);
+        JobopenResponse.UpdateDTO respDTO = jobopenService.jobopenUpdate(id, sessionUser, reqDTO);
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 

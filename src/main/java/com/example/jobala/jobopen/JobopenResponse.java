@@ -12,6 +12,34 @@ import java.util.*;
 
 public class JobopenResponse {
 
+    @AllArgsConstructor
+    @Data
+    public static class UpdateDTO {
+        private Integer id;
+        private String jobopenTitle;
+        private String career;
+        private String edu;
+        private String jobType;
+        private String salary;
+        private String compLocation;
+        private String hopeJob;
+        private String skills;
+        private Date endTime; // 마감일
+
+        public UpdateDTO(Jobopen jobopen) {
+            this.id = jobopen.getId();
+            this.jobopenTitle = jobopen.getJobopenTitle();
+            this.career = jobopen.getCareer();
+            this.edu = jobopen.getEdu();
+            this.jobType = jobopen.getJobType();
+            this.salary = jobopen.getSalary();
+            this.compLocation = jobopen.getCompLocation();
+            this.hopeJob = jobopen.getHopeJob();
+            this.skills = jobopen.getSkills();
+            this.endTime = jobopen.getEndTime();
+        }
+    }
+
     @Data//기업 - 마이페이지 공고 관리 DTO
     public static class MngDTO {
         private Integer userId;
