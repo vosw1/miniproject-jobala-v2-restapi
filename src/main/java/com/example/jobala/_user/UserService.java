@@ -1,11 +1,12 @@
 package com.example.jobala._user;
 
+import com.example.jobala._core.errors.apiException.ApiException401;
 import com.example.jobala._core.errors.exception.Exception400;
-import com.example.jobala._core.errors.exception.Exception401;
 import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._core.utill.Paging;
 import com.example.jobala.jobopen.JobopenJPARepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,17 +27,15 @@ public class UserService {
     }
 
     // 로그인
-    public User login(UserRequest.LoginDTO reqDTO) {
-        // username으로 사용자 검색
-        User user = userJPARepository.findByUsername(reqDTO.getUsername())
-                .orElseThrow(() -> new Exception401("사용자 이름이 존재하지 않습니다."));
-        // 비밀번호 일치 여부 확인
-        if (!user.getPassword().equals(reqDTO.getPassword())) {
-            throw new Exception401("비밀번호가 틀렸습니다.");
+    public UserResponse.LoginResponseDTO login(UserRequest.LoginDTO reqDTO) {
+        try {
+            User user = userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
+                    .orElseThrow(() -> new ApiException401("인증되지 않았습니다."));
+            Boolean isCheck = user.getRole() == 0;
+            return new UserResponse.LoginResponseDTO(user, isCheck);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ApiException401("아이디,비밀번호가 틀렸어요");
         }
-
-
-        return user;
     }
 
     // 회원가입
@@ -46,14 +45,12 @@ public class UserService {
         if (userOP.isPresent()) {
             throw new Exception400("중복된 유저네임입니다.");
         }
-
         User user = null;
         if (reqDTO.getRole() == 1) {
             user = userJPARepository.save(reqDTO.toCompEntity());
         } else if (reqDTO.getRole() == 0) {
             user = userJPARepository.save(reqDTO.toGuestEntity());
         }
-
         return new UserResponse.JoinDTO(
                 new UserResponse.JoinDTO.GuestDTO(user),
                 new UserResponse.JoinDTO.CompDTO(user)

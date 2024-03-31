@@ -20,6 +20,8 @@ public class UserController {
     private final JobopenJPARepository jobopenJPARepository;
     private final HttpSession session;
 
+    // TODO : 중복체크 로직 삭제
+
     //메인에서 공고목록보기
     @GetMapping("/")
     public ResponseEntity<?> mainForm(@RequestParam(defaultValue = "0") Integer page, HttpServletRequest req) {
@@ -28,22 +30,22 @@ public class UserController {
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
-    //서비스 변경 완료
+    //로그인
     @PostMapping("/login")
     public ResponseEntity<?> login(UserRequest.LoginDTO reqDTO, HttpSession session) {
-        User sessionUser = userService.login(reqDTO);
-        session.setAttribute("sessionUser", sessionUser);
+        UserResponse.LoginResponseDTO respDTO = userService.login(reqDTO);
+        session.setAttribute("sessionUser", respDTO);
         return ResponseEntity.ok(new ApiUtil(null));
     }
 
+    // 회원가입
     @PostMapping("/join")
     public ResponseEntity<?> join(UserRequest.JoinDTO reqDTO, HttpServletRequest req) {
         UserResponse.JoinDTO respDTO = userService.join(reqDTO);
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
-    // TODO : 중복체크 로직 삭제
-
+    //로그아웃
     @GetMapping("/logout")
     public ResponseEntity<?> logout() {
         session.invalidate();

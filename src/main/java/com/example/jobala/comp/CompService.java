@@ -7,6 +7,7 @@ import com.example.jobala.apply.ApplyJPARepository;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
+import com.example.jobala.resume.ResumeJPARepository;
 import com.example.jobala.resume.ResumeResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,9 +25,10 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class CompService {
-    private final CompJPARepository compJPARepository;
     private final UserJPARepository userJPARepository;
+    private final ResumeJPARepository resumeJPARepository;
     private final CompQueryRepository compQueryRepository;
+    private final CompJPARepository compJPARepository;
     private final ApplyJPARepository applyJPARepository;
 
 
@@ -91,4 +93,5 @@ public class CompService {
         }
         return user;
     }
+
 }
