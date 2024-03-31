@@ -29,7 +29,7 @@ public class UserController {
 
     //로그인
     @PostMapping("/login")
-    public ResponseEntity<?> login(UserRequest.LoginDTO reqDTO, HttpSession session) {
+    public ResponseEntity<?> login(@RequestBody UserRequest.LoginDTO reqDTO) {
         UserResponse.LoginResponseDTO respDTO = userService.login(reqDTO);
         session.setAttribute("sessionUser", respDTO);
         return ResponseEntity.ok(new ApiUtil(null));
