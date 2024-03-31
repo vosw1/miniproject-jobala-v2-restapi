@@ -66,6 +66,7 @@ public class JobopenResponse {
             }
         }
     }
+
     @AllArgsConstructor
     @Data
     public static class ListDTO {
