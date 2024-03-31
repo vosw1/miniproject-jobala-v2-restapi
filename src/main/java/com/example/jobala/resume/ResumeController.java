@@ -1,5 +1,6 @@
 package com.example.jobala.resume;
 
+import com.example.jobala._core.utill.ApiUtil;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserQueryRepository;
 import com.example.jobala.jobopen.JobopenQueryRepository;
@@ -8,6 +9,7 @@ import com.example.jobala.scrap.ScrapQueryRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,25 +34,24 @@ public class ResumeController {
     }
 
     // TODO: 글조회로 변경예정
-    @GetMapping("/guest/resume/{id}/updateForm")
-    public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        ResumeResponse.DetailDTO respDTO = resumeService.resumeFindById(id, sessionUser);
-        req.setAttribute("resume", respDTO);
-
-        // 업데이트 페이지에서 체크박스 체크 로직
-        ResumeResponse.CheckBoxDTO checkedSkillsList = resumeService.getCheckedSkills(id);
-        req.setAttribute("checkedSkillsList", checkedSkillsList);
-        return "guest/resume/updateForm";
-    }
+//    @GetMapping("/guest/resume/{id}/updateForm")
+//    public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
+//        User sessionUser = (User) session.getAttribute("sessionUser");
+//        ResumeResponse.DetailDTO respDTO = resumeService.resumeFindById(id, sessionUser);
+//        req.setAttribute("resume", respDTO);
+//
+//        // 업데이트 페이지에서 체크박스 체크 로직
+//        ResumeResponse.CheckBoxDTO checkedSkillsList = resumeService.getCheckedSkills(id);
+//        req.setAttribute("checkedSkillsList", checkedSkillsList);
+//        return "guest/resume/updateForm";
+//    }
 
     //이력서 상세보기
     @GetMapping("/guest/resume/{id}")
-    public String detailForm(@PathVariable Integer id, HttpServletRequest req) {
+    public ResponseEntity<?> detailForm(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ResumeResponse.DetailDTO respDTO = resumeService.resumeFindById(id, sessionUser);
-        req.setAttribute("resume", respDTO);
-        return "guest/resume/detailForm";
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
     //이력서 등록
