@@ -26,18 +26,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JobopenController {
 
-    private final JobopenQueryRepository jobopenRepository;
-    private final GuestQueryRepository guestRepository;
-    private final ScrapQueryRepository scrapRepository;
     private final HttpSession session;
     private final JobopenService jobopenService;
-    private final JobopenJPARepository jobopenJPARepository;
 
     //공고 삭제
-    @PostMapping("/comp/jobopen/{id}/delete")  // 주소 수정 필요
+    @DeleteMapping("/comp/jobopen/{id}/delete")  // 주소 수정 필요
     public ResponseEntity<?> delete(@PathVariable int id) {
-        UserResponse.LoginResponseDTO sessionUser = (UserResponse.LoginResponseDTO) session.getAttribute("sessionUser");
-        jobopenService.jobopenDelete(id, sessionUser.getUser().getId());
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        jobopenService.jobopenDelete(id, sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil(null));
     }
 
@@ -61,18 +57,18 @@ public class JobopenController {
     //공고 등록
     @PostMapping("/comp/jobopen/save")  // 주소 수정 필요
     public ResponseEntity<?> jobopenSave(@RequestBody JobopenRequest.SaveDTO reqDTO) {
-        UserResponse.LoginResponseDTO sessionUser = (UserResponse.LoginResponseDTO) session.getAttribute("sessionUser");
-        JobopenResponse.SaDTO respDTO = jobopenService.jobopenSave(reqDTO, sessionUser.getUser());
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        JobopenResponse.SaDTO respDTO = jobopenService.jobopenSave(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
     //공고 보기
     @GetMapping("/comp/jobopen/{id}")
     public ResponseEntity<?> detailForm(@PathVariable int id) {
-        UserResponse.LoginResponseDTO sessionUser = (UserResponse.LoginResponseDTO) session.getAttribute("sessionUser");
+       User sessionUser = (User) session.getAttribute("sessionUser");
 
         // 채용공고 정보 가져오기
-        JobopenResponse.DetailDTO respDTO = jobopenService.findJobopenById(id, sessionUser.getUser());
+        JobopenResponse.DetailDTO respDTO = jobopenService.findJobopenById(id, sessionUser);
 
 
         return ResponseEntity.ok(new ApiUtil(respDTO));

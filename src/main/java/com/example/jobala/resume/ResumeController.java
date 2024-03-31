@@ -23,12 +23,6 @@ public class ResumeController {
     private final HttpSession session;
     private final ResumeService resumeService;
 
-    //TODO: saveForm 삭제예정
-    @GetMapping("/guest/resume/saveForm")
-    public String saveForm() {
-        return "guest/resume/saveForm";
-    }
-
     //이력서 업데이트
     @PostMapping("/guest/resume/{id}/update")  // 주소 수정 필요
     public String update(@PathVariable Integer id, ResumeRequest.UpdateDTO reqDTO) {
