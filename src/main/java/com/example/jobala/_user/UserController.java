@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,16 +32,17 @@ public class UserController {
     //로그인
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserRequest.LoginDTO reqDTO, HttpSession session) {
-        UserResponse.LoginResponseDTO respDTO = userService.login(reqDTO);
-        session.setAttribute("sessionUser", respDTO);
+        User sessionUser = userService.login(reqDTO);
+        session.setAttribute("sessionUser", sessionUser);
         return ResponseEntity.ok(new ApiUtil(null));
     }
 
     // 회원가입
     @PostMapping("/join")
-    public ResponseEntity<?> join(UserRequest.JoinDTO reqDTO, HttpServletRequest req) {
+    public ResponseEntity<?> join(@RequestBody UserRequest.JoinDTO reqDTO) {
         UserResponse.JoinDTO respDTO = userService.join(reqDTO);
-        return ResponseEntity.ok(new ApiUtil(respDTO));
+        // TODO : ?? - 찬혁
+        return ResponseEntity.ok(new ApiUtil(respDTO.getCompDTO()));
     }
 
     //로그아웃

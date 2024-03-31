@@ -13,6 +13,28 @@ import java.util.List;
 
 public class ResumeResponse {
 
+    @Data//개인 - 마이페이지 이력서 관리 DTO
+    public static class MngDTO {
+        private Integer id;
+        private List<ResumeDTO> resumeDTO = new ArrayList<>();
+
+        public MngDTO(Integer userId, List<Resume> resumeList) {
+            this.id = userId;
+            this.resumeDTO = resumeList.stream().map(ResumeDTO::new).toList();
+        }
+
+        @Data
+        public class ResumeDTO {
+            private Integer id;
+            private String resumeTitle; //공고제목
+
+            public ResumeDTO(Resume resume) {
+                this.id = resume.getId();
+                this.resumeTitle = resume.getResumeTitle();
+            }
+        }
+    }
+
     @AllArgsConstructor
     @Data
     public static class ScrapDTO {
@@ -55,29 +77,35 @@ public class ResumeResponse {
     @NoArgsConstructor
     @AllArgsConstructor
     @Data
-    public static class ListDTO {
-        private int id;
-        private String name;
-        private String resumeTitle;
-        private String edu;
-        private String career;
-        private String imgFilename;
+    public static class ScoutListDTO {
+        private Integer id; //이력서 아이디
+        private String resumeTitle; //이력서제목
+        private String edu; //학력
+        private String career; //경력
         private User user;
 
-        public ListDTO(int id, String name, String resumeTitle, String edu, String career, String imgFilename) {
-            this.id = id;
-            this.name = name;
-            this.resumeTitle = resumeTitle;
-            this.edu = edu;
-            this.career = career;
-            this.imgFilename = imgFilename;
+        public ScoutListDTO(User user, Resume resume) {
+            this.id = resume.getId();
+            this.resumeTitle = resume.getResumeTitle();
+            this.edu = resume.getEdu();
+            this.career = resume.getCareer();
+            this.user = new User(user);
         }
 
-        // 사용자 ID를 반환하는 getter 메서드
-        public Integer getUserId() {
-            return user.getId();
+
+        public class User {
+            private Integer id; //유저아이디
+            private String imgFilename; // 유저이미지
+            private String name; // 유저이름
+
+            public User(User user) {
+                this.id = user.id;
+                this.imgFilename = user.imgFilename;
+                this.name = user.name;
+            }
         }
     }
+
 
     @AllArgsConstructor
     @Data

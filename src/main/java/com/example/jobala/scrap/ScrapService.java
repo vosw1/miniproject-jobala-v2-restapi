@@ -21,7 +21,7 @@ public class ScrapService {
     private final JobopenJPARepository jobopenJPARepository;
 
     // 회사가스크랩
-    public Scrap scrapByComp(ScrapRequest.CompScrapDTO reqDTO, User sessionUser) {
+    public Scrap scrapByComp(ScrapRequest.ScrapDTO reqDTO, User sessionUser) {
         Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())
                 .orElseThrow(() -> new Exception404("스크랩 하려는 이력서를 찾을 수 없습니다."));
 
@@ -37,7 +37,7 @@ public class ScrapService {
     }
 
     // 게스트가스크랩
-    public Scrap scrapByGuest(ScrapRequest.GuestScrap reqDTO, User sessionUser) {
+    public Scrap scrapByGuest(ScrapRequest.ScrapDTO reqDTO, User sessionUser) {
         Jobopen jobopen = jobopenJPARepository.findById(reqDTO.getJobopenId())
                 .orElseThrow(() -> new Exception404("스크랩 하려는 공고를 찾을 수 없습니다."));
 

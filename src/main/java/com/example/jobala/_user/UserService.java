@@ -1,7 +1,7 @@
 package com.example.jobala._user;
 
+import com.example.jobala._core.errors.apiException.ApiException400;
 import com.example.jobala._core.errors.apiException.ApiException401;
-import com.example.jobala._core.errors.exception.Exception400;
 import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._core.utill.Paging;
 import com.example.jobala.jobopen.JobopenJPARepository;
@@ -22,17 +22,16 @@ public class UserService {
 
     //메인 공고 목록조회
     public List<UserResponse.MainDTO> mainJobopenList(Integer page, User sessionUser) {
-        return jobopenJPARepository.findAll(paging.boardPaging(page)).
+        return jobopenJPARepository.findAll(paging.mainPaging(page)).
                 stream().map(jobopen -> new UserResponse.MainDTO(jobopen, sessionUser)).toList();
     }
 
     // 로그인
-    public UserResponse.LoginResponseDTO login(UserRequest.LoginDTO reqDTO) {
+    public User login(UserRequest.LoginDTO reqDTO) {
         try {
-            User user = userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
+            return userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
                     .orElseThrow(() -> new ApiException401("인증되지 않았습니다."));
-            Boolean isCheck = user.getRole() == 0;
-            return new UserResponse.LoginResponseDTO(user, isCheck);
+            
         } catch (EmptyResultDataAccessException e) {
             throw new ApiException401("아이디,비밀번호가 틀렸어요");
         }
@@ -43,22 +42,13 @@ public class UserService {
     public UserResponse.JoinDTO join(UserRequest.JoinDTO reqDTO) {
         Optional<User> userOP = userJPARepository.findByUsername(reqDTO.getUsername());
         if (userOP.isPresent()) {
-            throw new Exception400("중복된 유저네임입니다.");
+            throw new ApiException400("중복된 유저네임입니다.");
         }
-        User user = null;
-        if (reqDTO.getRole() == 1) {
-            user = userJPARepository.save(reqDTO.toCompEntity());
-        } else if (reqDTO.getRole() == 0) {
-            user = userJPARepository.save(reqDTO.toGuestEntity());
-        }
-        return new UserResponse.JoinDTO(
-                new UserResponse.JoinDTO.GuestDTO(user),
-                new UserResponse.JoinDTO.CompDTO(user)
-        );
+        User user = userJPARepository.save(reqDTO.toCompEntity());
+        return new UserResponse.JoinDTO(user);
     }
 
-
-    public User guestInfo(Integer id) {
+    public User guestProfile(Integer id) {
         return userJPARepository.findById(id).orElseThrow(() -> new Exception404("유저의 정보를 찾을 수 없습니다."));
     }
 

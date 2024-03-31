@@ -10,21 +10,19 @@ public class ReplyResponse {
     @Data
     public static class ReplyDTO {
         private Integer id;
-
-        //댓글의 주인여부(주인만 삭제가능)
         private Integer userId;
         private String comment;
         private String username;
-        private Boolean replyOwner; //게시글 주인 여부
+        private Boolean replyOwner; // 게시글 주인 여부
 
-        public ReplyDTO(Object[] object, User sessionUser) {
-            this.id = (Integer) object[0];
-            this.userId = (Integer) object[1];
-            this.comment = (String) object[2];
-            this.username = (String) object[3];
+        public ReplyDTO(Reply reply, User sessionUser) {
+            this.id = reply.getId();
+            this.userId = userId;
+            this.comment = comment;
+            this.username = username;
 
             if (sessionUser == null) replyOwner = false;
-            else replyOwner = sessionUser.getId() == userId;
+            else replyOwner = sessionUser.getId().equals(userId);
         }
     }
 }

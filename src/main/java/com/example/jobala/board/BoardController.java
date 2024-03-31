@@ -1,18 +1,19 @@
 package com.example.jobala.board;
 
+import com.example.jobala._core.utill.ApiUtil;
 import com.example.jobala._user.User;
+import com.example.jobala._user.UserResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -20,16 +21,17 @@ public class BoardController {
     private final BoardService boardService;
     private final HttpSession session;
 
+    // 글 상세보기 완료
     @GetMapping("/board/{id}")
-    public String boardDetailForm(@PathVariable int id, HttpServletRequest req) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        BoardResponse.DetailDTO board = boardService.boardDetail(id, sessionUser);
-        req.setAttribute("board", board);
-        return "board/detailForm";
+    public ResponseEntity<?> boardDetailForm(@PathVariable int id) {
+        UserResponse.LoginResponseDTO sessionUserDTO = (UserResponse.LoginResponseDTO) session.getAttribute("sessionUser");
+        BoardResponse.DetailDTO respDTO = boardService.boardDetail(id, sessionUserDTO.getUser());
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
-    @GetMapping("/board/mainForm")
-    public String boardForm(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size, HttpServletRequest req) {
+    // 글 목록보기 완료
+    @GetMapping("/board")
+    public ResponseEntity<?> boardForm(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size, HttpServletRequest req) {
         Page<Board> boardPage = boardService.글목록조회(page, size);
 
         req.setAttribute("boardList", boardPage.getContent());
@@ -42,14 +44,18 @@ public class BoardController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String dateStringWithoutTime = sdf.format(date);
         req.setAttribute("currentDate", dateStringWithoutTime);
-        return "board/mainForm";
+
+        List<BoardResponse.MainDetailDTO> respDTO = boardService.boardFindAll();
+        System.out.println("respDTO: " + respDTO);
+
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
-    @PostMapping("/board/{id}/update") // 주소 수정 필요
-    public String update(@PathVariable int id, BoardRequest.UpdateDTO reqDTO) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        boardService.boardUpdate(id, sessionUser.getId(), reqDTO);
-        return "redirect:/board/" + id;
+    @PutMapping("/board/{id}")
+    public ResponseEntity<?> update(@PathVariable int id, @RequestBody BoardRequest.UpdateDTO reqDTO) {
+        UserResponse.LoginResponseDTO sessionUserDTO = (UserResponse.LoginResponseDTO) session.getAttribute("sessionUser");
+        boardService.boardUpdate(id, sessionUserDTO.getUser().getId(), reqDTO);
+        return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
     @GetMapping("/board/{id}/updateForm")
@@ -66,18 +72,20 @@ public class BoardController {
         return "board/saveForm";
     }
 
-    @PostMapping("/board/save") // 주소 수정 필요
-    public String save(BoardRequest.SaveDTO reqDTO) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        boardService.boardSave(reqDTO, sessionUser);
-        System.out.println();
-        return "redirect:/board/mainForm";
+    // 글 쓰기 완료
+    @PostMapping("/board")
+    public ResponseEntity<?> save(@RequestBody BoardRequest.SaveDTO reqDTO) {
+        UserResponse.LoginResponseDTO sessionUserDTO = (UserResponse.LoginResponseDTO) session.getAttribute("sessionUser");
+        boardService.boardSave(reqDTO, sessionUserDTO.getUser());
+        return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
-    @PostMapping("/board/{id}/delete") // 주소 수정 필요
-    public String delete(@PathVariable int id) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        boardService.boardDelete(id, sessionUser.getId());
-        return "redirect:/board/mainForm";
+    // 글 삭제 완료
+    @DeleteMapping("/board/{id}")
+    public ResponseEntity<?> delete(@PathVariable int id) {
+        UserResponse.LoginResponseDTO sessionUserDTO = (UserResponse.LoginResponseDTO) session.getAttribute("sessionUser");
+
+        boardService.boardDelete(id, sessionUserDTO.getUser().getId());
+        return ResponseEntity.ok(new ApiUtil<>(null));
     }
 }
