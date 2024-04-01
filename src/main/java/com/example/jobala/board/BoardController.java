@@ -30,16 +30,6 @@ public class BoardController {
     }
 
     // 글 목록보기 완료
-    @GetMapping("/api/boards")
-    public ResponseEntity<?> boardForm(HttpServletRequest req) {
-
-        List<BoardResponse.BoardDTO> respDTO = boardService.boardFindAll();
-        System.out.println("respDTO: " + respDTO);
-
-        return ResponseEntity.ok(new ApiUtil<>(respDTO));
-    }
-
-    // 글 목록보기 완료
     @GetMapping("api/boards")
     public ResponseEntity<?> board() {
         List<BoardResponse.BoardDTO> respDTO = boardService.boardFindAll();
