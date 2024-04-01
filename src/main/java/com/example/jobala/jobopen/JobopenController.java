@@ -38,21 +38,20 @@ public class JobopenController {
     }
 
     //공고 수정
-    @PostMapping("/comp/jobopen/{id}/update")  // 주소 수정 필요
-    public String update(@PathVariable Integer id, JobopenRequest.UpdateDTO reqDTO) {
+    @PutMapping("/api/comp/jobopen/{id}")  // 주소 수정 필요
+    public ResponseEntity<?> update(@PathVariable Integer id, JobopenRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        jobopenService.jobopenUpdate(id, sessionUser.getId(), reqDTO);
-
-        return "redirect:/comp/mngForm";
+        JobopenResponse.UpdateDTO respDTO = jobopenService.jobopenUpdate(id, sessionUser, reqDTO);
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
-    //TODO: 글조회로 변경예정
-    @GetMapping("/comp/jobopen/{id}/updateForm")
-    public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        JobopenResponse.DetailDTO respDTO = jobopenService.findJobopenById(id, sessionUser);
-        return "comp/jobopen/updateForm";
-    }
+//    //TODO: 글조회로 변경예정
+//    @GetMapping("/comp/jobopen/{id}/updateForm")
+//    public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
+//        User sessionUser = (User) session.getAttribute("sessionUser");
+//        JobopenResponse.DetailDTO respDTO = jobopenService.findJobopenById(id, sessionUser);
+//        return "comp/jobopen/updateForm";
+//    }
 
     //공고 등록
     @PostMapping("/comp/jobopen/save")  // 주소 수정 필요
