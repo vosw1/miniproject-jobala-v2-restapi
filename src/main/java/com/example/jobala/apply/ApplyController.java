@@ -23,7 +23,7 @@ public class ApplyController {
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
-    // 개인 - 이력서 지원하기
+    // 개인 - 이력서, 포지션제안 지원하기
     @PostMapping("/api/applies/applys")
     public ResponseEntity<ApiUtil<ApplyResponse.ApplicationDTO>> apply(@RequestBody ApplyRequest.ApplyRequestDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
