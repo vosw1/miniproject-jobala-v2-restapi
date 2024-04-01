@@ -79,7 +79,7 @@ public class JobopenResponse {
     }
 
     @Data
-    public static class SaDTO{
+    public static class SaveDTO{
         private Integer userId;
         private Integer id;
         private String edu;
@@ -92,7 +92,7 @@ public class JobopenResponse {
         private java.sql.Date endTime;
         private List<String> skills = new ArrayList<>(); //내용
 
-        public SaDTO(Jobopen jobopen, User sessionUser) {
+        public SaveDTO(Jobopen jobopen, User sessionUser) {
             this.userId = sessionUser.getId();
             this.id = jobopen.getId();
             this.edu = jobopen.getEdu();
