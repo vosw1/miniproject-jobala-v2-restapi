@@ -100,4 +100,8 @@ public class ApplyService {
         }
     }
 
+    public List<ApplyResponse.GuestApplyDTO> findApplyGuestByUserId(Integer id, Integer role) {
+        List<ApplyResponse.GuestApplyDTO> applyList = applyJPARepository.findApplyGuestByUserId(id);
+        return applyList;
+    }
 }

@@ -10,6 +10,12 @@ import java.util.List;
 
 public class ApplyResponse {
 
+    @Data
+    public class ApplyStatusUpdateRequestDTO {
+        private Integer applyId;
+        private String status;
+    }
+
     // 지원 응답DTO
     @Data
     public static class ApplicationDTO {

@@ -19,8 +19,8 @@ public class ApplyController {
 
     // 기업 및 개인 - 지원 상태 업데이트 기존 기업 개인으로 구분되어 있던 것을 합침
     @PostMapping("/api/applies/applyStatus/update")
-    public ResponseEntity<ApiUtil<ApplyResponse.StatusUpdateDTO>> updateApplicationStatus(@RequestParam("applyId") Integer applyId, @RequestParam("status") String status) {
-        ApplyResponse.StatusUpdateDTO respDTO = applyService.statusUpdate(applyId, status);
+    public ResponseEntity<ApiUtil<ApplyResponse.StatusUpdateDTO>> updateApplicationStatus(@RequestBody ApplyResponse.ApplyStatusUpdateRequestDTO requestDTO) {
+        ApplyResponse.StatusUpdateDTO respDTO = applyService.statusUpdate(requestDTO.getApplyId(), requestDTO.getStatus());
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
@@ -43,6 +43,7 @@ public class ApplyController {
     @GetMapping("/api/applies/applyForm")
     public ResponseEntity<ApiUtil<?>> applyForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        return applyService.findApplyFormByUserId(sessionUser);
+        List<ApplyResponse.GuestApplyDTO> respDTO = applyService.findApplyGuestByUserId(sessionUser.getId(), sessionUser.getRole());
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 }

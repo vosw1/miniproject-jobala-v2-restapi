@@ -13,7 +13,6 @@ public class ApplyRequest {
     public static class ApplyRequestDTO {
         private Integer resumeId;
         private Integer jobopenId;
-        private Integer userId;
 
         public Apply toEntity(Resume resume, Jobopen jobopen, User sessionUser) {
             return Apply.builder()
