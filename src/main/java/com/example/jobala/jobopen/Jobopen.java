@@ -81,7 +81,7 @@ public class Jobopen {
         this.salary = reqDTO.getSalary();
         this.hopeJob = reqDTO.getHopeJob();
         this.compLocation = reqDTO.getCompLocation();
-        this.endTime = Date.valueOf(reqDTO.getEndTime());
+        this.endTime = reqDTO.getEndTime();
         this.skills = String.valueOf(reqDTO.getSkills());
     }
 }

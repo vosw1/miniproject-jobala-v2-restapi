@@ -43,7 +43,7 @@ public class JobopenRequest {
         private String salary; //연봉
         private String hopeJob;//희망직무
         private String compLocation; //근무지역
-        private String endTime; //내용
+        private Date endTime; //내용
         private List<String> skills = new ArrayList<>();//스킬
 
     }
