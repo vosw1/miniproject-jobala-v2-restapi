@@ -19,18 +19,18 @@ public class ReplyController {
     private final ReplyService replyService;
 
     //댓글 쓰기
-    @PostMapping("reply")
+    @PostMapping("/api/reply")
     public ResponseEntity<?> save(@RequestBody ReplyRequest.SaveDTO reqDTO){
-        UserResponse.LoginResponseDTO sessionUserDTO = (UserResponse.LoginResponseDTO) session.getAttribute("sessionUser");
-        replyService.replySave(reqDTO, sessionUserDTO.getUser());
-        return ResponseEntity.ok(new ApiUtil(null));
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        ReplyResponse.ReplyDTO respDTO = replyService.replySave(reqDTO, sessionUser);
+        return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
     //댓글 삭제
-    @DeleteMapping("reply/{id}")
+    @DeleteMapping("/api/reply/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id){
-        UserResponse.LoginResponseDTO sessionUserDTO = (UserResponse.LoginResponseDTO) session.getAttribute("sessionUser");
-        replyService.replyDelete(id, sessionUserDTO.getUser().getId());
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        replyService.replyDelete(id, sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil(null));
     }
 }
