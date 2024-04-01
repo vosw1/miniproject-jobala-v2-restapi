@@ -39,5 +39,6 @@ public class GuestController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         UserResponse.GuestProfile respDTO = guestService.guestUpdateProfile(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil(respDTO));
+
     }
 }

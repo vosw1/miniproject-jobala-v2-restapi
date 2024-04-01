@@ -2,11 +2,13 @@ package com.example.jobala.guest;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 public class GuestResponse {
 
     @AllArgsConstructor
     @Data
+    @NoArgsConstructor
     public static class SearchDTO {
         private String career;
         private String compLocation;
