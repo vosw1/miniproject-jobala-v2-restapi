@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface ResumeJPARepository extends JpaRepository<Resume, Integer> {
 
     // 회사가 스크랩한 이력서 조회
-    @Query("SELECT r FROM Resume r JOIN fetch r.scraps s WHERE s.user.id = :userId")
+    @Query("SELECT new com.example.jobala.resume.ResumeResponse$ScrapDTO(r) FROM Resume r JOIN fetch r.scraps s WHERE s.user.id = :userId")
     List<ResumeResponse.ScrapDTO> findByUserIdJoinScrap(@Param("userId") int userId);
 
     // 이력서 상세보기를 위한 한방 join쿼리
