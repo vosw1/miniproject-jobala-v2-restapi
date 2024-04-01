@@ -27,7 +27,7 @@ public class ResumeController {
     @PutMapping("api/guest/resume/{id}")  // 주소 수정 필요
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody ResumeRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        ResumeResponse.UpdateDTO respDTO = resumeService.resumeUpdate(id, reqDTO,sessionUser.getId());
+        ResumeResponse.UpdateDTO respDTO = resumeService.resumeUpdate(id, reqDTO, sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 

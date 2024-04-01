@@ -46,7 +46,6 @@ public class JobopenController {
     }
 
 
-
     //공고 등록
     @PostMapping("/api/comp/jobopen")  // 주소 수정 필요
     public ResponseEntity<?> jobopenSave(@RequestBody JobopenRequest.SaveDTO reqDTO) {
@@ -58,7 +57,7 @@ public class JobopenController {
     //공고 보기
     @GetMapping("/api/comp/jobopen/{id}")
     public ResponseEntity<?> detailForm(@PathVariable int id) {
-       User sessionUser = (User) session.getAttribute("sessionUser");
+        User sessionUser = (User) session.getAttribute("sessionUser");
         // 채용공고 정보 가져오기
         JobopenResponse.DetailDTO respDTO = jobopenService.findJobopenById(id, sessionUser);
         return ResponseEntity.ok(new ApiUtil(respDTO));
