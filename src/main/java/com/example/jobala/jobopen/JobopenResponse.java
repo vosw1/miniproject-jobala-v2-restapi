@@ -12,6 +12,34 @@ import java.util.*;
 
 public class JobopenResponse {
 
+    @Data//기업 - 마이페이지 공고 관리 DTO
+    public static class MngDTO {
+        private Integer userId;
+        private List<JobopenDTO> jobopenDTO = new ArrayList<>();
+
+        public MngDTO(Integer userId, List<Jobopen> jobopen) {
+            this.userId = userId;
+            this.jobopenDTO = jobopen.stream().map(JobopenDTO::new).toList();
+        }
+
+        @Data
+        public class JobopenDTO {
+            private Integer id;
+            private Integer role; // 역할 0 -> guest, 1 -> comp
+            private String jobopenTitle; //공고제목
+            private Integer applyCount;
+
+            public JobopenDTO(Jobopen jobopen) {
+                this.id = jobopen.getId();
+                this.role = jobopen.getRole();
+                this.jobopenTitle = jobopen.getJobopenTitle();
+                this.applyCount = jobopen.getId();
+
+            }
+        }
+    }
+
+
     @AllArgsConstructor
     @Data
     public static class UpdateDTO {
@@ -40,32 +68,6 @@ public class JobopenResponse {
         }
     }
 
-    @Data//기업 - 마이페이지 공고 관리 DTO
-    public static class MngDTO {
-        private Integer userId;
-        private List<JobopenDTO> jobopenDTO = new ArrayList<>();
-
-        public MngDTO(Integer userId, List<Jobopen> jobopen) {
-            this.userId = userId;
-            this.jobopenDTO = jobopen.stream().map(JobopenDTO::new).toList();
-        }
-
-        @Data
-        public class JobopenDTO {
-            private Integer id;
-            private Integer role; // 역할 0 -> guest, 1 -> comp
-            private String jobopenTitle; //공고제목
-            private Integer applyCount;
-
-            public JobopenDTO(Jobopen jobopen) {
-                this.id = jobopen.getId();
-                this.role = jobopen.getRole();
-                this.jobopenTitle = jobopen.getJobopenTitle();
-                this.applyCount = jobopen.getId();
-
-            }
-        }
-    }
 
     @AllArgsConstructor
     @Data
