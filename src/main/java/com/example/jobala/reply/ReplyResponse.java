@@ -17,9 +17,9 @@ public class ReplyResponse {
 
         public ReplyDTO(Reply reply, User sessionUser) {
             this.id = reply.getId();
-            this.userId = userId;
-            this.comment = comment;
-            this.username = username;
+            this.userId = reply.getUser().getId();
+            this.comment = reply.getComment();
+            this.username = reply.getUser().getUsername();
 
             if (sessionUser == null) replyOwner = false;
             else replyOwner = sessionUser.getId().equals(userId);

@@ -2,6 +2,8 @@ package com.example.jobala.board;
 
 import com.example.jobala._user.User;
 import com.example.jobala.reply.Reply;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -9,29 +11,22 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
 public class BoardResponse {
+
     // 글 수정
     @Data
-    public class UpdateDTO {
+    public static class UpdateDTO {
         private Integer id;
         private String title;
         private String content;
-        private UserDTO user;
+        private Integer userId;
 
         public UpdateDTO(Board board) {
             this.id = board.getId();
             this.title = board.getTitle();
             this.content = board.getContent();
-            this.user = new UserDTO(board.getUser());
-        }
-    }
-
-    @Data
-    public class UserDTO {
-        private int id;
-
-        public UserDTO(User user) {
-            this.id = user.getId();
+            this.userId = board.getUser().getId();
         }
     }
 
@@ -66,8 +61,8 @@ public class BoardResponse {
             this.userId = board.getUser().getId();
             this.username = board.getUser().getUsername(); // join 해서 가져왔음
             this.isOwner = false;
-            if(sessionUser != null){
-                if(sessionUser.getId() == userId) isOwner = true;
+            if (sessionUser != null) {
+                if (sessionUser.getId() == userId) isOwner = true;
             }
 
             this.replies = board.getReplies().stream().map(reply -> new ReplyDTO(reply, sessionUser)).toList();
@@ -87,36 +82,29 @@ public class BoardResponse {
                 this.userId = reply.getUser().getId();
                 this.username = reply.getUser().getUsername(); // lazy loading 발동 (in query)
                 this.isOwner = false;
-                if(sessionUser != null){
-                    if(sessionUser.getId() == userId) isOwner = true;
+                if (sessionUser != null) {
+                    if (sessionUser.getId() == userId) isOwner = true;
                 }
             }
         }
     }
-    //    자유게시판 메인 목록 DTO
+
+    // 글 조회
     @Data
-    public static class MainDetailDTO {
+    public static class BoardDTO {
         private Integer id;
         private String title;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private Timestamp createdAt;
-        private UserDTO user;
+        private Integer userId;
+        private String username;
 
-        @Data
-        public class UserDTO {
-            private int id;
-            private String username;
-
-            public UserDTO(User user) {
-                this.id = user.getId();
-                this.username = user.getUsername();
-            }
-        }
-
-        public MainDetailDTO(Board board) {
+        public BoardDTO(Board board) {
             this.id = board.getId();
             this.title = board.getTitle();
-            this.createdAt= board.getCreatedAt();
-            this.user = new UserDTO(board.getUser());
+            this.createdAt = board.getCreatedAt();
+            this.userId = board.getUser().getId();
+            this.username = board.getUser().getUsername();
         }
     }
 
