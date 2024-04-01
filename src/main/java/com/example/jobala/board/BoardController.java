@@ -51,12 +51,14 @@ public class BoardController {
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
+
     @PutMapping("/board/{id}")
     public ResponseEntity<?> update(@PathVariable int id, @RequestBody BoardRequest.UpdateDTO reqDTO) {
         UserResponse.LoginResponseDTO sessionUserDTO = (UserResponse.LoginResponseDTO) session.getAttribute("sessionUser");
         boardService.boardUpdate(id, sessionUserDTO.getUser().getId(), reqDTO);
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
+
 
     @GetMapping("/board/{id}/updateForm")
     public String updateForm(@PathVariable int id, HttpServletRequest request) {

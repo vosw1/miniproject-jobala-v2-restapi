@@ -27,7 +27,7 @@ public class CompQueryRepository {
                 AND (rt.career IN (?, ?)) 
                 AND (rt.edu IN (?, ?)) 
                 AND (rt.hope_job IN (?, ?)) 
-                order by rt.id desc 
+                order by rt.id desc  
                 """;
         // skill 파싱
         String[] skill = {"", "", "", "", "", ""};

@@ -42,7 +42,6 @@ public class JobopenController {
     public String update(@PathVariable Integer id, JobopenRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         jobopenService.jobopenUpdate(id, sessionUser.getId(), reqDTO);
-
         return "redirect:/comp/mngForm";
     }
 
@@ -66,11 +65,8 @@ public class JobopenController {
     @GetMapping("/comp/jobopen/{id}")
     public ResponseEntity<?> detailForm(@PathVariable int id) {
        User sessionUser = (User) session.getAttribute("sessionUser");
-
         // 채용공고 정보 가져오기
         JobopenResponse.DetailDTO respDTO = jobopenService.findJobopenById(id, sessionUser);
-
-
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 

@@ -16,24 +16,16 @@ public class BoardResponse {
         private Integer id;
         private String title;
         private String content;
-        private UserDTO user;
+        private Integer userId;
 
         public UpdateDTO(Board board) {
             this.id = board.getId();
             this.title = board.getTitle();
             this.content = board.getContent();
-            this.user = new UserDTO(board.getUser());
+            this.userId = board.getUser().getId();
         }
     }
 
-    @Data
-    public class UserDTO {
-        private int id;
-
-        public UserDTO(User user) {
-            this.id = user.getId();
-        }
-    }
 
     // 글쓰기
     @Data
@@ -120,29 +112,5 @@ public class BoardResponse {
         }
     }
 
-    // 상세보기
-    @Data
-    public static class BoardDetailDTO {
-        private Integer id;
-        private String title;
-        private String content;
-        private Integer userId;
-        private String username;
-        private Boolean boardOwner;
 
-        // qlrm 맵핑은 순서를 맞춰주고 조인하는 컬럼만 생성자를 만들어서 초기화를 시켜준다.
-        public BoardDetailDTO(Integer id, String title, String content, Integer userId, String username) {
-            this.id = id;
-            this.title = title;
-            this.content = content;
-            this.userId = userId;
-            this.username = username;
-        }
-
-        // 보더의 주인여부 확인
-        public void isOwner(User sessionUser) {
-            if (sessionUser == null) boardOwner = false;
-            else boardOwner = sessionUser.getId() == userId;
-        }
-    }
 }
