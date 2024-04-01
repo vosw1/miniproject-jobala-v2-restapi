@@ -18,7 +18,7 @@ public class CompQueryRepository {
 
 
     //인재채용 검색필터
-    public List<ResumeResponse.ScoutListDTO> findAll(String skills, CompResponse.SearchDTO resDTO) {
+    public List<ResumeResponse.ScoutListDTO> findAll(String skills, CompRequest.SearchDTO resDTO) {
         String skillQuery = """
                 SELECT rt.id, ut.name, rt.resume_title, rt.edu, rt.career, ut.img_filename
                 FROM resume_tb rt 

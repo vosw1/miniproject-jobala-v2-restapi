@@ -31,7 +31,7 @@ public class CompService {
     private final ApplyJPARepository applyJPARepository;
 
     //기업 - 인재채용 검색필터
-    public List<ResumeResponse.ScoutListDTO> searchResumes(String skills, CompResponse.SearchDTO resDTO) {
+    public List<ResumeResponse.ScoutListDTO> searchResumes(String skills, CompRequest.SearchDTO resDTO) {
         return compQueryRepository.findAll(skills, resDTO);
     }
 

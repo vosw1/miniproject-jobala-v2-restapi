@@ -104,34 +104,16 @@ public class ResumeResponse {
     }
 
 
+    @AllArgsConstructor
     @Data
     public static class ScoutListDTO {
         private Integer id; //이력서 아이디
+        private String username;
         private String resumeTitle; //이력서제목
         private String edu; //학력
         private String career; //경력
-        private User user;
+        private String imgFilename;
 
-        public ScoutListDTO(User user, Resume resume) {
-            this.id = resume.getId();
-            this.resumeTitle = resume.getResumeTitle();
-            this.edu = resume.getEdu();
-            this.career = resume.getCareer();
-            this.user = new User(user);
-        }
-
-
-        public class User {
-            private Integer id; //유저아이디
-            private String imgFilename; // 유저이미지
-            private String name; // 유저이름
-
-            public User(User user) {
-                this.id = user.id;
-                this.imgFilename = user.imgFilename;
-                this.name = user.name;
-            }
-        }
     }
 
 
