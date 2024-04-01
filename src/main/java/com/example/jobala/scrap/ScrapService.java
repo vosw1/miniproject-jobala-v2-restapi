@@ -10,6 +10,7 @@ import com.example.jobala.resume.ResumeJPARepository;
 import com.example.jobala.resume.ResumeResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,15 +22,16 @@ public class ScrapService {
     private final JobopenJPARepository jobopenJPARepository;
 
     // 회사가스크랩
-    public Scrap scrapByComp(ScrapRequest.ScrapDTO reqDTO, User sessionUser) {
+    @Transactional
+    public ScrapResponse.CompDTO scrapByComp(ScrapRequest.ScrapDTO reqDTO, User sessionUser) {
         Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())
                 .orElseThrow(() -> new Exception404("스크랩 하려는 이력서를 찾을 수 없습니다."));
 
         Scrap scrap = scrapJPARepository.findCompScrapByResumeIdAndUserId(reqDTO.getResumeId(), sessionUser.getId())
                 .orElse(null);
         if (scrap == null) {
-            scrapJPARepository.save(reqDTO.toEntity(resume, sessionUser));
-            return scrap;
+            Scrap scrapResult = scrapJPARepository.save(reqDTO.toEntity(resume, sessionUser));
+            return new ScrapResponse.CompDTO(scrapResult);
         } else {
             scrapJPARepository.deleteById(scrap.getId());
             return null;
@@ -37,15 +39,16 @@ public class ScrapService {
     }
 
     // 게스트가스크랩
-    public Scrap scrapByGuest(ScrapRequest.ScrapDTO reqDTO, User sessionUser) {
+    @Transactional
+    public ScrapResponse.GuestDTO scrapByGuest(ScrapRequest.ScrapDTO reqDTO, User sessionUser) {
         Jobopen jobopen = jobopenJPARepository.findById(reqDTO.getJobopenId())
                 .orElseThrow(() -> new Exception404("스크랩 하려는 공고를 찾을 수 없습니다."));
 
         Scrap scrap = scrapJPARepository.findGuestScrapByJobopenIdAndUserId(reqDTO.getJobopenId(), sessionUser.getId())
                 .orElse(null);
         if (scrap == null) {
-            scrapJPARepository.save(reqDTO.toEntity(jobopen, sessionUser));
-            return scrap;
+            Scrap scrapResult = scrapJPARepository.save(reqDTO.toEntity(jobopen, sessionUser));
+            return new ScrapResponse.GuestDTO(scrapResult);
         } else {
             scrapJPARepository.deleteById(scrap.getId());
             return null;

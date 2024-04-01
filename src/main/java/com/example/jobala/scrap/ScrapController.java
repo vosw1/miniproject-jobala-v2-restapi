@@ -22,12 +22,12 @@ public class ScrapController {
     //스크랩 목록
     @GetMapping("api/scrap")
     public ResponseEntity<?> ScrapForm() {
-        UserResponse.LoginResponseDTO sessionUser = (UserResponse.LoginResponseDTO) session.getAttribute("sessionUser");
-        if (sessionUser.getUser().getRole() == 1) { // 기업 스크랩 목록
-            List<ResumeResponse.ScrapDTO> respDTO = scrapService.scrapResumeBycomp(sessionUser.getUser().getId());
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser.getRole() == 1) { // 기업 스크랩 목록
+            List<ResumeResponse.ScrapDTO> respDTO = scrapService.scrapResumeBycomp(sessionUser.getId());
             return ResponseEntity.ok(new ApiUtil<>(respDTO));
         } else { // 개인 스크랩 목록
-            List<JobopenResponse.ScrapDTO> respDTO = scrapService.scrapJobopenByGuest(sessionUser.getUser().getId());
+            List<JobopenResponse.ScrapDTO> respDTO = scrapService.scrapJobopenByGuest(sessionUser.getId());
             return ResponseEntity.ok(new ApiUtil<>(respDTO));
         }
     }
@@ -35,13 +35,13 @@ public class ScrapController {
     //스크랩
     @RequestMapping(value = "/api/scrap", method = {RequestMethod.POST, RequestMethod.DELETE})
     public ResponseEntity<?> scrapResume(@RequestBody ScrapRequest.ScrapDTO reqDTO) {
-        UserResponse.LoginResponseDTO sessionUser = (UserResponse.LoginResponseDTO) session.getAttribute("sessionUser");
-        if (sessionUser.getUser().getRole() == 1) { // 기업이 스크랩
-            Scrap scrap = scrapService.scrapByComp(reqDTO, sessionUser.getUser());
-            return ResponseEntity.ok(new ApiUtil<>(scrap));
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser.getRole() == 1) { // 기업이 스크랩
+            ScrapResponse.CompDTO respDTO = scrapService.scrapByComp(reqDTO, sessionUser);
+            return ResponseEntity.ok(new ApiUtil<>(respDTO));
         } else {
-            Scrap scrap = scrapService.scrapByGuest(reqDTO, sessionUser.getUser());
-            return ResponseEntity.ok(new ApiUtil<>(scrap));
+            ScrapResponse.GuestDTO respDTO = scrapService.scrapByGuest(reqDTO, sessionUser);
+            return ResponseEntity.ok(new ApiUtil<>(respDTO));
         }
     }
 }
