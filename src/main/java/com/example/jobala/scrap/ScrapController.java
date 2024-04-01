@@ -20,7 +20,7 @@ public class ScrapController {
     private final ScrapService scrapService;
 
     //스크랩 목록
-    @GetMapping("api/scrap")
+    @GetMapping("/api/scrap")
     public ResponseEntity<?> ScrapForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser.getRole() == 1) { // 기업 스크랩 목록

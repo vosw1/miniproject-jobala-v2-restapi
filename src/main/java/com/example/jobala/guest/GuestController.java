@@ -26,7 +26,7 @@ public class GuestController {
     // DEL: mainForm 삭제
 
     //이력서 관리 페이징
-    @GetMapping("/guest/mngForm")
+    @GetMapping("/api/guest/mngForm")
     public ResponseEntity<?> mngForm(HttpServletRequest req, @RequestParam(defaultValue = "0") int page) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ResumeResponse.MngDTO respDTO = guestService.resumesFindAll(page, sessionUser.getId());

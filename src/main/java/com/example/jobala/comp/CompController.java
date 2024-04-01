@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -33,14 +34,14 @@ public class CompController {
     private final CompJPARepository compJPARepository;
 
     //기업 -인재 이력서 검색하기
-    @GetMapping("/comp/resumeSearch")
+    @GetMapping("/api/comp/resumeSearch")
     public ResponseEntity<?> resumeSearch(@RequestParam(value = "skills", defaultValue = "") String skills, CompRequest.SearchDTO resDTO) {
         List<ResumeResponse.ScoutListDTO> respDTO = compService.searchResumes(skills, resDTO);
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
     // 기업 - 인재 명단 목록
-    @GetMapping("/comp/scoutList")
+    @GetMapping("/api/comp/scoutList")
     public ResponseEntity<?> scoutList(HttpServletRequest req) {
         List<ResumeResponse.ScoutListDTO> respDTO = compService.listAllResumes();
         return ResponseEntity.ok(new ApiUtil(respDTO));
@@ -49,7 +50,7 @@ public class CompController {
     // DEL: getResumeList 삭제
 
     //기업 - 마이페이지 - 공고 관리
-    @GetMapping("/comp/mngForm")
+    @GetMapping("/api/comp/mngForm")
     public ResponseEntity<?> mngForm(HttpServletRequest req) {
         User sessionUser = (User) req.getSession().getAttribute("sessionUser");
         List<JobopenResponse.MngDTO> respDTO = compService.searchjobopenList(sessionUser.getId());
@@ -57,7 +58,7 @@ public class CompController {
     }
 
     //기업 - 마이페이지 - 프로필관리
-    @GetMapping("/comp/profileForm")
+    @GetMapping("/api/comp/profileForm")
     public ResponseEntity<?> profileForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         UserResponse.GuestProfile respSTO = compService.compProfile(sessionUser.getId());
@@ -65,7 +66,7 @@ public class CompController {
     }
 
     //기업 - 마이페이지 프로필 업데이트
-    @PostMapping("/comp/updateProfile") // 주소 수정 필요!
+    @PutMapping("/api/comp/updateProfile") // 주소 수정 필요!
     public ResponseEntity<?> updateProfile(CompRequest.CompProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         UserResponse.GuestProfile respSTO = compService.compUpdateProfile(reqDTO, sessionUser);
