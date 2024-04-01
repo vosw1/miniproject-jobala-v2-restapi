@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -65,11 +66,10 @@ public class CompController {
     }
 
     //기업 - 마이페이지 프로필 업데이트
-    @PutMapping("/api/comp/updateProfile") // 주소 수정 필요!
-    public ResponseEntity<?> updateProfile(CompRequest.CompProfileUpdateDTO reqDTO) {
+    @PutMapping("/api/comp/profile") // 주소 수정 필요!
+    public ResponseEntity<?> updateProfile(@RequestBody CompRequest.CompProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         UserResponse.CompProfile respDTO = compService.compUpdateProfile(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil(respDTO));
-
     }
 }
