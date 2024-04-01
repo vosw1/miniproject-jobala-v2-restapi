@@ -22,7 +22,7 @@ public class BoardController {
     private final HttpSession session;
 
     // 글 상세보기 완료
-    @GetMapping("/api/board/{id}")
+    @GetMapping("/api/boards/{id}")
     public ResponseEntity<?> boardDetailForm(@PathVariable int id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         BoardResponse.DetailDTO respDTO = boardService.boardDetail(id, sessionUser);
@@ -30,7 +30,7 @@ public class BoardController {
     }
 
     // 글 목록보기 완료
-    @GetMapping("/api/board")
+    @GetMapping("/api/boards")
     public ResponseEntity<?> boardForm(HttpServletRequest req) {
 
         List<BoardResponse.BoardDTO> respDTO = boardService.boardFindAll();
@@ -46,7 +46,7 @@ public class BoardController {
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
-    @PutMapping("/api/board/{id}")
+    @PutMapping("/api/boards/{id}")
     public ResponseEntity<?> update(@PathVariable int id, @RequestBody BoardRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         BoardResponse.UpdateDTO respDTO = boardService.boardUpdate(id, sessionUser.getId(), reqDTO);
@@ -57,7 +57,7 @@ public class BoardController {
 
 
     // 글 쓰기 완료
-    @PostMapping("/api/board")
+    @PostMapping("/api/boards")
     public ResponseEntity<?> save(@RequestBody BoardRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         BoardResponse.SaveDTO respDTO = boardService.boardSave(reqDTO, sessionUser);
@@ -65,7 +65,7 @@ public class BoardController {
     }
 
     // 글 삭제 완료
-    @DeleteMapping("/api/board/{id}")
+    @DeleteMapping("/api/boards/{id}")
     public ResponseEntity<?> delete(@PathVariable int id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
