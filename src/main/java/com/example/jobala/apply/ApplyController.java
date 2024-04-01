@@ -43,7 +43,6 @@ public class ApplyController {
     @GetMapping("/api/applies/applyForm")
     public ResponseEntity<ApiUtil<?>> applyForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        Object respDTO = applyService.findApplyGuestByUserId(sessionUser.getId(), sessionUser.getRole());
-        return ResponseEntity.ok(new ApiUtil<>(respDTO));
+        return applyService.findApplyFormByUserId(sessionUser);
     }
 }

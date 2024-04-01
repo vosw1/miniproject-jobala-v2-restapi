@@ -46,7 +46,7 @@ public class ApplyService {
         return new ApplyResponse.ApplicationDTO(true);
     }
 
-    // 기업 사용자
+    // 제안 기업 사용자
     public List<ApplyResponse.CompPositionDTO> findApplyCompByUserId(Integer id) {
         List<Apply> applyList = applyJPARepository.findByUserId(id);
         return applyList.stream()
@@ -54,7 +54,7 @@ public class ApplyService {
                 .collect(Collectors.toList());
     }
 
-    // 개인 사용자
+    // 제안 개인 사용자
     public List<ApplyResponse.GuestPositionDTO> findJobOpenByUserId(Integer id) {
         List<Apply> applyList = applyJPARepository.findByUserId(id);
         return applyList.stream()
@@ -62,7 +62,7 @@ public class ApplyService {
                 .collect(Collectors.toList());
     }
 
-    // 사용자 역할에 따른 통합 조회 및 변환 로직
+    // 제안 사용자 역할에 따른 통합 조회 및 변환 로직
     public ResponseEntity<ApiUtil<?>> findPositionFormByUserId(User sessionUser) {
         if (sessionUser.getRole() == 1) {
             List<ApplyResponse.CompPositionDTO> respDTO = findApplyCompByUserId(sessionUser.getId());
@@ -73,9 +73,31 @@ public class ApplyService {
         }
     }
 
-        public Object findApplyGuestByUserId (Integer id, Integer role){
+    // 지원 기업 사용자
+    public List<ApplyResponse.CompApplyDTO> findApplyCompByUserId2(Integer id) {
+        List<Apply> applyList = applyJPARepository.findByUserId(id);
+        return applyList.stream()
+                .map(ApplyResponse.CompApplyDTO::new)
+                .collect(Collectors.toList());
+    }
 
-            List<Apply> applyList = applyJPARepository.findByUserId(id);
-            return applyList.stream().map(apply -> new ApplyResponse.GuestApplyDTO(apply)).toList();
+    // 지원 개인 사용자
+    public List<ApplyResponse.GuestApplyDTO> findJobOpenByUserId2(Integer id) {
+        List<Apply> applyList = applyJPARepository.findByUserId(id);
+        return applyList.stream()
+                .map(ApplyResponse.GuestApplyDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    // 지원 사용자 역할에 따른 통합 조회 및 변환 로직
+    public ResponseEntity<ApiUtil<?>> findApplyFormByUserId(User sessionUser) {
+        if (sessionUser.getRole() == 1) {
+            List<ApplyResponse.CompApplyDTO> respDTO = findApplyCompByUserId2(sessionUser.getId());
+            return ResponseEntity.ok(new ApiUtil<>(respDTO));
+        } else {
+            List<ApplyResponse.GuestApplyDTO> respDTO = findJobOpenByUserId2(sessionUser.getId());
+            return ResponseEntity.ok(new ApiUtil<>(respDTO));
         }
     }
+
+}
