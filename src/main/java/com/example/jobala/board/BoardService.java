@@ -78,9 +78,8 @@ public class BoardService {
     }
 
     public List<BoardResponse.MainDetailDTO> boardFindAll() { // 글목록조회
-        Sort sort = Sort.by(Sort.Direction.DESC, "id");
-        List<Board> boardList = boardJPARepository.findAll(sort);
-        return boardList.stream().map(board -> new BoardResponse.MainDetailDTO(board)).toList();
+        List<BoardResponse.MainDetailDTO> boardList = boardJPARepository.findBoardAll();
+        return boardList;
         // return boardList.stream().map(BoardResponse.MainDTO::new).toList();와 같은 것
     }
 }

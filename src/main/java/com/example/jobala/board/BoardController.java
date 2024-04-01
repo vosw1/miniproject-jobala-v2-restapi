@@ -46,8 +46,14 @@ public class BoardController {
         req.setAttribute("currentDate", dateStringWithoutTime);
 
         List<BoardResponse.MainDetailDTO> respDTO = boardService.boardFindAll();
-        System.out.println("respDTO: " + respDTO);
 
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
+    }
+
+    // 글 목록보기 완료
+    @GetMapping("api/boards")
+    public ResponseEntity<?> board() {
+        List<BoardResponse.MainDetailDTO> respDTO = boardService.boardFindAll();
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
