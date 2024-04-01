@@ -1,5 +1,6 @@
 package com.example.jobala._user;
 
+import com.example.jobala.guest.GuestRequest;
 import com.example.jobala.guest.GuestResponse;
 import com.example.jobala.jobopen.JobopenResponse;
 import jakarta.persistence.EntityManager;
@@ -30,7 +31,7 @@ public class UserQueryRepository {
         return jobopenList;
     }
 
-    public List<JobopenResponse.ListDTO> findAll(String skills, GuestResponse.SearchDTO resDTO) {
+    public List<JobopenResponse.ListDTO> findAll(String skills, GuestRequest.SearchDTO resDTO) {
         String skillQuery = """
                SELECT jb.id, jb.jobopen_title, jb.comp_location, jb.career, jb.edu, ut.img_filename 
                FROM jobopen_tb jb 

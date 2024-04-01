@@ -1,6 +1,7 @@
 package com.example.jobala._user;
 
 import com.example.jobala._core.utill.ApiUtil;
+import com.example.jobala.guest.GuestRequest;
 import com.example.jobala.guest.GuestResponse;
 import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.jobopen.JobopenResponse;
@@ -57,7 +58,7 @@ public class UserController {
 
     //기업,개인 - 채용공고 검색필터
     @GetMapping("/jobopenSearch")
-    public ResponseEntity<?> jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, @RequestParam GuestResponse.SearchDTO resDTO) {
+    public ResponseEntity<?> jobopenSearch(@RequestParam(value = "skills", defaultValue = "") String skills, GuestRequest.SearchDTO resDTO) {
         List<JobopenResponse.ListDTO> respDTO = userService.jobopenSearch(skills, resDTO);
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }

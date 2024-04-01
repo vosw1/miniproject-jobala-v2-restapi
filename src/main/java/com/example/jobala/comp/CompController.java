@@ -34,7 +34,7 @@ public class CompController {
 
     //기업 -인재 이력서 검색하기
     @GetMapping("/comp/resumeSearch")
-    public ResponseEntity<?> jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, CompResponse.SearchDTO resDTO) {
+    public ResponseEntity<?> resumeSearch(@RequestParam(value = "skills", defaultValue = "") String skills, CompRequest.SearchDTO resDTO) {
         List<ResumeResponse.ScoutListDTO> respDTO = compService.searchResumes(skills, resDTO);
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
