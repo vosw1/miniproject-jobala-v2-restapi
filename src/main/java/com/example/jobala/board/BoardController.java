@@ -39,26 +39,22 @@ public class BoardController {
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
+    // 글 목록보기 완료
+    @GetMapping("api/boards")
+    public ResponseEntity<?> board() {
+        List<BoardResponse.BoardDTO> respDTO = boardService.boardFindAll();
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
+    }
+
     @PutMapping("/api/board/{id}")
     public ResponseEntity<?> update(@PathVariable int id, @RequestBody BoardRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         BoardResponse.UpdateDTO respDTO = boardService.boardUpdate(id, sessionUser.getId(), reqDTO);
-        return ResponseEntity.ok(new ApiUtil(respDTO));
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
-//    @GetMapping("/board/{id}/updateForm")
-//    public String updateForm(@PathVariable int id, HttpServletRequest request) {
-//        Board board = boardService.boardFindById(id);
-//        request.setAttribute("board", board);
-//        return "board/updateForm";
-//    }
-//
-//    //TODO: saveForm삭제 예정
-//    @GetMapping("/board/saveForm")
-//    public String saveForm() {
-//        User sessionUser = (User) session.getAttribute("sessionUser");
-//        return "board/saveForm";
-//    }
+
+
 
     // 글 쓰기 완료
     @PostMapping("/api/board")
