@@ -72,14 +72,13 @@ public class User {
     }
 
     //프로필 업데이트 setter
-
-    public void setGuestProfileUpdateDTO(GuestRequest.GuestProfileUpdateDTO reqDTO) {
+    public void setGuestProfileUpdateDTO(GuestRequest.GuestProfileUpdateDTO reqDTO, String webImgPath) {
         this.name = reqDTO.getName();
         this.password = reqDTO.getPassword();
         this.phone = reqDTO.getPhone();
         this.email = reqDTO.getEmail();
         this.imgTitle = reqDTO.getImgTitle();
-//        this.imgFilename = webImgPath;
+        this.imgFilename = webImgPath;
     }
 
     public void setCompProfileUpdateDTO(CompRequest.CompProfileUpdateDTO reqDTO, String webImgPath) {

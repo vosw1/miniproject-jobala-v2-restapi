@@ -10,6 +10,7 @@ public class GuestJPARepositoryTest {
     public void findAll_test() {
     // given
 
+
     //when
 
     //then

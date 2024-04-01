@@ -25,20 +25,6 @@ public class GuestController {
 
     // DEL: mainForm 삭제
 
-    //기업,개인 - 채용공고 검색필터
-    @GetMapping("/guest/jobopenSearch")
-    public ResponseEntity<?> jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, @RequestParam GuestResponse.SearchDTO resDTO) {
-        List<JobopenResponse.ListDTO> respDTO = guestService.jobopenSearch(skills, resDTO);
-        return ResponseEntity.ok(new ApiUtil(respDTO));
-    }
-
-    // 기업,개인 - 채용공고 목록
-    @GetMapping("/guest/jobSearch")
-    public ResponseEntity<?> jobSearch(HttpServletRequest req) {
-        List<JobopenResponse.ListDTO> respDTO = guestService.findAll();
-        return ResponseEntity.ok(new ApiUtil(respDTO));
-    }
-
     //이력서 관리 페이징
     @GetMapping("/guest/mngForm")
     public ResponseEntity<?> mngForm(HttpServletRequest req, @RequestParam(defaultValue = "0") int page) {
@@ -47,15 +33,14 @@ public class GuestController {
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
-
-    @GetMapping("/guest/profileForm")
+    @GetMapping("/api/guest/profileForm")
     public ResponseEntity<?> profileForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         UserResponse.GuestProfile respDTO = guestService.guestProgile(sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
-    @PutMapping("/guest/Profile") // 주소 수정 필요!
+    @PutMapping("/api/guest/profile") // 주소 수정 필요!
     public ResponseEntity<?> updateProfile(@RequestParam GuestRequest.GuestProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         UserResponse.CompProfile respDTO = guestService.guestUpdateProfile(reqDTO, sessionUser);

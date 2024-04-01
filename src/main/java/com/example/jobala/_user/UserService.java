@@ -4,8 +4,10 @@ import com.example.jobala._core.errors.apiException.ApiException400;
 import com.example.jobala._core.errors.apiException.ApiException401;
 import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._core.utill.Paging;
+import com.example.jobala.guest.GuestResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenJPARepository;
+import com.example.jobala.jobopen.JobopenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,20 @@ import java.util.Optional;
 public class UserService {
     private final JobopenJPARepository jobopenJPARepository;
     private final UserJPARepository userJPARepository;
+    private final UserQueryRepository userQueryRepository;
     private final Paging paging;
+
+
+    //기업,개인 - 채용공고 검색필터
+    public List<JobopenResponse.ListDTO> jobopenSearch(String skills, GuestResponse.SearchDTO resDTO) {
+        return userQueryRepository.findAll(skills, resDTO);
+    }
+
+    // 기업,개인 - 채용공고 목록
+    public List<JobopenResponse.ListDTO> findAll() {
+        return userQueryRepository.findByJoboopenAll();
+    }
+
 
     //메인 공고 목록조회
     public UserResponse.MainDTO mainJobopenList(Integer page, User sessionUser) {
