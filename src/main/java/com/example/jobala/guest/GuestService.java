@@ -37,22 +37,22 @@ public class GuestService {
         User user = guestJPARepository.findById(sessionUser.getId())
                 .orElseThrow(() -> new Exception404("수정할 프로필이 없습니다.")).getUser();
 
-        System.out.println("reqDTO = " + reqDTO.getImgFilename());
-        MultipartFile imgFilename = reqDTO.getImgFilename();
-
-        // 이미지 파일의 저장 경로 설정
-        String GuestImgFilename = UUID.randomUUID() + "_" + imgFilename.getOriginalFilename();
-        Path imgPath = Paths.get("./image/" + GuestImgFilename);
-        try {
-            Files.write(imgPath, imgFilename.getBytes());
-            String webImgPath = imgPath.toString().replace("\\", "/");
-            webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
-
-            user.setGuestProfileUpdateDTO(reqDTO, webImgPath);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        System.out.println("reqDTO = " + reqDTO.getImgFilename());
+//        MultipartFile imgFilename = reqDTO.getImgFilename();
+//
+//        // 이미지 파일의 저장 경로 설정
+//        String GuestImgFilename = UUID.randomUUID() + "_" + imgFilename.getOriginalFilename();
+//        Path imgPath = Paths.get("./image/" + GuestImgFilename);
+//        try {
+//            Files.write(imgPath, imgFilename.getBytes());
+//            String webImgPath = imgPath.toString().replace("\\", "/");
+//            webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
+//
+            user.setGuestProfileUpdateDTO(reqDTO);
+//
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
         return new UserResponse.CompProfile(user);
     }
 

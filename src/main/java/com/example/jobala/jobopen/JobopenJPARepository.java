@@ -11,6 +11,9 @@ import java.util.Optional;
 
 public interface JobopenJPARepository extends JpaRepository<Jobopen, Integer> {
 
+    @Query("select j from Jobopen j JOIN FETCH j.user")
+    List<Jobopen> main();
+
     //공고 찾아오기
     @Query("select j from Jobopen j where j.user.id=:userId")
     List<Jobopen> findJobopenById(@Param("userId")int userId);

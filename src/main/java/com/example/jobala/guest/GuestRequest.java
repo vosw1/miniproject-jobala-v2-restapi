@@ -14,6 +14,6 @@ public class GuestRequest {
         private String phone;
         private String email;
         private String imgTitle;
-        private MultipartFile imgFilename;
+//        private MultipartFile imgFilename;
     }
 }

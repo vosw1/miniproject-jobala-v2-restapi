@@ -4,6 +4,7 @@ import com.example.jobala._core.errors.apiException.ApiException400;
 import com.example.jobala._core.errors.apiException.ApiException401;
 import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._core.utill.Paging;
+import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenJPARepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -21,9 +22,9 @@ public class UserService {
     private final Paging paging;
 
     //메인 공고 목록조회
-    public List<UserResponse.MainDTO> mainJobopenList(Integer page, User sessionUser) {
-        return jobopenJPARepository.findAll(paging.mainPaging(page)).
-                stream().map(jobopen -> new UserResponse.MainDTO(jobopen, sessionUser)).toList();
+    public UserResponse.MainDTO mainJobopenList(Integer page, User sessionUser) {
+        List<Jobopen> jobopenList = jobopenJPARepository.main();
+        return new UserResponse.MainDTO(jobopenList);
     }
 
     // 로그인
@@ -31,7 +32,7 @@ public class UserService {
         try {
             return userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
                     .orElseThrow(() -> new ApiException401("인증되지 않았습니다."));
-            
+
         } catch (EmptyResultDataAccessException e) {
             throw new ApiException401("아이디,비밀번호가 틀렸어요");
         }

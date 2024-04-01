@@ -70,6 +70,7 @@ public class JobopenResponse {
 
 
     @AllArgsConstructor
+    @NoArgsConstructor
     @Data
     public static class ListDTO {
         private Integer id;

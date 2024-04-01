@@ -25,7 +25,7 @@ public class UserController {
     @GetMapping("/")
     public ResponseEntity<?> mainForm(@RequestParam(defaultValue = "0") Integer page, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<UserResponse.MainDTO> respDTO = userService.mainJobopenList(page, sessionUser);
+        UserResponse.MainDTO respDTO = userService.mainJobopenList(page, sessionUser);
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
