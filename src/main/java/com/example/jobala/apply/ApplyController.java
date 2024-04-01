@@ -4,7 +4,6 @@ package com.example.jobala.apply;
 import com.example.jobala._core.utill.ApiUtil;
 import com.example.jobala._user.User;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,6 @@ public class ApplyController {
 
     private final HttpSession session;
     private final ApplyService applyService;
-    private final ApplyQueryRepository applyQueryRepository;
 
     // 기업 및 개인 - 지원 상태 업데이트 기존 기업 개인으로 구분되어 있던 것을 합침
     @PutMapping("/api/applies/applyStatus")

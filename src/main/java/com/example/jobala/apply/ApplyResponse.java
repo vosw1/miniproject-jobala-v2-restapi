@@ -1,12 +1,10 @@
 package com.example.jobala.apply;
 
-import com.example.jobala.jobopen.Jobopen;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.sql.Date;
-import java.util.List;
+
 
 public class ApplyResponse {
 
