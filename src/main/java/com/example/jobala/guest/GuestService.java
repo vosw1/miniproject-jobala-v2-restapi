@@ -20,6 +20,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -39,15 +40,19 @@ public class GuestService {
 
     // 프로필업데이트
     @Transactional
-    public UserResponse.CompProfile guestUpdateProfile(GuestRequest.GuestProfileUpdateDTO reqDTO, User sessionUser) {
+    public UserResponse.GuestProfile guestUpdateProfile(GuestRequest.GuestProfileUpdateDTO reqDTO, User sessionUser) {
         User user = guestJPARepository.findById(sessionUser.getId())
                 .orElseThrow(() -> new Exception404("수정할 프로필이 없습니다.")).getUser();
 
         //베이스 64로 들어오는 문자열을 바이트로 디코딩하기
-        byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getImgFilename().getBytes());
+        byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getImgFilename().trim().getBytes());
+        System.out.println("decodedBytes = " + decodedBytes);
+
+        String decodedString = new String(decodedBytes, StandardCharsets.UTF_8);
+        System.out.println("decodedString = " + decodedString);
 
         // 이미지 파일의 저장 경로 설정
-        String GuestImgFilename = UUID.randomUUID() + "_" + decodedBytes;
+        String GuestImgFilename = UUID.randomUUID() + decodedString;
 
         Path imgPath = Paths.get("./image/" + GuestImgFilename);
         try {
@@ -60,7 +65,7 @@ public class GuestService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return new UserResponse.CompProfile(user);
+        return new UserResponse.GuestProfile(user);
     }
 
 

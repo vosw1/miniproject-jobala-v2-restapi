@@ -4,6 +4,7 @@ import com.example.jobala._user.User;
 import com.example.jobala.resume.Resume;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -67,7 +68,8 @@ public class JobopenResponse {
         }
     }
 
-
+    @AllArgsConstructor
+    @NoArgsConstructor
     @Data
     public static class ListDTO {
         private Integer id;

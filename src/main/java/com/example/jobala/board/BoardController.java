@@ -54,8 +54,6 @@ public class BoardController {
     }
 
 
-
-
     // 글 쓰기 완료
     @PostMapping("/api/board")
     public ResponseEntity<?> save(@RequestBody BoardRequest.SaveDTO reqDTO) {

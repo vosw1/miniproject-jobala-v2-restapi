@@ -56,15 +56,16 @@ public class UserController {
 
 
     //기업,개인 - 채용공고 검색필터
-    @GetMapping("/jobopenSearch")
-    public ResponseEntity<?> jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, @RequestParam GuestResponse.SearchDTO resDTO) {
+    @GetMapping("/api/jobopenSearch")
+    public ResponseEntity<?> jobopenSearch(@RequestParam(value = "skills", defaultValue = "") String skills, GuestResponse.SearchDTO resDTO) {
         List<JobopenResponse.ListDTO> respDTO = userService.jobopenSearch(skills, resDTO);
+        respDTO.forEach(System.out::println);
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
     // 기업,개인 - 채용공고 목록
-    @GetMapping("/jobSearch")
-    public ResponseEntity<?> jobSearch(HttpServletRequest req) {
+    @GetMapping("/api/jobSearch")
+    public ResponseEntity<?> jobSearch() {
         List<JobopenResponse.ListDTO> respDTO = userService.findAll();
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }

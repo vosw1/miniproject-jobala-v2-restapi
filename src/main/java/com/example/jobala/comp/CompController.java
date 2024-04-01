@@ -65,8 +65,8 @@ public class CompController {
     }
 
     //기업 - 마이페이지 프로필 업데이트
-    @PostMapping("/comp/updateProfile") // 주소 수정 필요!
-    public ResponseEntity<?> updateProfile(CompRequest.CompProfileUpdateDTO reqDTO) {
+    @PostMapping("/comp/profile") // 주소 수정 필요!
+    public ResponseEntity<?> profileUpdate(CompRequest.CompProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         UserResponse.GuestProfile respSTO = compService.compUpdateProfile(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil(respSTO));
