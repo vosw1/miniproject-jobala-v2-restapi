@@ -54,7 +54,7 @@ public class BoardResponse {
         private boolean isOwner;
         private List<ReplyDTO> replies = new ArrayList<>();
 
-        public DetailDTO(Board board, User sessionUser) {
+        public DetailDTO(Board board, User sessionUser, List<Reply> repliesList) {
             this.id = board.getId();
             this.title = board.getTitle();
             this.content = board.getContent();
@@ -65,7 +65,7 @@ public class BoardResponse {
                 if (sessionUser.getId() == userId) isOwner = true;
             }
 
-            this.replies = board.getReplies().stream().map(reply -> new ReplyDTO(reply, sessionUser)).toList();
+            this.replies = repliesList.stream().map(reply -> new ReplyDTO(reply, sessionUser)).toList();
         }
 
         @Data
