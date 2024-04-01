@@ -46,13 +46,10 @@ public class GuestService {
 
         //베이스 64로 들어오는 문자열을 바이트로 디코딩하기
         byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getImgFilename().trim().getBytes());
-        System.out.println("decodedBytes = " + decodedBytes);
 
-        String decodedString = new String(decodedBytes, StandardCharsets.UTF_8);
-        System.out.println("decodedString = " + decodedString);
 
         // 이미지 파일의 저장 경로 설정
-        String GuestImgFilename = UUID.randomUUID() + decodedString;
+        String GuestImgFilename = UUID.randomUUID() + decodedBytes.toString();
 
         Path imgPath = Paths.get("./image/" + GuestImgFilename);
         try {
