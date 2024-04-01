@@ -99,7 +99,6 @@ public class CompQueryRepository {
         return resumeList;
     }
 
-
     public List<Resume> findResumeById(int userId) {
         Query query = em.createNativeQuery("select * from resume_tb where user_id = ? order by id desc", Resume.class);
         query.setParameter(1, userId);

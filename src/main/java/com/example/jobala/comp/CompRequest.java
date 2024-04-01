@@ -3,7 +3,6 @@ package com.example.jobala.comp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
-import org.springframework.web.multipart.MultipartFile;
 
 public class CompRequest {
 
@@ -27,6 +26,5 @@ public class CompRequest {
         private String email;
         private String address;
         private String imgTitle;
-        private MultipartFile imgFilename;
     }
 }

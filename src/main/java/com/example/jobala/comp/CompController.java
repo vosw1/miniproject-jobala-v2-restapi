@@ -68,8 +68,8 @@ public class CompController {
     @PutMapping("/api/comp/updateProfile") // 주소 수정 필요!
     public ResponseEntity<?> updateProfile(CompRequest.CompProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        UserResponse.GuestProfile respSTO = compService.compUpdateProfile(reqDTO, sessionUser);
-        return ResponseEntity.ok(new ApiUtil(respSTO));
+        UserResponse.CompProfile respDTO = compService.compUpdateProfile(reqDTO, sessionUser);
+        return ResponseEntity.ok(new ApiUtil(respDTO));
 
     }
 }

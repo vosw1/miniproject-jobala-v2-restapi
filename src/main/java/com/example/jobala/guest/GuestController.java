@@ -40,7 +40,7 @@ public class GuestController {
     @PutMapping("/api/guest/profile")
     public ResponseEntity<?> updateProfile(@RequestParam GuestRequest.GuestProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        UserResponse.CompProfile respDTO = guestService.guestUpdateProfile(reqDTO, sessionUser);
+        UserResponse.GuestProfile respDTO = guestService.guestUpdateProfile(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 }

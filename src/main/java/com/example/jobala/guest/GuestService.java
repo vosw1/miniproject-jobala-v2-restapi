@@ -12,48 +12,25 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Base64;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class GuestService {
 
     private final GuestJPARepository guestJPARepository;
-    private final GuestQueryRepository guestQueryRepository;
     private final UserJPARepository userJPARepository;
     private final ResumeJPARepository resumeJPARepository;
     private final Paging paging;
 
-    // 프로필업데이트
+    // 개인 - 프로필업데이트
     @Transactional
-    public UserResponse.CompProfile guestUpdateProfile(GuestRequest.GuestProfileUpdateDTO reqDTO, User sessionUser) {
+    public UserResponse.GuestProfile guestUpdateProfile(GuestRequest.GuestProfileUpdateDTO reqDTO, User sessionUser) {
         User user = guestJPARepository.findById(sessionUser.getId())
                 .orElseThrow(() -> new Exception404("수정할 프로필이 없습니다.")).getUser();
 
-        //베이스 64로 들어오는 문자열을 바이트로 디코딩하기
-        byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getImgFilename().getBytes());
-
-        // 이미지 파일의 저장 경로 설정
-        String GuestImgFilename = UUID.randomUUID() + "_" + decodedBytes;
-
-        Path imgPath = Paths.get("./image/" + GuestImgFilename);
-        try {
-            Files.write(imgPath, decodedBytes);
-            String webImgPath = imgPath.toString().replace("\\", "/");
-            webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
-
-            user.setGuestProfileUpdateDTO(reqDTO, webImgPath);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return new UserResponse.CompProfile(user);
+        user.setGuestProfileUpdateDTO(reqDTO);
+        return new UserResponse.GuestProfile(user);
     }
 
     // 개인 - 프로필관리

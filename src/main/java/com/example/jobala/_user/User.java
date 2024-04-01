@@ -72,22 +72,20 @@ public class User {
     }
 
     //프로필 업데이트 setter
-    public void setGuestProfileUpdateDTO(GuestRequest.GuestProfileUpdateDTO reqDTO, String webImgPath) {
+    public void setGuestProfileUpdateDTO(GuestRequest.GuestProfileUpdateDTO reqDTO) {
         this.name = reqDTO.getName();
         this.password = reqDTO.getPassword();
         this.phone = reqDTO.getPhone();
         this.email = reqDTO.getEmail();
         this.imgTitle = reqDTO.getImgTitle();
-        this.imgFilename = webImgPath;
     }
 
-    public void setCompProfileUpdateDTO(CompRequest.CompProfileUpdateDTO reqDTO, String webImgPath) {
+    public void setCompProfileUpdateDTO(CompRequest.CompProfileUpdateDTO reqDTO) {
         this.name = reqDTO.getName();
         this.password = reqDTO.getPassword();
         this.phone = reqDTO.getPhone();
         this.email = reqDTO.getEmail();
         this.address = reqDTO.getAddress();
         this.imgTitle = reqDTO.getImgTitle();
-        this.imgFilename = webImgPath;
     }
 }
