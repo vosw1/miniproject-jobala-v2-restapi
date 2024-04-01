@@ -31,19 +31,6 @@ public class ResumeController {
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
-    // TODO: 글조회로 변경예정
-//    @GetMapping("/guest/resume/{id}/updateForm")
-//    public String updateForm(@PathVariable Integer id, HttpServletRequest req) {
-//        User sessionUser = (User) session.getAttribute("sessionUser");
-//        ResumeResponse.DetailDTO respDTO = resumeService.resumeFindById(id, sessionUser);
-//        req.setAttribute("resume", respDTO);
-//
-//        // 업데이트 페이지에서 체크박스 체크 로직
-//        ResumeResponse.CheckBoxDTO checkedSkillsList = resumeService.getCheckedSkills(id);
-//        req.setAttribute("checkedSkillsList", checkedSkillsList);
-//        return "guest/resume/updateForm";
-//    }
-
     //이력서 상세보기
     @GetMapping("/api/guest/resume/{id}")
     public ResponseEntity<?> detailForm(@PathVariable Integer id) {
