@@ -3,6 +3,8 @@ package com.example.jobala.board;
 import com.example.jobala._core.errors.exception.Exception403;
 import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._user.User;
+import com.example.jobala.reply.Reply;
+import com.example.jobala.reply.ReplyJPARepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardService {
     private final BoardJPARepository boardJPARepository;
+    private final ReplyJPARepository replyJPARepository;
 
     // 글삭제하기
     public void boardDelete(int boardId, Integer sessionUserId) {
@@ -29,8 +32,9 @@ public class BoardService {
     public BoardResponse.DetailDTO boardDetail(int boardId, User sessionUser) {
         Board board = boardJPARepository.findByIdJoinUser(boardId)
                 .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다"));
+        List<Reply> replyList = replyJPARepository.findByUserId(boardId);
 
-        return new BoardResponse.DetailDTO(board, sessionUser);
+        return new BoardResponse.DetailDTO(board, sessionUser, replyList);
     }
 
     // 글수정
