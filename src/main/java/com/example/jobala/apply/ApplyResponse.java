@@ -1,5 +1,6 @@
 package com.example.jobala.apply;
 
+import com.example.jobala.jobopen.Jobopen;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,25 @@ import java.util.List;
 
 public class ApplyResponse {
 
+    // 지원 응답DTO
+    @Data
+    public static class ApplicationDTO {
+        private boolean success;
 
+        public ApplicationDTO(boolean success) {
+            this.success = success;
+        }
+    }
+
+    // 상태 수정 응답DTO
+    @Data
+    public static class StatusUpdateDTO {
+        private boolean success;
+
+        public StatusUpdateDTO(boolean success) {
+            this.success = success;
+        }
+    }
 
    //기업 applyForm 응답DTO
     @Data
@@ -96,8 +115,18 @@ public class ApplyResponse {
         private Integer resumeId;
         private String jobopenTitle;
         private String resumeTitle;
-        private Date endTime;
+        private java.util.Date endTime;
         private String state;
+
+        public GuestPositionDTO(Apply apply) {
+            this.id = apply.getId();
+            this.jobopenId = apply.getJobopen().getId();
+            this.resumeId = apply.getResume().getId();
+            this.jobopenTitle = apply.getJobopen().getJobopenTitle();
+            this.resumeTitle = apply.getResume().getResumeTitle();
+            this.endTime = apply.getJobopen().getEndTime();
+            this.state = apply.getState();
+        }
     }
 }
 

@@ -3,9 +3,13 @@ package com.example.jobala._user;
 
 import com.example.jobala.jobopen.Jobopen;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Page;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserResponse {
-
 
     @Data
     public static class CompProfile {
@@ -26,13 +30,11 @@ public class UserResponse {
     @Data
     public static class GuestProfile {
         private Integer id;
-        private String imgFilename;
         private String name;
         private String email;
 
         public GuestProfile(User user) {
             this.id = user.getId();
-            this.imgFilename = user.getImgFilename();
             this.name = user.getName();
             this.email = user.getEmail();
         }
@@ -92,24 +94,33 @@ public class UserResponse {
 
     @Data
     public static class MainDTO {
-        private Integer userId;
-        private String imgFilename; // 파일 패스
-        private Integer jobopenId; //
-        private String jobopenTitle; //공고제목
-        private String compLocation; //
-        private String career; //
-        private String edu; //
-        private String endTime; //
+        private List<JobopenDTO> jobopenDTO = new ArrayList<>();
 
-        public MainDTO(Jobopen jobopen, User user) {
-            this.userId = jobopen.getUser().getId();
-            this.imgFilename = jobopen.getUser().getImgFilename();
-            this.jobopenId = jobopen.getId();
-            this.jobopenTitle = jobopen.getJobopenTitle();
-            this.compLocation = jobopen.getCompLocation();
-            this.career = jobopen.getCareer();
-            this.edu = jobopen.getEdu();
-            this.endTime = String.valueOf(jobopen.getEndTime());
+        public MainDTO(List<Jobopen> jobopen) {
+            this.jobopenDTO = jobopen.stream().map(jobopen1 -> new JobopenDTO(jobopen1)).toList();
+        }
+
+        @Data
+        public static class JobopenDTO {
+            private Integer userId;
+            private String imgFilename;; // 파일 패스
+            private Integer jobopenId; //private Integer jobopenId; //
+            private String jobopenTitle; //공고제목
+            private String compLocation; //
+            private String career; //
+            private String edu; //
+            private String endTime; //
+
+            public JobopenDTO(Jobopen jobopen) {
+                this.userId = jobopen.getUser().getId();
+                this.imgFilename = jobopen.getUser().getImgFilename();
+                this.jobopenId = jobopen.getId();
+                this.jobopenTitle = jobopen.getJobopenTitle();
+                this.compLocation = jobopen.getCompLocation();
+                this.career = jobopen.getCareer();
+                this.edu = jobopen.getEdu();
+                this.endTime = String.valueOf(jobopen.getEndTime());
+            }
         }
     }
 

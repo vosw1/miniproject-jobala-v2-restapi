@@ -1,7 +1,9 @@
 package com.example.jobala._user;
 
 import com.example.jobala._core.utill.ApiUtil;
+import com.example.jobala.guest.GuestResponse;
 import com.example.jobala.jobopen.JobopenJPARepository;
+import com.example.jobala.jobopen.JobopenResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +27,7 @@ public class UserController {
     @GetMapping("/")
     public ResponseEntity<?> mainForm(@RequestParam(defaultValue = "0") Integer page, HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<UserResponse.MainDTO> respDTO = userService.mainJobopenList(page, sessionUser);
+        UserResponse.MainDTO respDTO = userService.mainJobopenList(page, sessionUser);
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
@@ -52,5 +54,19 @@ public class UserController {
         return ResponseEntity.ok(new ApiUtil(null));
     }
 
+
+    //기업,개인 - 채용공고 검색필터
+    @GetMapping("/jobopenSearch")
+    public ResponseEntity<?> jobopenSearch(HttpServletRequest req, @RequestParam(value = "skills", defaultValue = "") String skills, @RequestParam GuestResponse.SearchDTO resDTO) {
+        List<JobopenResponse.ListDTO> respDTO = userService.jobopenSearch(skills, resDTO);
+        return ResponseEntity.ok(new ApiUtil(respDTO));
+    }
+
+    // 기업,개인 - 채용공고 목록
+    @GetMapping("/jobSearch")
+    public ResponseEntity<?> jobSearch(HttpServletRequest req) {
+        List<JobopenResponse.ListDTO> respDTO = userService.findAll();
+        return ResponseEntity.ok(new ApiUtil(respDTO));
+    }
 }
  

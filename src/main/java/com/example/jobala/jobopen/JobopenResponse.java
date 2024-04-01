@@ -40,7 +40,6 @@ public class JobopenResponse {
     }
 
 
-    @AllArgsConstructor
     @Data
     public static class UpdateDTO {
         private Integer id;
@@ -69,7 +68,6 @@ public class JobopenResponse {
     }
 
 
-    @AllArgsConstructor
     @Data
     public static class ListDTO {
         private Integer id;

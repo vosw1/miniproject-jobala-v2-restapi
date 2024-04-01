@@ -10,14 +10,20 @@ import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeJPARepository;
 import com.example.jobala.resume.ResumeResponse;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.util.Base64Util;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,18 +43,19 @@ public class GuestService {
         User user = guestJPARepository.findById(sessionUser.getId())
                 .orElseThrow(() -> new Exception404("수정할 프로필이 없습니다.")).getUser();
 
-        System.out.println("reqDTO = " + reqDTO.getImgFilename());
-        MultipartFile imgFilename = reqDTO.getImgFilename();
+        //베이스 64로 들어오는 문자열을 바이트로 디코딩하기
+        byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getImgFilename().getBytes());
 
         // 이미지 파일의 저장 경로 설정
-        String GuestImgFilename = UUID.randomUUID() + "_" + imgFilename.getOriginalFilename();
+        String GuestImgFilename = UUID.randomUUID() + "_" + decodedBytes;
+
         Path imgPath = Paths.get("./image/" + GuestImgFilename);
         try {
-            Files.write(imgPath, imgFilename.getBytes());
+            Files.write(imgPath, decodedBytes);
             String webImgPath = imgPath.toString().replace("\\", "/");
             webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
 
-            user.setGuestProfileUpdateDTO(reqDTO, webImgPath);
+            user.setGuestProfileUpdateDTO(reqDTO,webImgPath);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -56,15 +63,6 @@ public class GuestService {
         return new UserResponse.CompProfile(user);
     }
 
-    //기업,개인 - 채용공고 검색필터
-    public List<JobopenResponse.ListDTO> jobopenSearch(String skills, GuestResponse.SearchDTO resDTO) {
-        return guestQueryRepository.findAll(skills, resDTO);
-    }
-
-    // 기업,개인 - 채용공고 목록
-    public List<JobopenResponse.ListDTO> findAll() {
-        return guestQueryRepository.findByJoboopenAll();
-    }
 
     // 개인 - 프로필관리
     public UserResponse.GuestProfile guestProgile(Integer id) {
