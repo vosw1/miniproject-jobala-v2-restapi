@@ -40,12 +40,6 @@ public class ResumeRequest {
 
     @AllArgsConstructor
     @Data
-    public static class DeleteDTO {
-        private int id;
-    }
-
-    @AllArgsConstructor
-    @Data
     public static class UpdateDTO {
         private String resumeTitle;
         private String hopeJob;

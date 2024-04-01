@@ -31,7 +31,7 @@ public class JobopenService {
 
     // 공고등록
     @Transactional
-    public JobopenResponse.SaDTO jobopenSave(@RequestBody JobopenRequest.SaveDTO reqDTO, User sessionUser) {
+    public JobopenResponse.SaDTO jobopenSave(JobopenRequest.SaveDTO reqDTO, User sessionUser) {
         Jobopen jobopen = jobopenJPARepository.save(reqDTO.toEntity(sessionUser));
         return new JobopenResponse.SaDTO(jobopen,sessionUser);
     }
