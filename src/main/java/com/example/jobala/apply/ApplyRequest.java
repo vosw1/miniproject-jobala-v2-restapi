@@ -5,8 +5,17 @@ import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 public class ApplyRequest {
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class ApplyStatusUpdateRequestDTO {
+        private Integer applyId;
+        private String status;
+    }
 
     @Data
     @AllArgsConstructor

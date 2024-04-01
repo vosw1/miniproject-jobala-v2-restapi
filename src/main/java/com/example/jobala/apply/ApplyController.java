@@ -18,9 +18,10 @@ public class ApplyController {
     private final ApplyQueryRepository applyQueryRepository;
 
     // 기업 및 개인 - 지원 상태 업데이트 기존 기업 개인으로 구분되어 있던 것을 합침
-    @PostMapping("/api/applies/applyStatus/update")
-    public ResponseEntity<ApiUtil<ApplyResponse.StatusUpdateDTO>> updateApplicationStatus(@RequestBody ApplyResponse.ApplyStatusUpdateRequestDTO requestDTO) {
-        ApplyResponse.StatusUpdateDTO respDTO = applyService.statusUpdate(requestDTO.getApplyId(), requestDTO.getStatus());
+    @PutMapping("/api/applies/applyStatus")
+    public ResponseEntity<ApiUtil<ApplyResponse.StatusUpdateDTO>> updateApplicationStatus(@RequestBody ApplyRequest.ApplyStatusUpdateRequestDTO reqDTO) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        ApplyResponse.StatusUpdateDTO respDTO = applyService.statusUpdate(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
@@ -36,7 +37,8 @@ public class ApplyController {
     @GetMapping("/api/applies/positionForm")
     public ResponseEntity<ApiUtil<?>> positionForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        return applyService.findPositionFormByUserId(sessionUser);
+        List<ApplyResponse.GuestPositionDTO> respDTO = applyService.findPositionGuestByUserId(sessionUser.getId(), sessionUser.getRole());
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
     // 기업 및 개인 - 이력서 지원 현황보기

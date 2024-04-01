@@ -26,11 +26,12 @@ public class ApplyService {
 
 
     // 상태수정
-    @Transactional
-    public ApplyResponse.StatusUpdateDTO statusUpdate(Integer applyId, String status) throws Exception404 {
-        Apply apply = applyJPARepository.findById(applyId)
+    public ApplyResponse.StatusUpdateDTO statusUpdate(ApplyRequest.ApplyStatusUpdateRequestDTO reqDTO, User sessionUser) {
+        Apply apply = applyJPARepository.findById(reqDTO.getApplyId())
                 .orElseThrow(() -> new Exception404("해당 정보를 찾을 수 없습니다."));
-        apply.setState(status);
+
+        apply.setState(reqDTO.getStatus());
+        applyJPARepository.save(apply);
         return new ApplyResponse.StatusUpdateDTO(true);
     }
 
@@ -103,5 +104,10 @@ public class ApplyService {
     public List<ApplyResponse.GuestApplyDTO> findApplyGuestByUserId(Integer id, Integer role) {
         List<ApplyResponse.GuestApplyDTO> applyList = applyJPARepository.findApplyGuestByUserId(id);
         return applyList;
+    }
+
+    public List<ApplyResponse.GuestPositionDTO> findPositionGuestByUserId(Integer id, Integer role) {
+        List<ApplyResponse.GuestPositionDTO> positionList = applyJPARepository.findPositionGuestByUserId(id);
+        return positionList;
     }
 }
