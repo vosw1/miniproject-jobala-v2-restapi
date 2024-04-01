@@ -5,21 +5,14 @@ import com.example.jobala._core.utill.Paging;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
 import com.example.jobala._user.UserResponse;
-import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeJPARepository;
 import com.example.jobala.resume.ResumeResponse;
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.util.Base64Util;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -55,14 +48,13 @@ public class GuestService {
             String webImgPath = imgPath.toString().replace("\\", "/");
             webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
 
-            user.setGuestProfileUpdateDTO(reqDTO,webImgPath);
+            user.setGuestProfileUpdateDTO(reqDTO, webImgPath);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return new UserResponse.CompProfile(user);
     }
-
 
     // 개인 - 프로필관리
     public UserResponse.GuestProfile guestProgile(Integer id) {
@@ -71,8 +63,8 @@ public class GuestService {
     }
 
     //이력서 페이징 하기 위한 목록 조회
-    public ResumeResponse.MngDTO resumesFindAll(int page, Integer sessionUserId) {
-        List<Resume> resumes = guestJPARepository.findAll();
+    public ResumeResponse.MngDTO guestResumesMng(int page, Integer sessionUserId) {
+        List<Resume> resumes = resumeJPARepository.findResumeByWithUserId(sessionUserId);
         return new ResumeResponse.MngDTO(sessionUserId, resumes);
     }
 }

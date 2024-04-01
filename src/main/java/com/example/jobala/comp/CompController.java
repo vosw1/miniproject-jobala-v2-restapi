@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -53,7 +52,7 @@ public class CompController {
     @GetMapping("/api/comp/mngForm")
     public ResponseEntity<?> mngForm(HttpServletRequest req) {
         User sessionUser = (User) req.getSession().getAttribute("sessionUser");
-        List<JobopenResponse.MngDTO> respDTO = compService.searchjobopenList(sessionUser.getId());
+        List<JobopenResponse.MngDTO> respDTO = compService.compJobopenMng(sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 

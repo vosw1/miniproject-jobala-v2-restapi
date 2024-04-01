@@ -99,6 +99,7 @@ public class CompQueryRepository {
         return resumeList;
     }
 
+
     public List<Resume> findResumeById(int userId) {
         Query query = em.createNativeQuery("select * from resume_tb where user_id = ? order by id desc", Resume.class);
         query.setParameter(1, userId);
@@ -124,7 +125,7 @@ public class CompQueryRepository {
         return rm.list(query, ResumeResponse.ScoutListDTO.class);
     }
 
-    public List<Jobopen> findJobopenById(int id) {
+    public List<Jobopen> findJobopenByWithUserId(int id) {
         String q = """
                 select * from jobopen_tb where user_id= ? order by id desc;
                 """;

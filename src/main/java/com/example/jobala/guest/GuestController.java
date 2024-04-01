@@ -3,7 +3,6 @@ package com.example.jobala.guest;
 import com.example.jobala._core.utill.ApiUtil;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserResponse;
-import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.ResumeResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,7 +26,7 @@ public class GuestController {
     @GetMapping("/api/guest/mngForm")
     public ResponseEntity<?> mngForm(HttpServletRequest req, @RequestParam(defaultValue = "0") int page) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        ResumeResponse.MngDTO respDTO = guestService.resumesFindAll(page, sessionUser.getId());
+        ResumeResponse.MngDTO respDTO = guestService.guestResumesMng(page, sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 

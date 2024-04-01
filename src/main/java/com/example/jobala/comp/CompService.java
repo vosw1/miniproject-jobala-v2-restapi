@@ -45,9 +45,9 @@ public class CompService {
     }
 
     // 기업 - 마이페이지 공고 관리
-    public List<JobopenResponse.MngDTO> searchjobopenList(Integer sessionUserId) {
+    public List<JobopenResponse.MngDTO> compJobopenMng(Integer sessionUserId) {
         //공고와 유저를 조인해서 가져온 공고 리스트
-        List<Jobopen> temp = compQueryRepository.findJobopenById(sessionUserId);
+        List<Jobopen> temp = compQueryRepository.findJobopenByWithUserId(sessionUserId);
         List<JobopenResponse.MngDTO> jobopenList = temp.stream()
                 .map(jobopen -> new JobopenResponse.MngDTO(sessionUserId, temp)).toList();
 
@@ -57,7 +57,6 @@ public class CompService {
                     jobopenDTO.setApplyCount(count);
                 })
         );
-
         return jobopenList;
     }
 
