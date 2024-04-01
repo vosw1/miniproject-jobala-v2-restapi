@@ -2,17 +2,12 @@ package com.example.jobala.board;
 
 import com.example.jobala._core.utill.ApiUtil;
 import com.example.jobala._user.User;
-import com.example.jobala._user.UserResponse;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -42,8 +37,6 @@ public class BoardController {
         BoardResponse.UpdateDTO respDTO = boardService.boardUpdate(id, sessionUser.getId(), reqDTO);
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
-
-
 
 
     // 글 쓰기 완료

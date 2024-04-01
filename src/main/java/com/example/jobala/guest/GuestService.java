@@ -32,17 +32,16 @@ public class GuestService {
 
     // 프로필업데이트
     @Transactional
-    public UserResponse.CompProfile guestUpdateProfile(GuestRequest.GuestProfileUpdateDTO reqDTO, User sessionUser) {
+    public UserResponse.GuestProfile guestUpdateProfile(GuestRequest.GuestProfileUpdateDTO reqDTO, User sessionUser) {
         User user = guestJPARepository.findById(sessionUser.getId())
                 .orElseThrow(() -> new Exception404("수정할 프로필이 없습니다.")).getUser();
 
         //베이스 64로 들어오는 문자열을 바이트로 디코딩하기
         byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getImgFilename().getBytes());
+        String imageUUID = UUID.nameUUIDFromBytes(decodedBytes).randomUUID() + ".png";
 
-        // 이미지 파일의 저장 경로 설정
-        String GuestImgFilename = UUID.randomUUID() + "_" + decodedBytes;
+        Path imgPath = Paths.get("./image/" + imageUUID);
 
-        Path imgPath = Paths.get("./image/" + GuestImgFilename);
         try {
             Files.write(imgPath, decodedBytes);
             String webImgPath = imgPath.toString().replace("\\", "/");
@@ -53,7 +52,7 @@ public class GuestService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return new UserResponse.CompProfile(user);
+        return new UserResponse.GuestProfile(user);
     }
 
     // 개인 - 프로필관리
