@@ -37,11 +37,11 @@ public class ScrapController {
     public ResponseEntity<?> scrapResume(@RequestBody ScrapRequest.ScrapDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser.getRole() == 1) { // 기업이 스크랩
-            Scrap scrap = scrapService.scrapByComp(reqDTO, sessionUser);
-            return ResponseEntity.ok(new ApiUtil<>(scrap));
+            ScrapResponse.CompDTO respDTO = scrapService.scrapByComp(reqDTO, sessionUser);
+            return ResponseEntity.ok(new ApiUtil<>(respDTO));
         } else {
-            Scrap scrap = scrapService.scrapByGuest(reqDTO, sessionUser);
-            return ResponseEntity.ok(new ApiUtil<>(scrap));
+            ScrapResponse.GuestDTO respDTO = scrapService.scrapByGuest(reqDTO, sessionUser);
+            return ResponseEntity.ok(new ApiUtil<>(respDTO));
         }
     }
 }
