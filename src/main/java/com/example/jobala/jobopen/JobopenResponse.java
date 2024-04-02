@@ -43,7 +43,7 @@ public class JobopenResponse {
 
     @Data
     public static class UpdateDTO {
-        private Integer id;
+        private Integer jobopenId;
         private String jobopenTitle;
         private String career;
         private String edu;
@@ -55,7 +55,7 @@ public class JobopenResponse {
         private Date endTime; // 마감일
 
         public UpdateDTO(Jobopen jobopen) {
-            this.id = jobopen.getId();
+            this.jobopenId = jobopen.getId();
             this.jobopenTitle = jobopen.getJobopenTitle();
             this.career = jobopen.getCareer();
             this.edu = jobopen.getEdu();
@@ -84,7 +84,7 @@ public class JobopenResponse {
     @Data
     public static class SaveDTO{
         private Integer userId;
-        private Integer id;
+        private Integer jobopenId;
         private String edu;
         private String jobopenTitle;
         private String career;
@@ -97,7 +97,7 @@ public class JobopenResponse {
 
         public SaveDTO(Jobopen jobopen, User sessionUser) {
             this.userId = sessionUser.getId();
-            this.id = jobopen.getId();
+            this.jobopenId = jobopen.getId();
             this.edu = jobopen.getEdu();
             this.jobopenTitle = jobopen.getJobopenTitle();
             this.career = jobopen.getCareer();
@@ -113,7 +113,7 @@ public class JobopenResponse {
     @AllArgsConstructor
     @Data
     public static class DetailDTO {
-        private Integer id;
+        private Integer jobopenId;
         private String jobopenTitle;
         private String career;
         private String edu;
@@ -129,7 +129,7 @@ public class JobopenResponse {
         private List<ResumeDTO> applyResumeList = new ArrayList<>();
 
         public DetailDTO(Jobopen jobopen, User sessionUser, List<Resume> resumeList) {
-            this.id = jobopen.getId();
+            this.jobopenId = jobopen.getId();
             this.jobopenTitle = jobopen.getJobopenTitle();
             this.career = jobopen.getCareer();
             this.edu = jobopen.getEdu();
@@ -153,7 +153,7 @@ public class JobopenResponse {
         }
 
         public DetailDTO(Jobopen jobopen, User sessionUser) {
-            this.id = jobopen.getId();
+            this.jobopenId = jobopen.getId();
             this.jobopenTitle = jobopen.getJobopenTitle();
             this.career = jobopen.getCareer();
             this.edu = jobopen.getEdu();
