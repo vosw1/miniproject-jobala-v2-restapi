@@ -27,7 +27,7 @@ public class JobopenService {
         return jobopenJPARepository.findAll();
     }
 
-    // 공고등록
+    // 공고등록임
     @Transactional
     public JobopenResponse.SaveDTO jobopenSave(JobopenRequest.SaveDTO reqDTO, User sessionUser) {
         Jobopen jobopen = jobopenJPARepository.save(reqDTO.toEntity(sessionUser));

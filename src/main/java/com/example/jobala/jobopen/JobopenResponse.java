@@ -80,6 +80,7 @@ public class JobopenResponse {
         private String imgFilename;
     }
 
+    //공고 쓰기 응답 dto
     @Data
     public static class SaveDTO{
         private Integer userId;
