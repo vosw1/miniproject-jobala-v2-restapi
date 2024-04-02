@@ -44,11 +44,11 @@ public class ResumeResponse {
 
     @Data
     public static class MngDTO {
-        private Integer id;
+        private Integer userId;
         private List<ResumeDTO> resume = new ArrayList<>();
 
         public MngDTO(Integer userId, List<Resume> resumeList) {
-            this.id = userId;
+            this.userId = userId;
             this.resume = resumeList.stream().map(ResumeDTO::new).toList();
         }
 
