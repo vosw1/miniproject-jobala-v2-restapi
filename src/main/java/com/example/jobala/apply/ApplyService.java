@@ -43,13 +43,13 @@ public class ApplyService {
         return new ApplyResponse.ApplicationDTO(true);
     }
 
-    // TODO: 이름
+    // 기업/개인 지원 현황 보기
     public List<ApplyResponse.GuestApplyDTO> findApplyGuestByUserId(Integer id, Integer role) {
         List<ApplyResponse.GuestApplyDTO> applyList = applyJPARepository.findApplyGuestByUserId(id);
         return applyList;
     }
 
-    // TODO: 이름
+    // 기업/개인 포지션 제안 보기
     public List<ApplyResponse.GuestPositionDTO> findPositionGuestByUserId(Integer id, Integer role) {
         List<ApplyResponse.GuestPositionDTO> positionList = applyJPARepository.findPositionGuestByUserId(id);
         return positionList;
