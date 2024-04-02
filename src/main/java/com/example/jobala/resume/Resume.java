@@ -32,7 +32,7 @@ public class Resume {
     private String license;
     private String content;
     private String edu;
-    private String skills;
+    private String skills; // java,spring,shell
 
     @ColumnDefault("0")
     private Integer role; // 0 -> guest, 1 -> comp
@@ -44,7 +44,7 @@ public class Resume {
     private List<Apply> applies = new ArrayList<>();
 
     @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<Scrap> scraps;
+    private List<Scrap> scraps = new ArrayList<>();
 
     @Transient
     private boolean isScrap;

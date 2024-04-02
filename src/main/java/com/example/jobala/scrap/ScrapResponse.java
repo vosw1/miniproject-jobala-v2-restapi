@@ -3,6 +3,7 @@ package com.example.jobala.scrap;
 import lombok.Data;
 
 public class ScrapResponse {
+
     @Data
     public static class CompDTO {
         private Integer scrapId;

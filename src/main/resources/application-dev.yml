@@ -29,5 +29,4 @@ spring:
         format_sql: true
         default_batch_fetch_size: 10
     defer-datasource-initialization: true
-    #    TODO: DTO로 만들고 false전환
     open-in-view: false
