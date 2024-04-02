@@ -2,6 +2,7 @@ package com.example.jobala.resume;
 
 import com.example.jobala._user.User;
 import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.resume.Resume;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

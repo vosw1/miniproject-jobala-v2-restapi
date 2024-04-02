@@ -1,8 +1,11 @@
 package com.example.jobala.apply;
 
 import com.example.jobala._core.errors.apiException.ApiException403;
-
 import com.example.jobala._user.User;
+import com.example.jobala.apply.Apply;
+import com.example.jobala.apply.ApplyJPARepository;
+import com.example.jobala.apply.ApplyRequest;
+import com.example.jobala.apply.ApplyResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.resume.Resume;
@@ -13,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -38,6 +42,7 @@ public class ApplyService {
     public ApplyResponse.ApplicationDTO saveAfterApply(ApplyRequest.ApplyRequestDTO reqDTO, User sessionUser) {
         Jobopen jobopen = jobopenJPARepository.findById(reqDTO.getJobopenId())
                 .orElseThrow(() -> new ApiException403("공고를 찾을 수 없습니다."));
+
         Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())
                 .orElseThrow(() -> new ApiException403("이력서를 찾을 수 없습니다."));
 
@@ -45,23 +50,23 @@ public class ApplyService {
         return new ApplyResponse.ApplicationDTO(true);
     }
 
-    // 기업/개인 지원 현황 보기
-    public List<?> findApplyByUserId(Integer id, Integer role) {
-        if (role == 0) { // 개인
-            return applyJPARepository.findApplyGuestByUserId(id);
-        } else if (role == 1) { // 기업
-            return applyJPARepository.findApplyCompByUserId(id);
-        }
-        return new ArrayList<>();
+    // 개인의 포지션 제안 현황 조회
+    public List<ApplyResponse.GuestPositionDTO> findPositionGuestByUserId(int userId) {
+        return applyJPARepository.findPositionGuestByUserId(userId);
     }
 
-    // 기업/개인 포지션 제안 보기
-    public List<?> findPositionByUserId(Integer id, Integer role) {
-        if (role == 0) { // 개인
-            return applyJPARepository.findPositionGuestByUserId(id);
-        } else if (role == 1) { // 기업
-            return applyJPARepository.findPositionCompByUserId(id);
-        }
-        return new ArrayList<>();
+    // 기업의 포지션 제안 현황 조회
+    public List<ApplyResponse.CompPositionDTO> findPositionCompByUserId(int userId) {
+        return applyJPARepository.findPositionCompByUserId(userId);
+    }
+
+    // 개인의 이력서 지원 현황 조회
+    public List<ApplyResponse.GuestApplyDTO> findApplyGuestByUserId(int userId) {
+        return applyJPARepository.findApplyGuestByUserId(userId);
+    }
+
+    // 기업의 이력서 지원 현황 조회
+    public List<ApplyResponse.CompApplyDTO> findApplyCompByUserId(int userId) {
+        return applyJPARepository.findApplyCompByUserId(userId);
     }
 }

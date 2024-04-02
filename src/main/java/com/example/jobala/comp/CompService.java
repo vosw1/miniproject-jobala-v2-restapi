@@ -2,6 +2,7 @@ package com.example.jobala.comp;
 
 import com.example.jobala._core.errors.apiException.ApiException403;
 
+import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
 import com.example.jobala._user.UserResponse;
@@ -53,7 +54,7 @@ public class CompService {
 
         jobopenList.forEach(dto ->
                 dto.getJobopenDTO().forEach(jobopenDTO -> {
-                    int count = applyJPARepository.countJobopenApplyById(jobopenDTO.getUserId());
+                    int count = applyJPARepository.countJobopenApplyById(jobopenDTO.getId());
                     jobopenDTO.setApplyCount(count);
                 })
         );
@@ -70,7 +71,7 @@ public class CompService {
 
     //기업 - 프로필업데이트
     @Transactional
-    public UserResponse.CompProfile compUpdateProfile(CompRequest.CompProfileUpdateDTO reqDTO, User sessionUser) {
+    public UserResponse.CompProfile compUpdateProfile(CompRequest.CompProfileUpdateDTO reqDTO, SessionUser sessionUser) {
         User user = compJPARepository.findById(sessionUser.getId())
                 .orElseThrow(() -> new ApiException403("수정할 프로필이 없습니다."));
 

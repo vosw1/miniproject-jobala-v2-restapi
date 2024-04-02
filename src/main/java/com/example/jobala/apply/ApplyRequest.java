@@ -17,11 +17,9 @@ public class ApplyRequest {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class ApplyStatusUpdateRequestDTO {
-        @NotEmpty(message = "applyId는 공백일 수 없습니다")
-        @Size(min = 1, message = "applyId는 최소 1자 이상여야 합니다")
+//        @NotEmpty
         private Integer applyId;
-
-        @Pattern(regexp = "^(열람전|합격|불합격|수락|거절)$", message = "status는 공백일 수 없습니다")
+        @NotEmpty
         private String status;
     }
 
@@ -29,12 +27,10 @@ public class ApplyRequest {
     @Data
     @AllArgsConstructor
     public static class ApplyRequestDTO {
-        @NotEmpty(message = "applyId는 공백일 수 없습니다")
-        @Size(min = 1, message = "applyIdsms 최소 1자 이상여야 합니다")
-        private Integer applyId;
-
-        @Pattern(regexp = "^(열람전|합격|불합격|수락|거절)$", message = "status는 공백일 수 없습니다")
-        private String status;
+        @NotEmpty
+        private Integer resumeId;
+        @NotEmpty
+        private Integer jobopenId;
 
         public Apply toEntity(Resume resume, Jobopen jobopen, User sessionUser) {
             return Apply.builder()

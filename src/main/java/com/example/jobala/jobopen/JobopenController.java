@@ -2,27 +2,13 @@ package com.example.jobala.jobopen;
 
 import com.example.jobala._core.utill.ApiUtil;
 import com.example.jobala._user.User;
-import com.example.jobala._user.UserResponse;
-import com.example.jobala.guest.GuestQueryRepository;
-import com.example.jobala.resume.Resume;
-import com.example.jobala.resume.ResumeQueryRepository;
-import com.example.jobala.scrap.Scrap;
-import com.example.jobala.scrap.ScrapQueryRepository;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Type;
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
