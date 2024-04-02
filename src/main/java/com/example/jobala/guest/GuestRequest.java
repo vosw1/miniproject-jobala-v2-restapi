@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 public class GuestRequest {
 
-
+    //TODO: 이름
     @AllArgsConstructor
     @NoArgsConstructor
     @Data
@@ -27,5 +27,6 @@ public class GuestRequest {
         private String phone;
         private String email;
         private String imgTitle;
+        private String imgFilename;
     }
 }

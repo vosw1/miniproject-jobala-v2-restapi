@@ -1,5 +1,6 @@
 package com.example.jobala._core.interceptor;
 
+import com.example.jobala._core.errors.apiException.ApiException401;
 import com.example.jobala._core.errors.exception.Exception401;
 import com.example.jobala._user.UserResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +19,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
         if (sessionUser == null) {
-            throw new Exception401("로그인 하셔야 해요");
+            throw new ApiException401("로그인 하셔야 해요");
         }
         return true;
     }

@@ -1,7 +1,8 @@
 package com.example.jobala.board;
 
+import com.example.jobala._core.errors.apiException.ApiException403;
 import com.example.jobala._core.errors.exception.Exception403;
-import com.example.jobala._core.errors.exception.Exception404;
+
 import com.example.jobala._user.User;
 import com.example.jobala.reply.Reply;
 import com.example.jobala.reply.ReplyJPARepository;
@@ -20,10 +21,10 @@ public class BoardService {
     // 글삭제하기
     public void boardDelete(int boardId, Integer sessionUserId) {
         Board board = boardJPARepository.findById(boardId)
-                .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다."));
+                .orElseThrow(() -> new ApiException403("게시글을 찾을 수 없습니다."));
 
         if (sessionUserId != board.getUser().getId()) {
-            throw new Exception403("게시글을 삭제 할 권한이 없습니다.");
+            throw new ApiException403("게시글을 삭제 할 권한이 없습니다.");
         }
         boardJPARepository.deleteById(boardId);
     }
@@ -31,7 +32,7 @@ public class BoardService {
     // 글상세보기
     public BoardResponse.DetailDTO boardDetail(int boardId, User sessionUser) {
         Board board = boardJPARepository.findByIdJoinUser(boardId)
-                .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다"));
+                .orElseThrow(() -> new ApiException403("게시글을 찾을 수 없습니다"));
         List<Reply> replyList = replyJPARepository.findByUserId(boardId);
 
         return new BoardResponse.DetailDTO(board, sessionUser, replyList);
@@ -42,10 +43,10 @@ public class BoardService {
     public BoardResponse.UpdateDTO boardUpdate(int boardId, int sessionUserId, BoardRequest.UpdateDTO reqDTO) {
         // 1. 조회 및 예외처리
         Board board = boardJPARepository.findById(boardId)
-                .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다"));
+                .orElseThrow(() -> new ApiException403("게시글을 찾을 수 없습니다"));
         // 2. 권한 처리
         if (sessionUserId != board.getUser().getId()) {
-            throw new Exception403("게시글을 수정할 권한이 없습니다");
+            throw new ApiException403("게시글을 수정할 권한이 없습니다");
         }
         // 3. 글수정
         board.setTitle(reqDTO.getTitle());
@@ -57,7 +58,7 @@ public class BoardService {
     // 글조회
     public BoardResponse.BoardDTO boardFindById(int boardId) {
         Board board = boardJPARepository.findById(boardId)
-                .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다."));
+                .orElseThrow(() -> new ApiException403("게시글을 찾을 수 없습니다."));
         return new BoardResponse.BoardDTO(board);
     }
 

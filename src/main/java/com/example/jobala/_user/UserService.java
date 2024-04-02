@@ -2,10 +2,8 @@ package com.example.jobala._user;
 
 import com.example.jobala._core.errors.apiException.ApiException400;
 import com.example.jobala._core.errors.apiException.ApiException401;
-import com.example.jobala._core.errors.exception.Exception404;
 import com.example.jobala._core.utill.Paging;
 import com.example.jobala.guest.GuestRequest;
-import com.example.jobala.guest.GuestResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.jobopen.JobopenResponse;

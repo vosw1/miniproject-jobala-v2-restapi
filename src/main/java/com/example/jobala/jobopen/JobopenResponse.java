@@ -68,7 +68,6 @@ public class JobopenResponse {
         }
     }
 
-
     @AllArgsConstructor
     @NoArgsConstructor
     @Data
@@ -107,31 +106,6 @@ public class JobopenResponse {
             this.compLocation = jobopen.getCompLocation();
             this.endTime = jobopen.getEndTime();
             this.skills = Arrays.asList(jobopen.getSkills().split(",")); // 쉼표로 구분된 기술들을 리스트로 변환
-        }
-    }
-
-    @Data
-    public static class DTO {
-        private Integer userId;
-        private List<JobopenDTO> jobopenDTO = new ArrayList<>();
-
-        public DTO(Integer userId, List<Jobopen> jobopen) {
-            this.userId = userId;
-            this.jobopenDTO = jobopen.stream().map(JobopenDTO::new).toList();
-        }
-
-        @Data
-        public class JobopenDTO {
-            private Integer id;
-            private Integer role; // 역할 0 -> guest, 1 -> comp
-            private String jobopenTitle; //공고제목
-            private Integer applyCount;
-
-            public JobopenDTO(Jobopen jobopen) {
-                this.id = jobopen.getId();
-                this.role = jobopen.getRole();
-                this.jobopenTitle = jobopen.getJobopenTitle();
-            }
         }
     }
 

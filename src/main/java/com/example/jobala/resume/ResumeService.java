@@ -1,7 +1,8 @@
 package com.example.jobala.resume;
 
+import com.example.jobala._core.errors.apiException.ApiException403;
 import com.example.jobala._core.errors.exception.Exception403;
-import com.example.jobala._core.errors.exception.Exception404;
+
 import com.example.jobala._user.User;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenJPARepository;
@@ -36,9 +37,9 @@ public class ResumeService {
     @Transactional
     public Resume resumeDelete(int resumeId, Integer sessionUserId) {
         Resume resume = resumeJPARepository.findById(sessionUserId)
-                .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다"));
+                .orElseThrow(() -> new ApiException403("이력서를 찾을 수 없습니다"));
         if (sessionUserId != resume.getUser().getId()) {
-            throw new Exception403("이력서를 삭제할 권한이 없습니다");
+            throw new ApiException403("이력서를 삭제할 권한이 없습니다");
         }
         resumeJPARepository.deleteById(resumeId);
         return resume;
@@ -48,9 +49,9 @@ public class ResumeService {
     @Transactional
     public ResumeResponse.UpdateDTO resumeUpdate(Integer resumeId, ResumeRequest.UpdateDTO reqDTO, Integer sessionUserId) {
         Resume resume = resumeJPARepository.findById(resumeId)
-                .orElseThrow(() -> new Exception404("이력서 정보를 찾을 수 없습니다."));
+                .orElseThrow(() -> new ApiException403("이력서 정보를 찾을 수 없습니다."));
         if (sessionUserId != resume.getUser().getId()) {
-            throw new Exception403("이력서를 수정할 권한이 없습니다.");
+            throw new ApiException403("이력서를 수정할 권한이 없습니다.");
         }
         resume.setResumeUpdateDTO(reqDTO);
         return new ResumeResponse.UpdateDTO(resume);
@@ -59,7 +60,7 @@ public class ResumeService {
     // 이력서보기
     public ResumeResponse.DetailDTO resumeFindById(Integer resumeId, User sessionUser) {
         Resume resume = resumeJPARepository.findByIdWithUser(resumeId)
-                .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다."));
+                .orElseThrow(() -> new ApiException403("이력서를 찾을 수 없습니다."));
 
         //모달 공고목록 조회
         List<Jobopen> jobopen = jobopenJPARepository.findJobopenById(sessionUser.getId());
@@ -77,7 +78,7 @@ public class ResumeService {
 
 
     public ResumeResponse.CheckBoxDTO getCheckedSkills(Integer id) {
-        Resume resume = resumeJPARepository.findById(id).orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다."));
+        Resume resume = resumeJPARepository.findById(id).orElseThrow(() -> new ApiException403("이력서를 찾을 수 없습니다."));
         String skillsStr = resume.getSkills();
         skillsStr = skillsStr.substring(1, skillsStr.length() - 1);
         List<String> skills = Arrays.asList(skillsStr.split(","));

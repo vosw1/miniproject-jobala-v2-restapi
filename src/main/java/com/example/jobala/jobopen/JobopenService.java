@@ -1,7 +1,8 @@
 package com.example.jobala.jobopen;
 
-import com.example.jobala._core.errors.exception.Exception403;
-import com.example.jobala._core.errors.exception.Exception404;
+import com.example.jobala._core.errors.apiException.ApiException403;
+import com.example.jobala._core.errors.exception.;
+
 import com.example.jobala._user.User;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeJPARepository;
@@ -40,10 +41,10 @@ public class JobopenService {
     @Transactional
     public Jobopen jobopenDelete(Integer jobopenId, Integer sessionUserId) {
         Jobopen jobopen = jobopenJPARepository.findById(jobopenId)
-                .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다."));
+                .orElseThrow(() -> new ApiException403("공고를 찾을 수 없습니다."));
 
         if (sessionUserId != jobopen.getUser().getId()) {
-            throw new Exception403("공고를 삭제할 권한이 없습니다.");
+            throw new ApiException403("공고를 삭제할 권한이 없습니다.");
         }
         jobopenJPARepository.deleteById(jobopenId);
         return jobopen;
@@ -54,10 +55,10 @@ public class JobopenService {
     public JobopenResponse.UpdateDTO jobopenUpdate(int jobOpenId, User sessionUser, JobopenRequest.UpdateDTO reqDTO) {
         //1.조회 및 예외 처리
         Jobopen jobopen = jobopenJPARepository.findById(jobOpenId)
-                .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다."));
+                .orElseThrow(() -> new ApiException403("공고를 찾을 수 없습니다."));
         //2.권한 처리
         if (sessionUser.getId() != jobopen.getUser().getId()) {
-            throw new Exception403("공고를 수정할 권한이 없습니다.");
+            throw new ApiException403("공고를 수정할 권한이 없습니다.");
         }
         //3.공고 수정
         jobopen.setJobopenUpdate(reqDTO);
@@ -67,7 +68,7 @@ public class JobopenService {
     // 공고보기
     public JobopenResponse.DetailDTO findJobopenById(Integer jobopenId, User sessionUser) {
         Jobopen jobopen = jobopenJPARepository.findByJobopenIdWithUser(jobopenId)
-                .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다"));
+                .orElseThrow(() -> new ApiException403("공고를 찾을 수 없습니다"));
 
         List<String> skills = Arrays.stream(jobopen.getSkills().replaceAll("[\\[\\]\"]", "").split(",")).toList();
         String skillsString = String.join(", ", skills);
@@ -90,7 +91,7 @@ public class JobopenService {
     }
 
     public JobopenResponse.CheckBoxDTO getCheckedSkills(Integer id) {
-        Jobopen jobopen = jobopenJPARepository.findById(id).orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다."));
+        Jobopen jobopen = jobopenJPARepository.findById(id).orElseThrow(() -> new ApiException403("공고를 찾을 수 없습니다."));
         String skillsStr = jobopen.getSkills();
         skillsStr = skillsStr.substring(1, skillsStr.length() - 1).trim();
         List<String> skills = Arrays.asList(skillsStr.split(","));

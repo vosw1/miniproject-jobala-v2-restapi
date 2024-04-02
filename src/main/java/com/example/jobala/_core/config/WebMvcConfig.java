@@ -1,6 +1,8 @@
 package com.example.jobala._core.config;
 
+import com.example.jobala._core.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
@@ -9,6 +11,13 @@ import org.springframework.web.servlet.resource.PathResourceResolver;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     // 로그인 인터셉터
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LoginInterceptor())
+                .addPathPatterns("/api/***")
+                .excludePathPatterns("/api/boards/{id:\\d+}/detail","/api/comp/jobopen/{id:\\\\d+}/detail");
+    }
 
     //외부이미지 경로설정
     @Override

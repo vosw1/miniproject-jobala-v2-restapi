@@ -11,7 +11,7 @@ import java.util.List;
 
 public class UserResponse {
 
-    //기업 프로필
+    //기업 - 프로필 & 업데이트
     @Data
     public static class CompProfile {
         private Integer id;
@@ -29,7 +29,7 @@ public class UserResponse {
         }
     }
 
-    //개인 프로필
+    //개인 - 프로필 & 업데이트
     @Data
     public static class GuestProfile {
         private Integer id;
@@ -45,7 +45,7 @@ public class UserResponse {
         }
     }
 
-    // 회원가입 프로필
+    // 개인, 기업 - 회원가입
     @Data
     public static class JoinDTO {
         private GuestDTO guestDTO; // 개인 회원가입

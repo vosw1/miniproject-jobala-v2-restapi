@@ -1,6 +1,7 @@
 package com.example.jobala.comp;
 
-import com.example.jobala._core.errors.exception.Exception404;
+import com.example.jobala._core.errors.apiException.ApiException403;
+
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
 import com.example.jobala._user.UserResponse;
@@ -19,6 +20,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -38,7 +40,7 @@ public class CompService {
     public List<ResumeResponse.ScoutListDTO> listAllResumes() {
         List<ResumeResponse.ScoutListDTO> resumes = compQueryRepository.findResumeAll();
         if (resumes.isEmpty()) {
-            throw new Exception404("이력서가 없습니다.");
+            throw new ApiException403("이력서가 없습니다.");
         }
         return resumes;
     }
@@ -61,7 +63,7 @@ public class CompService {
     // 기업 - 프로필관리
     public UserResponse.GuestProfile compProfile(Integer userId) {
         User user = userJPARepository.findById(userId)
-                .orElseThrow(() -> new Exception404("유저를 찾을 수 없습니다."));
+                .orElseThrow(() -> new ApiException403("유저를 찾을 수 없습니다."));
 
         return new UserResponse.GuestProfile(user);
     }
@@ -70,7 +72,7 @@ public class CompService {
     @Transactional
     public UserResponse.CompProfile compUpdateProfile(CompRequest.CompProfileUpdateDTO reqDTO, User sessionUser) {
         User user = compJPARepository.findById(sessionUser.getId())
-                .orElseThrow(() -> new Exception404("수정할 프로필이 없습니다."));
+                .orElseThrow(() -> new ApiException403("수정할 프로필이 없습니다."));
 
         //베이스 64로 들어오는 문자열을 바이트로 디코딩하기
         byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getImgFilename().getBytes());
