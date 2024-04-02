@@ -62,11 +62,5 @@ public class UserController {
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
-    // 기업,개인 - 채용공고 목록
-    @GetMapping("/api/jobSearch")
-    public ResponseEntity<?> jobSearch(HttpServletRequest req) {
-        List<JobopenResponse.ListDTO> respDTO = userService.findAll();
-        return ResponseEntity.ok(new ApiUtil(respDTO));
-    }
 }
  

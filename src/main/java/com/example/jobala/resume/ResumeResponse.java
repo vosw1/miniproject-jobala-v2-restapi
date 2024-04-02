@@ -67,15 +67,26 @@ public class ResumeResponse {
     @AllArgsConstructor
     @Data
     public static class ScrapDTO {
-        private int id;
-        private String name;
+        private UserDTO user;
+        private int resumeId;
         private String resumeTitle;
         private String career;
         private String edu;
 
+        @Data
+        public class UserDTO {
+            private int id;
+            private String name;
+
+            public UserDTO(User user) {
+                this.id = user.getId();
+                this.name = user.getName();
+            }
+        }
+
         public ScrapDTO(Resume resume) {
-            this.id = resume.getId();
-            this.name = resume.getUser().getName();
+            this.resumeId = resume.getId();
+            this.user = new UserDTO(resume.getUser());
             this.resumeTitle = resume.getResumeTitle();
             this.career = resume.getCareer();
             this.edu = resume.getEdu();
