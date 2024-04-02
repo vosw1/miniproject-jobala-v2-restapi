@@ -2,7 +2,6 @@ package com.example.jobala._user;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 
