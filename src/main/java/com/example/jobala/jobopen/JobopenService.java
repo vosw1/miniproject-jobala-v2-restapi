@@ -1,8 +1,6 @@
 package com.example.jobala.jobopen;
 
 import com.example.jobala._core.errors.apiException.ApiException403;
-import com.example.jobala._core.errors.exception.;
-
 import com.example.jobala._user.User;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeJPARepository;
@@ -11,7 +9,6 @@ import com.example.jobala.scrap.ScrapJPARepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Arrays;
 import java.util.List;
