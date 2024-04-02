@@ -17,8 +17,7 @@ public class GuestController {
     private final HttpSession session;
     private final GuestService guestService;
 
-    // DEL: mainForm 삭제
-
+    // TODO : /api/mngForm 으로 변경 -> 기업 개인 합쳐서 분기처리 -> UserController
     //이력서 관리 페이징
     @GetMapping("/api/guest/mngForm")
     public ResponseEntity<?> mngForm( @RequestParam(defaultValue = "0") int page) {
@@ -27,6 +26,7 @@ public class GuestController {
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
+    // TODO : /api/profile 으로 변경 -> 기업 개인 합쳐서 분기처리 -> UserController
     // 개인 - 마이페이지 - 프로필
     @GetMapping("/api/guest/profileForm")
     public ResponseEntity<?> profileForm(HttpServletRequest req) {
@@ -35,6 +35,7 @@ public class GuestController {
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
+    // TODO : /api/profile 으로 변경 -> 기업 개인 합쳐서 분기처리 -> UserContoller
     // 개인 - 마이페이지 - 프로필 업데이트
     @PutMapping("/api/guest/profile")
     public ResponseEntity<?> profileUpdate(@RequestBody GuestRequest.GuestProfileUpdateDTO reqDTO) {

@@ -47,6 +47,7 @@ public class CompController {
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
+    // TODO : /api/mngForm 으로 변경 -> 기업 개인 합쳐서 분기처리 -> UserContoller
     //기업 - 마이페이지 - 공고 관리
     @GetMapping("/api/comp/mngForm")
     public ResponseEntity<?> mngForm(HttpServletRequest req) {
@@ -55,6 +56,7 @@ public class CompController {
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
+    // TODO : /api/profile 으로 변경 -> 기업 개인 합쳐서 분기처리 -> UserContoller
     //기업 - 마이페이지 - 프로필관리
     @GetMapping("/api/comp/profileForm")
     public ResponseEntity<?> profileForm() {
@@ -63,6 +65,7 @@ public class CompController {
         return ResponseEntity.ok(new ApiUtil(respSTO));
     }
 
+    // TODO : /api/profile 으로 변경 -> 기업 개인 합쳐서 분기처리 -> UserContoller
     //기업 - 마이페이지 프로필 업데이트
     @PutMapping("/api/comp/profile")
     public ResponseEntity<?> profileUpdate(@RequestBody CompRequest.CompProfileUpdateDTO reqDTO) {
