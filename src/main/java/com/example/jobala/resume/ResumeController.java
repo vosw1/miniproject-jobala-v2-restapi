@@ -24,7 +24,7 @@ public class ResumeController {
     private final ResumeService resumeService;
 
     //이력서 업데이트
-    @PutMapping("/api/guest/resume/{id}")  // 주소 수정 필요
+    @PutMapping("/api/guest/resumes/{id}")  // 주소 수정 필요
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody ResumeRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ResumeResponse.UpdateDTO respDTO = resumeService.resumeUpdate(id, reqDTO,sessionUser.getId());
@@ -32,7 +32,7 @@ public class ResumeController {
     }
 
     //이력서 상세보기
-    @GetMapping("/api/guest/resume/{id}")
+    @GetMapping("/api/guest/resumes/{id}")
     public ResponseEntity<?> detailForm(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ResumeResponse.DetailDTO respDTO = resumeService.resumeFindById(id, sessionUser);
@@ -40,7 +40,7 @@ public class ResumeController {
     }
 
     //이력서 등록
-    @PostMapping("/api/guest/resume")  // 주소 수정 필요
+    @PostMapping("/api/guest/resumes")  // 주소 수정 필요
     public ResponseEntity<?> save(@RequestBody ResumeRequest.SaveDTO resumeSaveDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ResumeResponse.ASaveDTO respDTO = resumeService.resumeSave(resumeSaveDTO, sessionUser);
@@ -48,7 +48,7 @@ public class ResumeController {
     }
 
     //이력서 삭제
-    @DeleteMapping("/api/guest/resume/{id}")  // 주소 수정 필요
+    @DeleteMapping("/api/guest/resumes/{id}")  // 주소 수정 필요
     public ResponseEntity<?> delete(@PathVariable int id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         resumeService.resumeDelete(id, sessionUser.getId());
