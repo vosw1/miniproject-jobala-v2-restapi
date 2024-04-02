@@ -46,8 +46,8 @@ public class ApplyService {
         Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())
                 .orElseThrow(() -> new ApiException403("이력서를 찾을 수 없습니다."));
 
-        applyJPARepository.save(reqDTO.toEntity(resume, jobopen, sessionUser));
-        return new ApplyResponse.ApplicationDTO(true);
+        Apply apply = applyJPARepository.save(reqDTO.toEntity(resume, jobopen, sessionUser));
+        return new ApplyResponse.ApplicationDTO(apply);
     }
 
     // 개인의 포지션 제안 현황 조회

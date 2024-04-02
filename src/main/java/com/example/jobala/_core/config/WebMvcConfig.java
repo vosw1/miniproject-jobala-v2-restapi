@@ -11,12 +11,11 @@ import org.springframework.web.servlet.resource.PathResourceResolver;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     // 로그인 인터셉터
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/api/***")
-                .excludePathPatterns("/api/boards/{id:\\d+}/detail","/api/comp/jobopen/{id:\\\\d+}/detail");
+                .excludePathPatterns("/api/boards/{id:\\d+}/detail","/api/comp/jobopen/{id:\\\\d+}/detail","/api/jobopenSearch");
     }
 
     //외부이미지 경로설정

@@ -29,7 +29,7 @@ public class ApplyController {
     @PostMapping("/api/applies")
     public ResponseEntity<ApiUtil<ApplyResponse.ApplicationDTO>> apply(@Valid @RequestBody ApplyRequest.ApplyRequestDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        ApplyResponse.ApplicationDTO respDTO = applyService.saveAfterApply(reqDTO, sessionUser);
+        ApplyResponse.ApplicationDTO respDTO= applyService.saveAfterApply(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 

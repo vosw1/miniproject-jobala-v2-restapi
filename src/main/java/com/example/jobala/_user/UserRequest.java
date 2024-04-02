@@ -10,11 +10,11 @@ public class UserRequest {
     @Data
     public static class LoginDTO {
         @NotEmpty(message = "유저네임이 공백일 수 없습니다")
-        @Size(min = 1, max = 3, message = "유저네임은 최소 1자 이상 최대 3자 이하여야 합니다")
+        @Size(min = 1, max = 20, message = "유저네임은 최소 1자 이상 최대 3자 이하여야 합니다")
         private String username;
 
         @NotEmpty(message = "비밀번호가 공백일 수 없습니다")
-        @Size(min = 4, message = "비밀번호는 최소 4자 이상이어야 합니다")
+        @Size(min = 2, max = 20, message = "비밀번호는 최소 4자 이상이어야 합니다")
         private String password;
     }
 

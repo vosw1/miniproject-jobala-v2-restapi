@@ -17,9 +17,9 @@ public class ApplyRequest {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class ApplyStatusUpdateRequestDTO {
-//        @NotEmpty
+//
         private Integer applyId;
-        @NotEmpty
+
         private String status;
     }
 
@@ -27,9 +27,8 @@ public class ApplyRequest {
     @Data
     @AllArgsConstructor
     public static class ApplyRequestDTO {
-        @NotEmpty
+
         private Integer resumeId;
-        @NotEmpty
         private Integer jobopenId;
 
         public Apply toEntity(Resume resume, Jobopen jobopen, User sessionUser) {
