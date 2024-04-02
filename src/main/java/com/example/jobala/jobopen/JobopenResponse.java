@@ -25,13 +25,13 @@ public class JobopenResponse {
 
         @Data
         public class JobopenDTO {
-            private Integer userId ;
+            private Integer id ;
             private Integer role; // 역할 0 -> guest, 1 -> comp
             private String jobopenTitle; //공고제목
             private Integer applyCount;
 
             public JobopenDTO(Jobopen jobopen) {
-                this.userId = jobopen.getId();
+                this.id = jobopen.getId();
                 this.role = jobopen.getRole();
                 this.jobopenTitle = jobopen.getJobopenTitle();
                 this.applyCount = jobopen.getId();
@@ -43,7 +43,7 @@ public class JobopenResponse {
 
     @Data
     public static class UpdateDTO {
-        private Integer jobopenId;
+        private Integer id;
         private String jobopenTitle;
         private String career;
         private String edu;
@@ -55,7 +55,7 @@ public class JobopenResponse {
         private Date endTime; // 마감일
 
         public UpdateDTO(Jobopen jobopen) {
-            this.jobopenId = jobopen.getId();
+            this.id = jobopen.getId();
             this.jobopenTitle = jobopen.getJobopenTitle();
             this.career = jobopen.getCareer();
             this.edu = jobopen.getEdu();
@@ -113,7 +113,7 @@ public class JobopenResponse {
     @AllArgsConstructor
     @Data
     public static class DetailDTO {
-        private Integer jobopenId;
+        private Integer id;
         private String jobopenTitle;
         private String career;
         private String edu;
@@ -129,7 +129,7 @@ public class JobopenResponse {
         private List<ResumeDTO> applyResumeList = new ArrayList<>();
 
         public DetailDTO(Jobopen jobopen, User sessionUser, List<Resume> resumeList) {
-            this.jobopenId = jobopen.getId();
+            this.id = jobopen.getId();
             this.jobopenTitle = jobopen.getJobopenTitle();
             this.career = jobopen.getCareer();
             this.edu = jobopen.getEdu();
@@ -153,7 +153,7 @@ public class JobopenResponse {
         }
 
         public DetailDTO(Jobopen jobopen, User sessionUser) {
-            this.jobopenId = jobopen.getId();
+            this.id = jobopen.getId();
             this.jobopenTitle = jobopen.getJobopenTitle();
             this.career = jobopen.getCareer();
             this.edu = jobopen.getEdu();
@@ -189,12 +189,12 @@ public class JobopenResponse {
 
         @Data
         public class UserDTO {
-            private Integer userId;
+            private Integer id;
             private String compname;
             private String imgFilename;
 
             public UserDTO(User user) {
-                this.userId = user.getId();
+                this.id = user.getId();
                 this.compname = user.getCompname();
                 this.imgFilename = user.getImgFilename();
             }
