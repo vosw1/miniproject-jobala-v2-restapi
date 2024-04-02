@@ -165,7 +165,6 @@ public class UserQueryRepository {
 
         JpaResultMapper rm = new JpaResultMapper();
         List<JobopenResponse.ListDTO> jobopenList = rm.list(query, JobopenResponse.ListDTO.class);
-
         return jobopenList;
     }
 

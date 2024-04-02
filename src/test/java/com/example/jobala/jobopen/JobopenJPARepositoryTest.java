@@ -10,7 +10,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @DataJpaTest
 class JobopenJPARepositoryTest {
@@ -22,7 +21,7 @@ class JobopenJPARepositoryTest {
     private EntityManager em;
 
     @Test
-    public void skill_test(){
+    public void skill_test() {
         // given
         String skillName = "[Java]";
 
@@ -36,7 +35,7 @@ class JobopenJPARepositoryTest {
     }
 
     @Test
-    public void 공고수정_test(){
+    public void 공고수정_test() {
         //given
         int id = 1;
 
@@ -51,9 +50,9 @@ class JobopenJPARepositoryTest {
         String salary = "100000";
         String hopeJob = "Software Engineer";
         String compLocation = "Seoul";
-        String endTime = "2024-04-01";
-        List<String> skills = Arrays.asList("스킬1" ,"스킬2", "스킬3");
-        JobopenRequest.UpdateDTO reqDTO = new JobopenRequest.UpdateDTO(jobopenTtile,career,edu,jobType,salary,hopeJob,compLocation,endTime,skills);
+        Date endTime = Date.valueOf("2024-04-01");
+        List<String> skills = Arrays.asList("스킬1", "스킬2", "스킬3");
+        JobopenRequest.UpdateDTO reqDTO = new JobopenRequest.UpdateDTO(jobopenTtile, career, edu, jobType, salary, hopeJob, compLocation, endTime, skills);
         // UpdateDTO 인스턴스에 각 속성 설정
 
         jobopen.setJobopenUpdate(reqDTO);

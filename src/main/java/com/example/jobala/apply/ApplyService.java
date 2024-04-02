@@ -43,12 +43,13 @@ public class ApplyService {
         return new ApplyResponse.ApplicationDTO(true);
     }
 
-
+    // TODO: 이름
     public List<ApplyResponse.GuestApplyDTO> findApplyGuestByUserId(Integer id, Integer role) {
         List<ApplyResponse.GuestApplyDTO> applyList = applyJPARepository.findApplyGuestByUserId(id);
         return applyList;
     }
 
+    // TODO: 이름
     public List<ApplyResponse.GuestPositionDTO> findPositionGuestByUserId(Integer id, Integer role) {
         List<ApplyResponse.GuestPositionDTO> positionList = applyJPARepository.findPositionGuestByUserId(id);
         return positionList;

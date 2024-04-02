@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class BoardResponse {
 
+
     // 글 수정
     @Data
     public static class UpdateDTO {
@@ -44,6 +45,7 @@ public class BoardResponse {
         }
     }
 
+    // TODO: 이름
     @Data
     public static class DetailDTO {
         private int id;

@@ -6,6 +6,7 @@ import lombok.Data;
 
 public class BoardRequest {
 
+    // TODO: 이름
     @Data
     public static class SaveDTO {
         @NotEmpty(message = "제목은 공백일 수 없습니다")
@@ -24,6 +25,8 @@ public class BoardRequest {
         }
     }
 
+
+    // TODO: 이름
     @Data
     public static class UpdateDTO {
         @NotEmpty(message = "제목은 공백일 수 없습니다")

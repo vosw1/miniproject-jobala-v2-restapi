@@ -103,6 +103,7 @@ public class ApplyResponse {
         }
     }
 
+
     //개인 positionForm 응답DTO
     @Data
     @AllArgsConstructor

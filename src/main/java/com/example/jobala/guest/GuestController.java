@@ -21,12 +21,13 @@ public class GuestController {
 
     //이력서 관리 페이징
     @GetMapping("/api/guest/mngForm")
-    public ResponseEntity<?> mngForm(HttpServletRequest req, @RequestParam(defaultValue = "0") int page) {
+    public ResponseEntity<?> mngForm( @RequestParam(defaultValue = "0") int page) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ResumeResponse.MngDTO respDTO = guestService.guestResumesMng(page, sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
+    // 개인 - 마이페이지 - 프로필
     @GetMapping("/api/guest/profileForm")
     public ResponseEntity<?> profileForm(HttpServletRequest req) {
         User sessionUser = (User) session.getAttribute("sessionUser");
@@ -34,8 +35,9 @@ public class GuestController {
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
+    // 개인 - 마이페이지 - 프로필 업데이트
     @PutMapping("/api/guest/profile")
-    public ResponseEntity<?> updateProfile(@RequestBody GuestRequest.GuestProfileUpdateDTO reqDTO) {
+    public ResponseEntity<?> profileUpdate(@RequestBody GuestRequest.GuestProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         UserResponse.GuestProfile respDTO = guestService.guestUpdateProfile(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil(respDTO));

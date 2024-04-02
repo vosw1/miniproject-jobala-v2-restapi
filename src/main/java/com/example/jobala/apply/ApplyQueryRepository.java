@@ -34,7 +34,7 @@ public class ApplyQueryRepository {
         return responseDTO;
     }
 
-
+    // TODO: 이름
     public List<ApplyResponse.CompPositionDTO> findCompByUserId(int compId) {
         //기업이 제안한 현황보기
         String q = """
@@ -59,6 +59,7 @@ public class ApplyQueryRepository {
      * 기업이면 공고를 기준으로 지원받은 이력서를 조회
      * 개인이면 어플라이를 기준으로 지원한 이력서를 조회
      */
+
     //기업 applyForm
     public List<ApplyResponse.CompApplyDTO> findByUserId(int sessionUserId, int role) {
             String q = """
@@ -76,6 +77,7 @@ public class ApplyQueryRepository {
             List<ApplyResponse.CompApplyDTO> responseDTO = mapper.list(query, ApplyResponse.CompApplyDTO.class);
             return responseDTO;
     }
+
 
     //개인 applyForm
     public List<ApplyResponse.GuestApplyDTO> findByCompUserId(int sessionUserId) {

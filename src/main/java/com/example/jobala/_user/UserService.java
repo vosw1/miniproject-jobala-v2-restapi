@@ -36,7 +36,6 @@ public class UserService {
         return userQueryRepository.findByJoboopenAll();
     }
 
-
     //메인 공고 목록조회
     public UserResponse.MainDTO mainJobopenList(Integer page, User sessionUser) {
         List<Jobopen> jobopenList = jobopenJPARepository.main();
@@ -63,10 +62,6 @@ public class UserService {
         }
         User user = userJPARepository.save(reqDTO.toCompEntity());
         return new UserResponse.JoinDTO(user);
-    }
-
-    public User guestProfile(Integer id) {
-        return userJPARepository.findById(id).orElseThrow(() -> new Exception404("유저의 정보를 찾을 수 없습니다."));
     }
 
 }

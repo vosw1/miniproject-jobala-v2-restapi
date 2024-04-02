@@ -68,16 +68,11 @@ public class BoardService {
         return new BoardResponse.SaveDTO(board);
     }
 
-//    // 글목록조회
-//    public Page<Board> 글목록조회(int page, int size) {
-//        Pageable pageable = (Pageable) PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"));
-//
-//        return boardJPARepository.findAll(pageable);
-//    }
 
+    //DEL: 글조호 삭제
+    // TODO: 이름
     public List<BoardResponse.BoardDTO> boardFindAll() { // 글목록조회
         List<BoardResponse.BoardDTO> boardList = boardJPARepository.findBoardAll();
         return boardList;
-        // return boardList.stream().map(BoardResponse.MainDTO::new).toList();와 같은 것
     }
 }
