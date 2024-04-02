@@ -215,13 +215,13 @@ public class JobopenResponse {
     @AllArgsConstructor
     @Data
     public static class ScrapDTO {
-        private int id;
+        private int jobopenId;
         private String compname;
         private String jobopenTitle;
         private String career;
 
         public ScrapDTO(Jobopen jobopen) {
-            this.id = jobopen.getId();
+            this.jobopenId = jobopen.getId();
             this.compname = jobopen.getUser().getCompname();
             this.jobopenTitle = jobopen.getJobopenTitle();
             this.career = jobopen.getCareer();
