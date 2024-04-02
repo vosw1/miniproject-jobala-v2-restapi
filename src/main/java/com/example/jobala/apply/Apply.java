@@ -1,5 +1,6 @@
 package com.example.jobala.apply;
 
+import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
@@ -34,6 +35,8 @@ public class Apply {
 
     @CreationTimestamp
     private Timestamp createdAt;
+
+
 
     @Builder
     public Apply(Integer id, Resume resume, Jobopen jobopen, User user, String state, Integer role, Timestamp createdAt) {

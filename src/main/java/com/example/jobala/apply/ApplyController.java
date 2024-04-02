@@ -1,6 +1,7 @@
 package com.example.jobala.apply;
 
 import com.example.jobala._core.utill.ApiUtil;
+import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -25,10 +26,10 @@ public class ApplyController {
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
-    // 개인 - 이력서, 포지션제안 지원하기
+    // 개인 - 이력서 지원하기
     @PostMapping("/api/applies")
     public ResponseEntity<?> apply(@Valid @RequestBody ApplyRequest.ApplyRequestDTO reqDTO) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         ApplyResponse.ApplicationDTO respDTO= applyService.saveAfterApply(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }

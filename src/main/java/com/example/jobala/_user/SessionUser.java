@@ -1,8 +1,11 @@
 package com.example.jobala._user;
 
+import jakarta.persistence.Column;
 import lombok.Builder;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Data
@@ -12,6 +15,7 @@ public class SessionUser {
     private String email;
     private Timestamp createdAt;
     private Integer role;
+    private User user;
 
     @Builder
     public SessionUser(Integer id, String username, String email, Timestamp createdAt, Integer role) {
@@ -29,4 +33,5 @@ public class SessionUser {
         this.createdAt = user.getCreatedAt();
         this.role = user.getRole();
     }
+
 }
