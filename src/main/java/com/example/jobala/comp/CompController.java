@@ -57,7 +57,7 @@ public class CompController {
 
     //기업 - 마이페이지 - 프로필관리
     @GetMapping("/api/comp/profileForm")
-    public ResponseEntity<?> profileForm(HttpServletRequest req) {
+    public ResponseEntity<?> profileForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
         UserResponse.GuestProfile respSTO = compService.compProfile(sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil(respSTO));

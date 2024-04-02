@@ -53,7 +53,7 @@ public class CompService {
 
         jobopenList.forEach(dto ->
                 dto.getJobopenDTO().forEach(jobopenDTO -> {
-                    int count = applyJPARepository.countJobopenApplyById(jobopenDTO.getId());
+                    int count = applyJPARepository.countJobopenApplyById(jobopenDTO.getUserId());
                     jobopenDTO.setApplyCount(count);
                 })
         );
