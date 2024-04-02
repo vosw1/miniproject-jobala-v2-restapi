@@ -39,7 +39,6 @@ public class User {
     private Integer role; // 0 -> guest, 1 -> comp
     private Date age;
 
-
     @CreationTimestamp
     private Timestamp createdAt;
 

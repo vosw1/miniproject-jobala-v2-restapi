@@ -1,5 +1,6 @@
 package com.example.jobala.apply;
 
+import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
@@ -32,10 +33,10 @@ public class ApplyRequest {
         private Integer resumeId;
         private Integer jobopenId;
 
-        public Apply toEntity(Resume resume, Jobopen jobopen, User sessionUser) {
+        public Apply toEntity(Resume resume, Jobopen jobopen, User user ) {
             return Apply.builder()
-                    .role(sessionUser.getRole())
-                    .user(sessionUser)
+                    .role(user.getRole())
+                    .user(user)
                     .jobopen(jobopen)
                     .resume(resume)
                     .state("검토중")

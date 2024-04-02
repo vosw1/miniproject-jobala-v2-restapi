@@ -32,7 +32,8 @@ public class UserController {
 
     //로그인
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserRequest.LoginDTO reqDTO) {
+    public ResponseEntity<?> login(@Valid @RequestBody UserRequest.LoginDTO reqDTO) {
+        System.out.println("reqDTO = " + reqDTO);
         String jwt = userService.login(reqDTO);
         return ResponseEntity.ok().header("Authorization", "Bearer "+jwt).body(new ApiUtil(null));
     }

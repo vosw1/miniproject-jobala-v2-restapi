@@ -21,8 +21,12 @@ public class JwtUtil {
     }
 
     public static SessionUser verify(String jwt){
-        DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512("metacoding")).build().verify(jwt);
+        System.out.println(jwt);
+
+        DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512("jobala")).build().verify(jwt);
+        System.out.println("decodedJWT = " + decodedJWT);
         int id = decodedJWT.getClaim("id").asInt();
+        System.out.println("id = " + id);
         String username = decodedJWT.getClaim("username").asString();
 
         return SessionUser.builder()
