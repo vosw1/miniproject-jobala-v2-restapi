@@ -34,12 +34,9 @@ public class User {
     private String phone; //폰번호
     private String ceo; // 기업 대표명
     private String address; //주소
-
     private String imgTitle; // 이미지 이름
     private String imgFilename; // 파일 패스
-
     private Integer role; // 0 -> guest, 1 -> comp
-
     private Date age;
 
 
@@ -77,6 +74,7 @@ public class User {
         this.password = reqDTO.getPassword();
         this.phone = reqDTO.getPhone();
         this.email = reqDTO.getEmail();
+        this.address = reqDTO.getAddress();
         this.imgTitle = reqDTO.getImgTitle();
         this.imgFilename = imgFilename;
     }

@@ -11,20 +11,36 @@ public class ApplyResponse {
     // 지원 응답DTO
     @Data
     public static class ApplicationDTO {
-        private boolean success;
+        private Integer resumeId;
+        private Integer userId;
+        private Integer jobopenId;
+        private String status;
+        private Integer role;
 
-        public ApplicationDTO(boolean success) {
-            this.success = success;
+        public ApplicationDTO(Apply apply) {
+            this.resumeId = apply.getResume().getId();
+            this.userId = apply.getUser().getId();
+            this.jobopenId = apply.getJobopen().getId();
+            this.status = apply.getState();
+            this.role = apply.getRole();
         }
     }
 
     // 상태 수정 응답DTO
     @Data
     public static class StatusUpdateDTO {
-        private boolean success;
+        private Integer resumeId;
+        private Integer userId;
+        private Integer jobopenId;
+        private String status;
+        private Integer role;
 
-        public StatusUpdateDTO(boolean success) {
-            this.success = success;
+        public StatusUpdateDTO(Apply apply) {
+            this.resumeId = apply.getResume().getId();
+            this.userId = apply.getUser().getId();
+            this.jobopenId = apply.getJobopen().getId();
+            this.status = apply.getState();
+            this.role = apply.getRole();
         }
     }
 

@@ -30,7 +30,7 @@ public class ApplyService {
 
         apply.setState(reqDTO.getStatus());
         applyJPARepository.save(apply);
-        return new ApplyResponse.StatusUpdateDTO(true);
+        return new ApplyResponse.StatusUpdateDTO(apply);
     }
 
     // 지원 후 저장
@@ -41,8 +41,8 @@ public class ApplyService {
         Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())
                 .orElseThrow(() -> new ApiException403("이력서를 찾을 수 없습니다."));
 
-        applyJPARepository.save(reqDTO.toEntity(resume, jobopen, sessionUser));
-        return new ApplyResponse.ApplicationDTO(true);
+        Apply apply = applyJPARepository.save(reqDTO.toEntity(resume, jobopen, sessionUser));
+        return new ApplyResponse.ApplicationDTO(apply);
     }
 
     // 기업/개인 지원 현황 보기

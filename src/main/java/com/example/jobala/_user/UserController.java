@@ -28,7 +28,7 @@ public class UserController {
 
     //메인에서 공고목록보기
     @GetMapping("/")
-    public ResponseEntity<?> mainForm(@RequestParam(defaultValue = "0") Integer page, HttpServletRequest req) {
+    public ResponseEntity<?> mainForm(@RequestParam(defaultValue = "0") Integer page) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         UserResponse.MainDTO respDTO = userService.mainJobopenList(page, sessionUser);
         return ResponseEntity.ok(new ApiUtil(respDTO));
@@ -65,5 +65,11 @@ public class UserController {
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
+    // 기업,개인 - 채용공고 목록
+    @GetMapping("/api/jobSearch")
+    public ResponseEntity<?> jobSearch(HttpServletRequest req) {
+        List<JobopenResponse.ListDTO> respDTO = userService.findAll();
+        return ResponseEntity.ok(new ApiUtil(respDTO));
+    }
 }
  
