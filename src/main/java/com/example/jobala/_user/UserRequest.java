@@ -2,6 +2,8 @@ package com.example.jobala._user;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.sql.Date;
 
 public class UserRequest {
@@ -10,11 +12,11 @@ public class UserRequest {
     @Data
     public static class LoginDTO {
         @NotEmpty(message = "유저네임이 공백일 수 없습니다")
-        @Size(min = 1, max = 20, message = "유저네임은 최소 1자 이상 최대 3자 이하여야 합니다")
+        @Size(min = 1, max = 20, message = "유저네임은 최소 1자 이상 최대 20자 이하여야 합니다")
         private String username;
 
         @NotEmpty(message = "비밀번호가 공백일 수 없습니다")
-        @Size(min = 2, max = 20, message = "비밀번호는 최소 4자 이상이어야 합니다")
+        @Size(min = 4, max = 20,message = "비밀번호는 최소 4자 이상 최대 20자 이하여야 합니다")
         private String password;
     }
 
@@ -22,15 +24,12 @@ public class UserRequest {
     //회원가입 - 개인, 기업
     @Data
     public static class JoinDTO {
-        @NotEmpty(message = "사업자번호가 공백일 수 없습니다")
         @Pattern(regexp = "^\\d{3}-\\d{3}-\\d{4}$", message = "사업자번호 형식이 올바르지 않습니다")
         private String compNum;
 
-        @NotEmpty(message = "ceo명이 공백일 수 없습니다")
         @Size(min = 1, max = 3, message = "ceo명은 최소 1자 이상 최대 3자 이하여야 합니다")
         private String ceo;
 
-        @NotEmpty(message = "기업명이 공백일 수 없습니다")
         private String compname;
 
         @NotEmpty(message = "주소가 공백일 수 없습니다")
@@ -44,7 +43,7 @@ public class UserRequest {
         private String email;
 
         @NotEmpty(message = "비밀번호가 공백일 수 없습니다")
-        @Size(min = 4, message = "비밀번호는 최소 4자 이상이어야 합니다")
+        @Size(min = 4, max = 20, message = "비밀번호는 최소 4자 이상 20장 이하여야 합니다")
         private String password;
 
         @NotEmpty(message = "이름이 공백일 수 없습니다")
@@ -55,12 +54,11 @@ public class UserRequest {
         @Pattern(regexp = "^\\d{3}-\\d{3,4}-\\d{4}$", message = "전화번호 형식이 올바르지 않습니다")
         private String phone;
 
-        @NotEmpty(message = "생년월일이 공백일 수 없습니다")
         private Date age;
 
         @Min(0)
         @Max(1)
-        @NotEmpty
+        @NotNull
         private Integer role; // 0 -> guest, 1 -> comp
 
         //개인이 회원가입할때

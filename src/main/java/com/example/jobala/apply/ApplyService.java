@@ -44,10 +44,10 @@ public class ApplyService {
     // 지원 후 저장
     @Transactional
     public ApplyResponse.ApplicationDTO saveAfterApply(ApplyRequest.ApplyRequestDTO reqDTO, SessionUser sessionUser) {
-        Jobopen jobopen = jobopenJPARepository.findById(reqDTO.getJobopenId())
+        Jobopen jobopen = jobopenJPARepository.findById(reqDTO.getApplyId())
                 .orElseThrow(() -> new ApiException403("공고를 찾을 수 없습니다."));
 
-        Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())
+        Resume resume = resumeJPARepository.findById(reqDTO.getApplyId())
                 .orElseThrow(() -> new ApiException403("이력서를 찾을 수 없습니다."));
         User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException403("회워정보를 찾을 수 없습니다."));
         Apply apply = applyJPARepository.save(reqDTO.toEntity(resume, jobopen, user));
