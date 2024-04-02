@@ -118,7 +118,7 @@ public class ResumeResponse {
     @AllArgsConstructor
     @Data
     public static class ScoutListDTO {
-        private Integer id; //이력서 아이디
+        private Integer resumeId; //이력서 아이디
         private String username;
         private String resumeTitle; //이력서제목
         private String edu; //학력

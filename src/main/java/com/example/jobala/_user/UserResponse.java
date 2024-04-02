@@ -14,14 +14,14 @@ public class UserResponse {
     //기업 - 프로필 & 업데이트
     @Data
     public static class CompProfile {
-        private Integer id;
+        private Integer userId;
         private String name;
         private String compname;
         private String email;
         private String imgFilename;
 
         public CompProfile(User user) {
-            this.id = user.getId();
+            this.userId = user.getId();
             this.name = user.getName();
             this.compname = user.getCompname();
             this.email = user.getEmail();
@@ -32,13 +32,13 @@ public class UserResponse {
     //개인 - 프로필 & 업데이트
     @Data
     public static class GuestProfile {
-        private Integer id;
+        private Integer userId;
         private String name;
         private String email;
         private String imgFilename;
 
         public GuestProfile(User user) {
-            this.id = user.getId();
+            this.userId = user.getId();
             this.name = user.getName();
             this.email = user.getEmail();
             this.imgFilename = user.getImgFilename();
@@ -58,7 +58,7 @@ public class UserResponse {
 
         @Data
         public static class GuestDTO {
-            private Integer id;
+            private Integer userId;
             private String username; // 아이디
             private String name; // 이름
             private String email; //이메일
@@ -66,7 +66,7 @@ public class UserResponse {
             private Integer role; // 0 -> guest, 1 -> comp
 
             public GuestDTO(User user) {
-                this.id = user.getId();
+                this.userId = user.getId();
                 this.username = user.getUsername();
                 this.name = user.getName();
                 this.email = user.getEmail();
@@ -77,7 +77,7 @@ public class UserResponse {
 
         @Data
         public static class CompDTO {
-            private Integer id;
+            private Integer uerId ;
             private String username; // 아이디
             private String name; // 담당자 이름
             private String compname; // 회사명
@@ -86,7 +86,7 @@ public class UserResponse {
             private Integer role; // 0 -> guest, 1 -> comp
 
             public CompDTO(User user) {
-                this.id = user.getId();
+                this.uerId = user.getId();
                 this.username = user.getUsername();
                 this.name = user.getName();
                 this.compname = user.getCompname();

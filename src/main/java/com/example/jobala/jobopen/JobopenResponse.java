@@ -25,13 +25,13 @@ public class JobopenResponse {
 
         @Data
         public class JobopenDTO {
-            private Integer id;
+            private Integer userId ;
             private Integer role; // 역할 0 -> guest, 1 -> comp
             private String jobopenTitle; //공고제목
             private Integer applyCount;
 
             public JobopenDTO(Jobopen jobopen) {
-                this.id = jobopen.getId();
+                this.userId = jobopen.getId();
                 this.role = jobopen.getRole();
                 this.jobopenTitle = jobopen.getJobopenTitle();
                 this.applyCount = jobopen.getId();
@@ -72,7 +72,7 @@ public class JobopenResponse {
     @NoArgsConstructor
     @Data
     public static class ListDTO {
-        private Integer id;
+        private Integer compId;
         private String jobopenTitle;
         private String compLocation;
         private String career;
