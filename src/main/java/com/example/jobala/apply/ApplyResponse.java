@@ -44,7 +44,7 @@ public class ApplyResponse {
         }
     }
 
-   //기업 applyForm 응답DTO
+    //기업 applyForm 응답DTO
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
@@ -59,17 +59,17 @@ public class ApplyResponse {
         private Date endTime;
         private String state;
 
-       public CompApplyDTO(Apply apply) {
-           this.id = apply.getId();
-           this.jobopenId = apply.getJobopen().getId();
-           this.resumeId = apply.getResume().getId();
-           this.jobopenTitle = apply.getJobopen().getJobopenTitle();
-           this.resumeTitle = apply.getResume().getResumeTitle();
-           this.name = apply.getResume().getUser().getName();
-           this.edu = apply.getResume().getEdu();
-           this.endTime = apply.getJobopen().getEndTime();
-           this.state = apply.getState();
-       }
+        public CompApplyDTO(Apply apply) {
+            this.id = apply.getId();
+            this.jobopenId = apply.getJobopen().getId();
+            this.resumeId = apply.getResume().getId();
+            this.jobopenTitle = apply.getJobopen().getJobopenTitle();
+            this.resumeTitle = apply.getResume().getResumeTitle();
+            this.name = apply.getResume().getUser().getName();
+            this.edu = apply.getResume().getEdu();
+            this.endTime = apply.getJobopen().getEndTime();
+            this.state = apply.getState();
+        }
     }
 
     // 개인 applyForm 응답DTO
@@ -144,4 +144,3 @@ public class ApplyResponse {
         }
     }
 }
-

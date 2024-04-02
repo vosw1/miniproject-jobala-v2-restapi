@@ -1,14 +1,14 @@
 package com.example.jobala._user;
 
 import com.example.jobala._core.errors.apiException.ApiException400;
-import com.example.jobala._core.errors.apiException.ApiException401;
+import com.example.jobala._core.errors.exception.Exception401;
+import com.example.jobala._core.utill.JwtUtil;
 import com.example.jobala._core.utill.Paging;
 import com.example.jobala.guest.GuestRequest;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.jobopen.JobopenResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,20 +35,18 @@ public class UserService {
     }
 
     //메인 공고 목록조회
-    public UserResponse.MainDTO mainJobopenList(Integer page, User sessionUser) {
+    public UserResponse.MainDTO mainJobopenList(Integer page, SessionUser sessionUser) {
         List<Jobopen> jobopenList = jobopenJPARepository.main();
         return new UserResponse.MainDTO(jobopenList);
     }
 
     // 로그인
-    public User login(UserRequest.LoginDTO reqDTO) {
-        try {
-            return userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
-                    .orElseThrow(() -> new ApiException401("인증되지 않았습니다."));
+    public String login(UserRequest.LoginDTO reqDTO) {
+        User user = userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
+                .orElseThrow(() -> new Exception401("아이디, 비밀번호가 틀렸어요"));
 
-        } catch (EmptyResultDataAccessException e) {
-            throw new ApiException401("아이디,비밀번호가 틀렸어요");
-        }
+        String jwt = JwtUtil.create(user);
+        return jwt;
     }
 
     // 회원가입

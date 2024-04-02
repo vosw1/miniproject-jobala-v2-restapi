@@ -38,10 +38,8 @@ public class Board {
     @OneToMany(mappedBy = "board", fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     private List<Reply> replies = new ArrayList<>();
 
-
     @Transient
     private boolean isBoardOwner;
-
 
     @Builder
     public Board(Integer id, String title, String content, Integer role, User user, Timestamp createdAt, boolean isBoardOwner) {

@@ -29,7 +29,7 @@ public class ResumeService {
     // 이력서등록
     @Transactional
     public ResumeResponse.ASaveDTO resumeSave(ResumeRequest.SaveDTO reqDTO, User sessionUser) {
-       Resume resume =  resumeJPARepository.save(reqDTO.toEntity(sessionUser));
+        Resume resume =  resumeJPARepository.save(reqDTO.toEntity(sessionUser));
         return new ResumeResponse.ASaveDTO(resume,sessionUser);
     }
 

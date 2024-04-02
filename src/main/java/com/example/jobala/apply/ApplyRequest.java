@@ -28,6 +28,7 @@ public class ApplyRequest {
     @Data
     @AllArgsConstructor
     public static class ApplyRequestDTO {
+
         private Integer resumeId;
         private Integer jobopenId;
 
