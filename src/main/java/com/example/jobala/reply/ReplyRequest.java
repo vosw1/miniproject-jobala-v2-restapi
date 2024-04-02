@@ -11,6 +11,7 @@ public class ReplyRequest {
     public static class SaveDTO {
         @NotNull(message = "댓글은 공백일 수 없습니다")
         private String comment;
+        private Integer boardId;
 
         public Reply toEntity(User sessionUser, Board board) {
             return Reply.builder()
