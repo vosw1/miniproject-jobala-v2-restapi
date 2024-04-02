@@ -42,12 +42,10 @@ public class CompController {
 
     // 기업 - 인재 명단 목록
     @GetMapping("/api/comp/scoutList")
-    public ResponseEntity<?> scoutList(HttpServletRequest req) {
+    public ResponseEntity<?> scoutList() {
         List<ResumeResponse.ScoutListDTO> respDTO = compService.listAllResumes();
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
-
-    // DEL: getResumeList 삭제
 
     //기업 - 마이페이지 - 공고 관리
     @GetMapping("/api/comp/mngForm")
@@ -66,10 +64,10 @@ public class CompController {
     }
 
     //기업 - 마이페이지 프로필 업데이트
-    @PutMapping("/api/comp/profile") // 주소 수정 필요!
-    public ResponseEntity<?> updateProfile(@RequestBody CompRequest.CompProfileUpdateDTO reqDTO) {
+    @PutMapping("/api/comp/profile")
+    public ResponseEntity<?> profileUpdate(@RequestBody CompRequest.CompProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        UserResponse.CompProfile respDTO = compService.compUpdateProfile(reqDTO, sessionUser);
-        return ResponseEntity.ok(new ApiUtil(respDTO));
+        UserResponse.CompProfile respSTO = compService.compUpdateProfile(reqDTO, sessionUser);
+        return ResponseEntity.ok(new ApiUtil(respSTO));
     }
 }

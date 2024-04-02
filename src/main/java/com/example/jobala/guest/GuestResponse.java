@@ -2,11 +2,14 @@ package com.example.jobala.guest;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 public class GuestResponse {
 
-    @AllArgsConstructor
+
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class SearchDTO {
         private String career;
         private String compLocation;
@@ -16,6 +19,7 @@ public class GuestResponse {
         private String jobType;
     }
 
+
     @Data
     @AllArgsConstructor
     public static class JopOpenApplyDTO {
@@ -24,9 +28,11 @@ public class GuestResponse {
         private String state;
     }
 
+
     @Data
     @AllArgsConstructor
     public static class GuestProfileDTO {
+        private Integer id;
         private String name;
         private String password;
         private String phone;
@@ -34,6 +40,7 @@ public class GuestResponse {
         private String imgFilename;
         private String imgTitle;
     }
+
 
     @Data
     @AllArgsConstructor

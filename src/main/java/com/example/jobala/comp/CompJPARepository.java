@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface CompJPARepository extends JpaRepository<User,Integer> {
+
 }
