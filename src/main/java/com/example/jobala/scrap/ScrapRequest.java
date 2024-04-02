@@ -12,8 +12,11 @@ public class ScrapRequest {
     @AllArgsConstructor
     @Data
     public static class ScrapDTO {
+
         private Integer jobopenId;
+
         private Integer resumeId;
+
         public Scrap toEntity(Jobopen jobopen, User sessionUser) {
             return Scrap.builder()
                     .user(sessionUser)

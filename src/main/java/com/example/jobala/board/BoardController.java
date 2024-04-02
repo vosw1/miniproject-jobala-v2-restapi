@@ -35,7 +35,7 @@ public class BoardController {
 
     // 글 수정
     @PutMapping("/api/boards/{id}")
-    public ResponseEntity<?> update(@Valid @PathVariable int id, @RequestBody BoardRequest.UpdateDTO reqDTO, Errors errors) {
+    public ResponseEntity<?> update(@Valid @PathVariable int id, @RequestBody BoardRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         BoardResponse.UpdateDTO respDTO = boardService.boardUpdate(id, sessionUser.getId(), reqDTO);
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
@@ -43,7 +43,7 @@ public class BoardController {
 
     // 글 쓰기 완료
     @PostMapping("/api/boards")
-    public ResponseEntity<?> save(@Valid @RequestBody BoardRequest.SaveDTO reqDTO, Errors errors) {
+    public ResponseEntity<?> save(@Valid @RequestBody BoardRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         BoardResponse.SaveDTO respDTO = boardService.boardSave(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil(respDTO));

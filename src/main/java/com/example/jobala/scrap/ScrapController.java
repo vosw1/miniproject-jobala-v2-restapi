@@ -7,8 +7,10 @@ import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.ResumeResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,7 +36,7 @@ public class ScrapController {
 
     //스크랩
     @RequestMapping(value = "/api/scraps", method = {RequestMethod.POST, RequestMethod.DELETE})
-    public ResponseEntity<?> scrapResume(@RequestBody ScrapRequest.ScrapDTO reqDTO) {
+    public ResponseEntity<?> scrapResume(@Valid @RequestBody ScrapRequest.ScrapDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser.getRole() == 1) { // 기업이 스크랩
             ScrapResponse.CompDTO respDTO = scrapService.scrapByComp(reqDTO, sessionUser);

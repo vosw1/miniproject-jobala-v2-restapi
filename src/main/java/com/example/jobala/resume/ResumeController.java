@@ -8,10 +8,12 @@ import com.example.jobala.scrap.Scrap;
 import com.example.jobala.scrap.ScrapQueryRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +27,7 @@ public class ResumeController {
 
     //이력서 업데이트
     @PutMapping("/api/guest/resumes/{id}")  // 주소 수정 필요
-    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody ResumeRequest.UpdateDTO reqDTO) {
+    public ResponseEntity<?> update(@Valid @PathVariable Integer id, @RequestBody ResumeRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ResumeResponse.UpdateDTO respDTO = resumeService.resumeUpdate(id, reqDTO, sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil(respDTO));
@@ -41,7 +43,7 @@ public class ResumeController {
 
     //이력서 등록
     @PostMapping("/api/guest/resumes")  // 주소 수정 필요
-    public ResponseEntity<?> save(@RequestBody ResumeRequest.SaveDTO resumeSaveDTO) {
+    public ResponseEntity<?> save(@Valid @RequestBody ResumeRequest.SaveDTO resumeSaveDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ResumeResponse.ASaveDTO respDTO = resumeService.resumeSave(resumeSaveDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil<>(respDTO));

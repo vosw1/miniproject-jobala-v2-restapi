@@ -19,7 +19,7 @@ public class ApplyController {
 
     // 기업 및 개인 - 지원 상태 업데이트 기존 기업 개인으로 구분되어 있던 것을 합침
     @PutMapping("/api/applies")
-    public ResponseEntity<ApiUtil<ApplyResponse.StatusUpdateDTO>> updateApplicationStatus(@Valid @RequestBody ApplyRequest.ApplyStatusUpdateRequestDTO reqDTO, Errors errors) {
+    public ResponseEntity<ApiUtil<ApplyResponse.StatusUpdateDTO>> updateApplicationStatus(@Valid @RequestBody ApplyRequest.ApplyStatusUpdateRequestDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ApplyResponse.StatusUpdateDTO respDTO = applyService.statusUpdate(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
@@ -27,7 +27,7 @@ public class ApplyController {
 
     // 개인 - 이력서, 포지션제안 지원하기
     @PostMapping("/api/applies")
-    public ResponseEntity<ApiUtil<ApplyResponse.ApplicationDTO>> apply(@Valid @RequestBody ApplyRequest.ApplyRequestDTO reqDTO, Errors errors) {
+    public ResponseEntity<ApiUtil<ApplyResponse.ApplicationDTO>> apply(@Valid @RequestBody ApplyRequest.ApplyRequestDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ApplyResponse.ApplicationDTO respDTO = applyService.saveAfterApply(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
