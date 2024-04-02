@@ -1,7 +1,6 @@
 package com.example.jobala.guest;
 
 import com.example.jobala._core.errors.apiException.ApiException403;
-
 import com.example.jobala._core.utill.Paging;
 import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;
@@ -13,6 +12,7 @@ import com.example.jobala.resume.ResumeResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,7 +37,7 @@ public class GuestService {
                 .orElseThrow(() -> new ApiException403("수정할 프로필이 없습니다.")).getUser();
 
         byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getImgFilename().getBytes());
-        String imageUUID = UUID.nameUUIDFromBytes(decodedBytes).randomUUID() +"_" + reqDTO.getImgTitle();
+        String imageUUID = UUID.randomUUID() + "_" + reqDTO.getImgTitle();
 
         Path imgPath = Paths.get("./image/" + imageUUID);
 

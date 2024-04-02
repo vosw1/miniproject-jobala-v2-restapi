@@ -1,7 +1,6 @@
 package com.example.jobala.comp;
 
 import com.example.jobala._core.errors.apiException.ApiException403;
-
 import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
@@ -47,10 +46,10 @@ public class CompService {
     }
 
     // 기업 - 마이페이지 공고 관리
-    public List<JobopenResponse.MngDTO> compJobopenMng(Integer sessionUserId) {
-        List<Jobopen> temp = compQueryRepository.findJobopenByWithUserId(sessionUserId);
+    public List<JobopenResponse.MngDTO> compJobopenMng(SessionUser sessionUser) {
+        List<Jobopen> temp = compQueryRepository.findJobopenByWithUserId(sessionUser.getId());
         List<JobopenResponse.MngDTO> jobopenList = temp.stream()
-                .map(jobopen -> new JobopenResponse.MngDTO(sessionUserId, temp)).toList();
+                .map(jobopen -> new JobopenResponse.MngDTO(sessionUser.getId(), temp)).toList();
 
         jobopenList.forEach(dto ->
                 dto.getJobopenDTO().forEach(jobopenDTO -> {
@@ -62,8 +61,8 @@ public class CompService {
     }
 
     // 기업 - 프로필관리
-    public UserResponse.GuestProfile compProfile(Integer userId) {
-        User user = userJPARepository.findById(userId)
+    public UserResponse.GuestProfile compProfile(SessionUser sessionUser) {
+        User user = userJPARepository.findById(sessionUser.getId())
                 .orElseThrow(() -> new ApiException403("유저를 찾을 수 없습니다."));
 
         return new UserResponse.GuestProfile(user);
@@ -77,7 +76,7 @@ public class CompService {
 
         //베이스 64로 들어오는 문자열을 바이트로 디코딩하기
         byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getImgFilename().getBytes());
-        String imageUUID = UUID.nameUUIDFromBytes(decodedBytes).randomUUID() +"_" + reqDTO.getImgTitle();
+        String imageUUID = UUID.randomUUID() + "_" + reqDTO.getImgTitle();
 
         // 이미지 파일의 저장 경로 설정
         Path imgPath = Paths.get("./image/" + imageUUID);
