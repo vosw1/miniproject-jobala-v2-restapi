@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -45,14 +46,22 @@ public class ApplyService {
     }
 
     // 기업/개인 지원 현황 보기
-    public List<ApplyResponse.GuestApplyDTO> findApplyGuestByUserId(Integer id, Integer role) {
-        List<ApplyResponse.GuestApplyDTO> applyList = applyJPARepository.findApplyGuestByUserId(id);
-        return applyList;
+    public List<?> findApplyByUserId(Integer id, Integer role) {
+        if (role == 0) { // 개인
+            return applyJPARepository.findApplyGuestByUserId(id);
+        } else if (role == 1) { // 기업
+            return applyJPARepository.findApplyCompByUserId(id);
+        }
+        return new ArrayList<>();
     }
 
     // 기업/개인 포지션 제안 보기
-    public List<ApplyResponse.GuestPositionDTO> findPositionGuestByUserId(Integer id, Integer role) {
-        List<ApplyResponse.GuestPositionDTO> positionList = applyJPARepository.findPositionGuestByUserId(id);
-        return positionList;
+    public List<?> findPositionByUserId(Integer id, Integer role) {
+        if (role == 0) { // 개인
+            return applyJPARepository.findPositionGuestByUserId(id);
+        } else if (role == 1) { // 기업
+            return applyJPARepository.findPositionCompByUserId(id);
+        }
+        return new ArrayList<>();
     }
 }

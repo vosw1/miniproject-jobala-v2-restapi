@@ -37,7 +37,7 @@ public class ApplyController {
     @GetMapping("/api/applies/positionForm")
     public ResponseEntity<ApiUtil<?>> positionForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<ApplyResponse.GuestPositionDTO> respDTO = applyService.findPositionGuestByUserId(sessionUser.getId(), sessionUser.getRole());
+        List<?> respDTO = applyService.findPositionByUserId(sessionUser.getId(), sessionUser.getRole());
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
@@ -45,7 +45,7 @@ public class ApplyController {
     @GetMapping("/api/applies/applyForm")
     public ResponseEntity<ApiUtil<?>> applyForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<ApplyResponse.GuestApplyDTO> respDTO = applyService.findApplyGuestByUserId(sessionUser.getId(), sessionUser.getRole());
+        List<?> respDTO = applyService.findApplyByUserId(sessionUser.getId(), sessionUser.getRole());
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 }
