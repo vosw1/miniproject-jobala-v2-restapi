@@ -11,9 +11,11 @@ import com.example.jobala.resume.ResumeJPARepository;
 import com.example.jobala.resume.ResumeResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -68,7 +70,7 @@ public class CompController {
     // TODO : /api/profile 으로 변경 -> 기업 개인 합쳐서 분기처리 -> UserContoller
     //기업 - 마이페이지 프로필 업데이트
     @PutMapping("/api/comp/profile")
-    public ResponseEntity<?> profileUpdate(@RequestBody CompRequest.CompProfileUpdateDTO reqDTO) {
+    public ResponseEntity<?> profileUpdate(@Valid @RequestBody CompRequest.CompProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         UserResponse.CompProfile respSTO = compService.compUpdateProfile(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil(respSTO));
