@@ -72,7 +72,7 @@ public class JobopenResponse {
     @NoArgsConstructor
     @Data
     public static class ListDTO {
-        private Integer id;
+        private Integer compId;
         private String jobopenTitle;
         private String compLocation;
         private String career;

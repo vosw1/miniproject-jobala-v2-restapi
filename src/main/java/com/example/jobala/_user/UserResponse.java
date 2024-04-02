@@ -58,7 +58,7 @@ public class UserResponse {
 
         @Data
         public static class GuestDTO {
-            private Integer id;
+            private Integer guestId;
             private String username; // 아이디
             private String name; // 이름
             private String email; //이메일
@@ -66,7 +66,7 @@ public class UserResponse {
             private Integer role; // 0 -> guest, 1 -> comp
 
             public GuestDTO(User user) {
-                this.id = user.getId();
+                this.guestId = user.getId();
                 this.username = user.getUsername();
                 this.name = user.getName();
                 this.email = user.getEmail();
@@ -77,7 +77,7 @@ public class UserResponse {
 
         @Data
         public static class CompDTO {
-            private Integer id;
+            private Integer compId;
             private String username; // 아이디
             private String name; // 담당자 이름
             private String compname; // 회사명
@@ -86,7 +86,7 @@ public class UserResponse {
             private Integer role; // 0 -> guest, 1 -> comp
 
             public CompDTO(User user) {
-                this.id = user.getId();
+                this.compId = user.getId();
                 this.username = user.getUsername();
                 this.name = user.getName();
                 this.compname = user.getCompname();
