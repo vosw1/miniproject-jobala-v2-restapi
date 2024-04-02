@@ -2,7 +2,7 @@ package com.example.jobala.comp;
 
 
 import com.example.jobala._core.utill.ApiUtil;
-import com.example.jobala._user.User;
+import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.UserJPARepository;
 import com.example.jobala._user.UserResponse;
 import com.example.jobala.apply.ApplyJPARepository;
@@ -50,7 +50,7 @@ public class CompController {
     //기업 - 마이페이지 - 공고 관리
     @GetMapping("/api/comp/mngForm")
     public ResponseEntity<?> mngForm(HttpServletRequest req) {
-        User sessionUser = (User) req.getSession().getAttribute("sessionUser");
+        SessionUser sessionUser = (SessionUser) req.getSession().getAttribute("sessionUser");
         List<JobopenResponse.MngDTO> respDTO = compService.compJobopenMng(sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
@@ -58,7 +58,7 @@ public class CompController {
     //기업 - 마이페이지 - 프로필관리
     @GetMapping("/api/comp/profileForm")
     public ResponseEntity<?> profileForm() {
-        User sessionUser = (User) session.getAttribute("sessionUser");
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         UserResponse.GuestProfile respSTO = compService.compProfile(sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil(respSTO));
     }
@@ -66,7 +66,7 @@ public class CompController {
     //기업 - 마이페이지 프로필 업데이트
     @PutMapping("/api/comp/profile")
     public ResponseEntity<?> profileUpdate(@RequestBody CompRequest.CompProfileUpdateDTO reqDTO) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         UserResponse.CompProfile respSTO = compService.compUpdateProfile(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil(respSTO));
     }

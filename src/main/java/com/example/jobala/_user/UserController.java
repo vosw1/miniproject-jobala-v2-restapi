@@ -2,15 +2,12 @@ package com.example.jobala._user;
 
 import com.example.jobala._core.utill.ApiUtil;
 import com.example.jobala.guest.GuestRequest;
-import com.example.jobala.guest.GuestResponse;
 import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.jobopen.JobopenResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,17 +24,16 @@ public class UserController {
     //메인에서 공고목록보기
     @GetMapping("/")
     public ResponseEntity<?> mainForm(@RequestParam(defaultValue = "0") Integer page, HttpServletRequest req) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         UserResponse.MainDTO respDTO = userService.mainJobopenList(page, sessionUser);
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
     //로그인
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserRequest.LoginDTO reqDTO, HttpSession session) {
-        User sessionUser = userService.login(reqDTO);
-        session.setAttribute("sessionUser", sessionUser);
-        return ResponseEntity.ok(new ApiUtil(null));
+    public ResponseEntity<?> login(@RequestBody UserRequest.LoginDTO reqDTO) {
+        String jwt = userService.login(reqDTO);
+        return ResponseEntity.ok().header("Authorization", "Bearer "+jwt).body(new ApiUtil(null));
     }
 
     // 회원가입

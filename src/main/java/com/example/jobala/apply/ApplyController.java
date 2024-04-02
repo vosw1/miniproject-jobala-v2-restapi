@@ -1,6 +1,5 @@
 package com.example.jobala.apply;
 
-
 import com.example.jobala._core.utill.ApiUtil;
 import com.example.jobala._user.User;
 import jakarta.servlet.http.HttpSession;
@@ -10,6 +9,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class ApplyController {
@@ -35,17 +35,27 @@ public class ApplyController {
 
     // 기업 및 개인 - 포지션 제안 현황보기
     @GetMapping("/api/applies/positionForm")
-    public ResponseEntity<ApiUtil<?>> positionForm() {
+    public ResponseEntity<?> positionForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<?> respDTO = applyService.findPositionByUserId(sessionUser.getId(), sessionUser.getRole());
-        return ResponseEntity.ok(new ApiUtil<>(respDTO));
+        if(sessionUser.getRole() == 0) { // 개인
+            List<ApplyResponse.GuestPositionDTO> respDTO = applyService.findPositionGuestByUserId(sessionUser.getId());
+            return ResponseEntity.ok(new ApiUtil<>(respDTO));
+        } else { // 기업
+            List<ApplyResponse.CompPositionDTO> respDTO = applyService.findPositionCompByUserId(sessionUser.getId());
+            return ResponseEntity.ok(new ApiUtil<>(respDTO));
+        }
     }
 
     // 기업 및 개인 - 이력서 지원 현황보기
     @GetMapping("/api/applies/applyForm")
-    public ResponseEntity<ApiUtil<?>> applyForm() {
+    public ResponseEntity<?> applyForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<?> respDTO = applyService.findApplyByUserId(sessionUser.getId(), sessionUser.getRole());
-        return ResponseEntity.ok(new ApiUtil<>(respDTO));
+        if(sessionUser.getRole() == 0) { // 개인
+            List<ApplyResponse.GuestApplyDTO> respDTO = applyService.findApplyGuestByUserId(sessionUser.getId());
+            return ResponseEntity.ok(new ApiUtil<>(respDTO));
+        } else { // 기업
+            List<ApplyResponse.CompApplyDTO> respDTO = applyService.findApplyCompByUserId(sessionUser.getId());
+            return ResponseEntity.ok(new ApiUtil<>(respDTO));
+        }
     }
 }

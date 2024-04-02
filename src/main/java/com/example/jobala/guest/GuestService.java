@@ -3,6 +3,7 @@ package com.example.jobala.guest;
 import com.example.jobala._core.errors.apiException.ApiException403;
 
 import com.example.jobala._core.utill.Paging;
+import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
 import com.example.jobala._user.UserResponse;
@@ -31,7 +32,7 @@ public class GuestService {
 
     // 개인 - 프로필업데이트
     @Transactional
-    public UserResponse.GuestProfile guestUpdateProfile(GuestRequest.GuestProfileUpdateDTO reqDTO, User sessionUser) {
+    public UserResponse.GuestProfile guestUpdateProfile(GuestRequest.GuestProfileUpdateDTO reqDTO, SessionUser sessionUser) {
         User user = guestJPARepository.findById(sessionUser.getId())
                 .orElseThrow(() -> new ApiException403("수정할 프로필이 없습니다.")).getUser();
 

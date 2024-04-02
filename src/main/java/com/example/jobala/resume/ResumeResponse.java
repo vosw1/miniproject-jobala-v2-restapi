@@ -2,6 +2,7 @@ package com.example.jobala.resume;
 
 import com.example.jobala._user.User;
 import com.example.jobala.jobopen.Jobopen;
+import com.example.jobala.resume.Resume;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,19 +18,18 @@ public class ResumeResponse {
     @Data
     public static class ASaveDTO {
         private Integer userId;
-        private Integer Id;
+        private Integer resumeId;
         private String resumeTitle;
         private String hopeJob;
         private String career;
         private String license;
         private String content;
         private String edu;
-
         private List<String> skills = new ArrayList<>();
 
         public ASaveDTO(Resume resume, User sessionUser) {
             this.userId = sessionUser.getId();
-            this.Id = resume.getId();
+            this.resumeId = resume.getId();
             this.resumeTitle = resume.getResumeTitle();
             this.hopeJob = resume.getHopeJob();
             this.career = resume.getCareer();
@@ -131,7 +131,7 @@ public class ResumeResponse {
     @AllArgsConstructor
     @Data
     public static class DetailDTO {
-        private Integer id;
+        private Integer resumeId;
         private String resumeTitle;
         private String hopeJob;
         private String career;
@@ -145,7 +145,7 @@ public class ResumeResponse {
         private List<JobopenDTO> applyJobopenList = new ArrayList<>();
 
         public DetailDTO(Resume resume, User sessionUser, List<Jobopen> jobopenList) {
-            this.id = resume.getId();
+            this.resumeId = resume.getId();
             this.resumeTitle = resume.getResumeTitle();
             this.hopeJob = resume.getHopeJob();
             this.career = resume.getCareer();
@@ -205,7 +205,7 @@ public class ResumeResponse {
     @AllArgsConstructor
     @Data
     public static class UpdateDTO {
-        private Integer id;
+        private Integer resumeId;
         private String resumeTitle;
         private String hopeJob;
         private String career;
@@ -215,7 +215,7 @@ public class ResumeResponse {
         private String skills;
 
         public UpdateDTO(Resume resume) {
-            this.id = resume.getId();
+            this.resumeId = resume.getId();
             this.resumeTitle = resume.getResumeTitle();
             this.hopeJob = resume.getHopeJob();
             this.career = resume.getCareer();

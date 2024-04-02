@@ -1,8 +1,8 @@
 package com.example.jobala.reply;
 
 import com.example.jobala._core.utill.ApiUtil;
+import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;
-import com.example.jobala._user.UserResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,7 @@ public class ReplyController {
     //댓글 삭제
     @DeleteMapping("/api/replies/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id){
-        User sessionUser = (User) session.getAttribute("sessionUser");
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         replyService.replyDelete(id, sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil(null));
     }
