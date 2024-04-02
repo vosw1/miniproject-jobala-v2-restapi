@@ -17,21 +17,21 @@ public class ScrapRequest {
 
         private Integer resumeId;
 
-        public Scrap toEntity(Jobopen jobopen, User sessionUser) {
+        public Scrap toEntity(Jobopen jobopen, User user) {
             return Scrap.builder()
-                    .user(sessionUser)
+                    .user(user)
                     .jobopen(jobopen)
                     .resume(null)
-                    .role(sessionUser.getRole())
+                    .role(user.getRole())
                     .build();
         }
 
-        public Scrap toEntity(Resume resume, User sessionUser) {
+        public Scrap toEntity(Resume resume, User user) {
             return Scrap.builder()
-                    .user(sessionUser)
+                    .user(user)
                     .jobopen(null)
                     .resume(resume)
-                    .role(sessionUser.getRole())
+                    .role(user.getRole())
                     .build();
         }
     }

@@ -15,7 +15,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,7 +53,7 @@ public class CompController {
     @GetMapping("/api/comp/mngForm")
     public ResponseEntity<?> mngForm(HttpServletRequest req) {
         SessionUser sessionUser = (SessionUser) req.getSession().getAttribute("sessionUser");
-        List<JobopenResponse.MngDTO> respDTO = compService.compJobopenMng(sessionUser.getId());
+        List<JobopenResponse.MngDTO> respDTO = compService.compJobopenMng(sessionUser);
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
@@ -63,7 +62,7 @@ public class CompController {
     @GetMapping("/api/comp/profileForm")
     public ResponseEntity<?> profileForm() {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        UserResponse.GuestProfile respSTO = compService.compProfile(sessionUser.getId());
+        UserResponse.GuestProfile respSTO = compService.compProfile(sessionUser);
         return ResponseEntity.ok(new ApiUtil(respSTO));
     }
 

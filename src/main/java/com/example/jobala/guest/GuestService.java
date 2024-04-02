@@ -1,5 +1,6 @@
 package com.example.jobala.guest;
 
+import com.example.jobala._core.errors.apiException.ApiException400;
 import com.example.jobala._core.errors.apiException.ApiException403;
 import com.example.jobala._core.utill.Paging;
 import com.example.jobala._user.SessionUser;
@@ -49,20 +50,20 @@ public class GuestService {
             user.setGuestProfileUpdateDTO(reqDTO, webImgPath);
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ApiException400("올바른 저장 경로를 찾지 못했습니다.");
         }
         return new UserResponse.GuestProfile(user);
     }
 
     // 개인 - 프로필관리
-    public UserResponse.GuestProfile guestProgile(Integer id) {
-        User user = userJPARepository.findById(id).orElseThrow(() -> new ApiException403("유저의 정보를 찾을 수 없습니다."));
+    public UserResponse.GuestProfile guestProgile(SessionUser sessionUser) {
+        User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException403("유저의 정보를 찾을 수 없습니다."));
         return new UserResponse.GuestProfile(user);
     }
 
     //이력서 페이징 하기 위한 목록 조회
-    public ResumeResponse.MngDTO guestResumesMng(int page, Integer sessionUserId) {
-        List<Resume> resumes = resumeJPARepository.findResumeByWithUserId(sessionUserId);
-        return new ResumeResponse.MngDTO(sessionUserId, resumes);
+    public ResumeResponse.MngDTO guestResumesMng(int page, SessionUser sessionUser) {
+        List<Resume> resumes = resumeJPARepository.findResumeByWithUserId(sessionUser.getId());
+        return new ResumeResponse.MngDTO(sessionUser.getId(), resumes);
     }
 }

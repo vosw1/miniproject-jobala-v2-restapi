@@ -15,15 +15,14 @@ public class BoardRequest {
         private String title;
 
         @NotEmpty(message = "내용은 공백일 수 없습니다")
-        @Size(min = 1, max =255, message = "내용은 1자 이상 225자 이하여야 합니다")
+        @Size(min = 1, max = 255, message = "내용은 1자 이상 225자 이하여야 합니다")
         private String content;
 
-        public Board toEntity(User sessionUser) {
+        public Board toEntity(User user) {
             Board board = Board.builder()
                     .title(title)
                     .content(content)
-                    //유저 객체 받아오기
-                    .user(sessionUser)
+                    .user(user)
                     .build();
             return board;
         }
@@ -37,7 +36,7 @@ public class BoardRequest {
         private String title;
 
         @NotEmpty(message = "내용은 공백일 수 없습니다")
-        @Size(min = 1, max =255, message = "내용은 1자 이상 225자 이하여야 합니다")
+        @Size(min = 1, max = 255, message = "내용은 1자 이상 225자 이하여야 합니다")
         private String content;
     }
 }

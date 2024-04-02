@@ -2,19 +2,18 @@ package com.example.jobala.resume;
 
 import com.example.jobala._user.User;
 import com.example.jobala.jobopen.Jobopen;
-import com.example.jobala.resume.Resume;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 
 public class ResumeResponse {
+
+    //TODO: 이름들 좀 적어줘~!!!!!선규 그리고 ASave는 뭐여??
     @Data
     public static class ASaveDTO {
         private Integer userId;
@@ -27,8 +26,8 @@ public class ResumeResponse {
         private String edu;
         private List<String> skills = new ArrayList<>();
 
-        public ASaveDTO(Resume resume, User sessionUser) {
-            this.userId = sessionUser.getId();
+        public ASaveDTO(Resume resume, User user) {
+            this.userId = user.getId();
             this.resumeId = resume.getId();
             this.resumeTitle = resume.getResumeTitle();
             this.hopeJob = resume.getHopeJob();
@@ -41,7 +40,7 @@ public class ResumeResponse {
     }
 
 
-
+    //이력서 관리
     @Data
     public static class MngDTO {
         private Integer userId;
@@ -55,7 +54,7 @@ public class ResumeResponse {
         @Data
         public static class ResumeDTO {
             private Integer id;
-            private String resumeTitle; // 공고 제목
+            private String resumeTitle;
 
             public ResumeDTO(Resume resume) {
                 this.id = resume.getId();
@@ -63,6 +62,7 @@ public class ResumeResponse {
             }
         }
     }
+
 
     @AllArgsConstructor
     @Data
@@ -72,6 +72,14 @@ public class ResumeResponse {
         private String resumeTitle;
         private String career;
         private String edu;
+
+        public ScrapDTO(Resume resume) {
+            this.resumeId = resume.getId();
+            this.user = new UserDTO(resume.getUser());
+            this.resumeTitle = resume.getResumeTitle();
+            this.career = resume.getCareer();
+            this.edu = resume.getEdu();
+        }
 
         @Data
         public class UserDTO {
@@ -83,15 +91,8 @@ public class ResumeResponse {
                 this.name = user.getName();
             }
         }
-
-        public ScrapDTO(Resume resume) {
-            this.resumeId = resume.getId();
-            this.user = new UserDTO(resume.getUser());
-            this.resumeTitle = resume.getResumeTitle();
-            this.career = resume.getCareer();
-            this.edu = resume.getEdu();
-        }
     }
+
 
     // update시 체크되도록하는 DTO
     @Data
@@ -144,7 +145,7 @@ public class ResumeResponse {
         private UserDTO userDTO;
         private List<JobopenDTO> applyJobopenList = new ArrayList<>();
 
-        public DetailDTO(Resume resume, User sessionUser, List<Jobopen> jobopenList) {
+        public DetailDTO(Resume resume, User user, List<Jobopen> jobopenList) {
             this.resumeId = resume.getId();
             this.resumeTitle = resume.getResumeTitle();
             this.hopeJob = resume.getHopeJob();
@@ -162,8 +163,8 @@ public class ResumeResponse {
             this.applyJobopenList = jobopenList.stream().map(j -> new JobopenDTO(j)).toList();
 
             // 회사만 이력서를 스크랩 할 수 있다.
-            if (sessionUser != null) {
-                if (sessionUser.getRole() == 1) {
+            if (user != null) {
+                if (user.getRole() == 1) {
                     this.isGuestScrap = true;
                 }
             }

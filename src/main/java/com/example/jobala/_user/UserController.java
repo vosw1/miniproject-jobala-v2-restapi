@@ -4,7 +4,6 @@ import com.example.jobala._core.utill.ApiUtil;
 import com.example.jobala.guest.GuestRequest;
 import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.jobopen.JobopenResponse;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -33,9 +32,8 @@ public class UserController {
     //로그인
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody UserRequest.LoginDTO reqDTO) {
-        System.out.println("reqDTO = " + reqDTO);
         String jwt = userService.login(reqDTO);
-        return ResponseEntity.ok().header("Authorization", "Bearer "+jwt).body(new ApiUtil(null));
+        return ResponseEntity.ok().header("Authorization", "Bearer " + jwt).body(new ApiUtil(null));
     }
 
     // 회원가입

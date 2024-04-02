@@ -5,11 +5,11 @@ import com.example.jobala.resume.Resume;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.Session;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.sql.Timestamp;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 public class JobopenResponse {
 
@@ -25,7 +25,7 @@ public class JobopenResponse {
 
         @Data
         public class JobopenDTO {
-            private Integer id ;
+            private Integer id;
             private Integer role; // 역할 0 -> guest, 1 -> comp
             private String jobopenTitle; //공고제목
             private Integer applyCount;
@@ -40,7 +40,7 @@ public class JobopenResponse {
         }
     }
 
-
+    //TODO: 이름
     @Data
     public static class UpdateDTO {
         private Integer id;
@@ -67,6 +67,7 @@ public class JobopenResponse {
             this.endTime = jobopen.getEndTime();
         }
     }
+    //TODO: 이름
 
     @AllArgsConstructor
     @NoArgsConstructor
@@ -82,7 +83,7 @@ public class JobopenResponse {
 
     //공고 쓰기 응답 dto
     @Data
-    public static class SaveDTO{
+    public static class SaveDTO {
         private Integer userId;
         private Integer jobopenId;
         private String edu;
@@ -95,8 +96,8 @@ public class JobopenResponse {
         private java.sql.Date endTime;
         private List<String> skills = new ArrayList<>(); //내용
 
-        public SaveDTO(Jobopen jobopen, User sessionUser) {
-            this.userId = sessionUser.getId();
+        public SaveDTO(Jobopen jobopen, User user) {
+            this.userId = user.getId();
             this.jobopenId = jobopen.getId();
             this.edu = jobopen.getEdu();
             this.jobopenTitle = jobopen.getJobopenTitle();
@@ -110,6 +111,8 @@ public class JobopenResponse {
         }
     }
 
+
+    //TODO: 이름
     @AllArgsConstructor
     @Data
     public static class DetailDTO {
@@ -128,7 +131,7 @@ public class JobopenResponse {
         private UserDTO userDTO;
         private List<ResumeDTO> applyResumeList = new ArrayList<>();
 
-        public DetailDTO(Jobopen jobopen, User sessionUser, List<Resume> resumeList) {
+        public DetailDTO(Jobopen jobopen, User user, List<Resume> resumeList) {
             this.id = jobopen.getId();
             this.jobopenTitle = jobopen.getJobopenTitle();
             this.career = jobopen.getCareer();
@@ -145,14 +148,14 @@ public class JobopenResponse {
 
             // 개인 지원하기 - 모달창 이력서 목록
             this.applyResumeList = resumeList.stream().map(r -> new ResumeDTO(r)).toList();
-            if (sessionUser != null) {
-                if (sessionUser.getRole() == 0) {
+            if (user != null) {
+                if (user.getRole() == 0) {
                     this.isGuestScrap = true;
                 }
             }
         }
 
-        public DetailDTO(Jobopen jobopen, User sessionUser) {
+        public DetailDTO(Jobopen jobopen, User user) {
             this.id = jobopen.getId();
             this.jobopenTitle = jobopen.getJobopenTitle();
             this.career = jobopen.getCareer();
@@ -167,8 +170,8 @@ public class JobopenResponse {
 
             this.userDTO = new UserDTO(jobopen.getUser());
 
-            if (sessionUser != null) {
-                if (sessionUser.getRole() == 0) {
+            if (user != null) {
+                if (user.getRole() == 0) {
                     this.isGuestScrap = true;
                 }
             }

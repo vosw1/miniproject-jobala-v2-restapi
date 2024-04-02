@@ -6,11 +6,12 @@ import com.example.jobala._user.UserResponse;
 import com.example.jobala.resume.ResumeResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,10 +23,9 @@ public class GuestController {
     // TODO : /api/mngForm 으로 변경 -> 기업 개인 합쳐서 분기처리 -> UserController
     //이력서 관리 페이징
     @GetMapping("/api/guest/mngForm")
-    public ResponseEntity<?> mngForm( @RequestParam(defaultValue = "0") int page) {
+    public ResponseEntity<?> mngForm(@RequestParam(defaultValue = "0") int page) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-
-        ResumeResponse.MngDTO respDTO = guestService.guestResumesMng(page, sessionUser.getId());
+        ResumeResponse.MngDTO respDTO = guestService.guestResumesMng(page, sessionUser);
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
@@ -34,7 +34,7 @@ public class GuestController {
     @GetMapping("/api/guest/profileForm")
     public ResponseEntity<?> profileForm(HttpServletRequest req) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        UserResponse.GuestProfile respDTO = guestService.guestProgile(sessionUser.getId());
+        UserResponse.GuestProfile respDTO = guestService.guestProgile(sessionUser);
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 

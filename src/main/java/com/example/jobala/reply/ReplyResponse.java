@@ -15,14 +15,14 @@ public class ReplyResponse {
         private String username;
         private Boolean replyOwner; // 게시글 주인 여부
 
-        public ReplyDTO(Reply reply, User sessionUser) {
+        public ReplyDTO(Reply reply, User user) {
             this.replyId = reply.getId();
             this.userId = reply.getUser().getId();
             this.comment = reply.getComment();
             this.username = reply.getUser().getUsername();
 
-            if (sessionUser == null) replyOwner = false;
-            else replyOwner = sessionUser.getId().equals(userId);
+            if (user == null) replyOwner = false;
+            else replyOwner = user.getId().equals(userId);
         }
     }
 }

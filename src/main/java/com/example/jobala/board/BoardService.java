@@ -1,9 +1,9 @@
 package com.example.jobala.board;
 
 import com.example.jobala._core.errors.apiException.ApiException403;
-import com.example.jobala._core.errors.exception.Exception403;
-
+import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;
+import com.example.jobala._user.UserJPARepository;
 import com.example.jobala.reply.Reply;
 import com.example.jobala.reply.ReplyJPARepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +17,8 @@ import java.util.List;
 public class BoardService {
     private final BoardJPARepository boardJPARepository;
     private final ReplyJPARepository replyJPARepository;
+    private final UserJPARepository userJPARepository;
+
 
     // 글삭제하기
     public void boardDelete(int boardId, Integer sessionUserId) {
@@ -30,12 +32,15 @@ public class BoardService {
     }
 
     // 글상세보기
-    public BoardResponse.DetailDTO boardDetail(int boardId, User sessionUser) {
+    public BoardResponse.DetailDTO boardDetail(int boardId, SessionUser sessionUser) {
         Board board = boardJPARepository.findByIdJoinUser(boardId)
                 .orElseThrow(() -> new ApiException403("게시글을 찾을 수 없습니다"));
+        User user = userJPARepository.findById(sessionUser.getId())
+                .orElseThrow(() -> new ApiException403("해당하는 회원정보를 찾을 수 없습니다."));
+
         List<Reply> replyList = replyJPARepository.findByUserId(boardId);
 
-        return new BoardResponse.DetailDTO(board, sessionUser, replyList);
+        return new BoardResponse.DetailDTO(board, user, replyList);
     }
 
     // 글수정
@@ -64,8 +69,12 @@ public class BoardService {
 
     // 글쓰기
     @Transactional
-    public BoardResponse.SaveDTO boardSave(BoardRequest.SaveDTO reqDTO, User sessionUser) {
-        Board board = boardJPARepository.save(reqDTO.toEntity(sessionUser));
+    public BoardResponse.SaveDTO boardSave(BoardRequest.SaveDTO reqDTO, SessionUser sessionUser) {
+        User user = userJPARepository.findById(sessionUser.getId())
+                .orElseThrow(() -> new ApiException403("해당하는 회원정보를 찾을 수 없습니다."));
+
+        Board board = boardJPARepository.save(reqDTO.toEntity(user));
+
         return new BoardResponse.SaveDTO(board);
     }
 

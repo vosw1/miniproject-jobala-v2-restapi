@@ -4,10 +4,6 @@ import com.example.jobala._core.errors.apiException.ApiException403;
 import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
-import com.example.jobala.apply.Apply;
-import com.example.jobala.apply.ApplyJPARepository;
-import com.example.jobala.apply.ApplyRequest;
-import com.example.jobala.apply.ApplyResponse;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.resume.Resume;
@@ -16,9 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,11 +24,10 @@ public class ApplyService {
     private final UserJPARepository userJPARepository;
 
 
-
     // 상태수정
-    public ApplyResponse.StatusUpdateDTO statusUpdate(ApplyRequest.ApplyStatusUpdateRequestDTO reqDTO, User sessionUser) {
+    public ApplyResponse.StatusUpdateDTO statusUpdate(ApplyRequest.ApplyStatusUpdateRequestDTO reqDTO, SessionUser sessionUser) {
         Apply apply = applyJPARepository.findById(reqDTO.getApplyId())
-                .orElseThrow(() -> new ApiException403("해당 정보를 찾을 수 없습니다."));
+                .orElseThrow(() -> new ApiException403("해당 지원정보를 찾을 수 없습니다."));
 
         apply.setState(reqDTO.getStatus());
         applyJPARepository.save(apply);
@@ -44,12 +37,13 @@ public class ApplyService {
     // 지원 후 저장
     @Transactional
     public ApplyResponse.ApplicationDTO saveAfterApply(ApplyRequest.ApplyRequestDTO reqDTO, SessionUser sessionUser) {
-        Jobopen jobopen = jobopenJPARepository.findById(reqDTO.getApplyId())
+        Jobopen jobopen = jobopenJPARepository.findById(reqDTO.getJobopenId())
                 .orElseThrow(() -> new ApiException403("공고를 찾을 수 없습니다."));
 
-        Resume resume = resumeJPARepository.findById(reqDTO.getApplyId())
+        Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())
                 .orElseThrow(() -> new ApiException403("이력서를 찾을 수 없습니다."));
         User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException403("회워정보를 찾을 수 없습니다."));
+
         Apply apply = applyJPARepository.save(reqDTO.toEntity(resume, jobopen, user));
         return new ApplyResponse.ApplicationDTO(apply);
     }

@@ -1,5 +1,6 @@
 package com.example.jobala.comp;
 
+import com.example.jobala._core.errors.apiException.ApiException400;
 import com.example.jobala._core.errors.apiException.ApiException403;
 import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;
@@ -48,22 +49,18 @@ public class CompService {
     // 기업 - 마이페이지 공고 관리
     public List<JobopenResponse.MngDTO> compJobopenMng(SessionUser sessionUser) {
         List<Jobopen> temp = compQueryRepository.findJobopenByWithUserId(sessionUser.getId());
-        List<JobopenResponse.MngDTO> jobopenList = temp.stream()
-                .map(jobopen -> new JobopenResponse.MngDTO(sessionUser.getId(), temp)).toList();
+        List<JobopenResponse.MngDTO> jobopenList = temp.stream().map(jobopen -> new JobopenResponse.MngDTO(sessionUser.getId(), temp)).toList();
 
-        jobopenList.forEach(dto ->
-                dto.getJobopenDTO().forEach(jobopenDTO -> {
-                    int count = applyJPARepository.countJobopenApplyById(jobopenDTO.getId());
-                    jobopenDTO.setApplyCount(count);
-                })
-        );
+        jobopenList.forEach(dto -> dto.getJobopenDTO().forEach(jobopenDTO -> {
+            int count = applyJPARepository.countJobopenApplyById(jobopenDTO.getId());
+            jobopenDTO.setApplyCount(count);
+        }));
         return jobopenList;
     }
 
     // 기업 - 프로필관리
     public UserResponse.GuestProfile compProfile(SessionUser sessionUser) {
-        User user = userJPARepository.findById(sessionUser.getId())
-                .orElseThrow(() -> new ApiException403("유저를 찾을 수 없습니다."));
+        User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException403("유저를 찾을 수 없습니다."));
 
         return new UserResponse.GuestProfile(user);
     }
@@ -71,24 +68,22 @@ public class CompService {
     //기업 - 프로필업데이트
     @Transactional
     public UserResponse.CompProfile compUpdateProfile(CompRequest.CompProfileUpdateDTO reqDTO, SessionUser sessionUser) {
-        User user = compJPARepository.findById(sessionUser.getId())
-                .orElseThrow(() -> new ApiException403("수정할 프로필이 없습니다."));
+        User user = compJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException403("수정할 프로필이 없습니다."));
 
-        //베이스 64로 들어오는 문자열을 바이트로 디코딩하기
-        byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getImgFilename().getBytes());
-        String imageUUID = UUID.randomUUID() + "_" + reqDTO.getImgTitle();
-
-        // 이미지 파일의 저장 경로 설정
-        Path imgPath = Paths.get("./image/" + imageUUID);
         try {
+            //베이스 64로 들어오는 문자열을 바이트로 디코딩하기
+            byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getImgFilename().getBytes());
+            String imageUUID = UUID.randomUUID() + "_" + reqDTO.getImgTitle();
+
+            // 이미지 파일의 저장 경로 설정
+            Path imgPath = Paths.get("./image/" + imageUUID);
             Files.write(imgPath, decodedBytes);
             String webImgPath = imgPath.toString().replace("\\", "/");
             webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
-
             user.setCompProfileUpdateDTO(reqDTO, webImgPath);
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ApiException400("올바른 저장 경로를 찾지 못했습니다.");
         }
         return new UserResponse.CompProfile(user);
     }

@@ -3,7 +3,6 @@ package com.example.jobala.board;
 import com.example.jobala._user.User;
 import com.example.jobala.reply.Reply;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -56,18 +55,18 @@ public class BoardResponse {
         private boolean isOwner;
         private List<ReplyDTO> replies = new ArrayList<>();
 
-        public DetailDTO(Board board, User sessionUser, List<Reply> repliesList) {
+        public DetailDTO(Board board, User user, List<Reply> repliesList) {
             this.boardId = board.getId();
             this.title = board.getTitle();
             this.content = board.getContent();
             this.userId = board.getUser().getId();
             this.username = board.getUser().getUsername(); // join 해서 가져왔음
             this.isOwner = false;
-            if (sessionUser != null) {
-                if (sessionUser.getId() == userId) isOwner = true;
+            if (user != null) {
+                if (user.getId() == userId) isOwner = true;
             }
 
-            this.replies = repliesList.stream().map(reply -> new ReplyDTO(reply, sessionUser)).toList();
+            this.replies = repliesList.stream().map(reply -> new ReplyDTO(reply, user)).toList();
         }
 
         @Data
@@ -78,14 +77,14 @@ public class BoardResponse {
             private String username; // 댓글 작성자 이름
             private boolean isOwner;
 
-            public ReplyDTO(Reply reply, User sessionUser) {
+            public ReplyDTO(Reply reply, User user) {
                 this.id = reply.getId(); // lazy loading 발동
                 this.comment = reply.getComment();
                 this.userId = reply.getUser().getId();
                 this.username = reply.getUser().getUsername(); // lazy loading 발동 (in query)
                 this.isOwner = false;
-                if (sessionUser != null) {
-                    if (sessionUser.getId() == userId) isOwner = true;
+                if (user != null) {
+                    if (user.getId() == userId) isOwner = true;
                 }
             }
         }
