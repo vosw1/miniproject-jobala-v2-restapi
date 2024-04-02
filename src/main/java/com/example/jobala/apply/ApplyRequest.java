@@ -1,12 +1,10 @@
 package com.example.jobala.apply;
 
-import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +16,7 @@ public class ApplyRequest {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class ApplyStatusUpdateRequestDTO {
-//
+        @NotNull(message = "applyId는 공백일 수 없습니다")
         private Integer applyId;
 
         private String status;
@@ -28,9 +26,11 @@ public class ApplyRequest {
     @Data
     @AllArgsConstructor
     public static class ApplyRequestDTO {
+        @NotNull(message = "applyId는 공백일 수 없습니다")
+        private Integer applyId;
 
-        private Integer resumeId;
-        private Integer jobopenId;
+        @Pattern(regexp = "^(열람전|합격|불합격|수락|거절)$", message = "status는 공백일 수 없습니다")
+        private String status;
 
         public Apply toEntity(Resume resume, Jobopen jobopen, User user ) {
             return Apply.builder()
