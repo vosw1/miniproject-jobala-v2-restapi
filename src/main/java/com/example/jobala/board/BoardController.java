@@ -5,10 +5,12 @@ import com.example.jobala._user.User;
 import com.example.jobala._user.UserResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
@@ -36,19 +38,17 @@ public class BoardController {
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
+    // 글 수정
     @PutMapping("/api/boards/{id}")
-    public ResponseEntity<?> update(@PathVariable int id, @RequestBody BoardRequest.UpdateDTO reqDTO) {
+    public ResponseEntity<?> update(@Valid @PathVariable int id, @RequestBody BoardRequest.UpdateDTO reqDTO, Errors errors) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         BoardResponse.UpdateDTO respDTO = boardService.boardUpdate(id, sessionUser.getId(), reqDTO);
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
-
-
-
     // 글 쓰기 완료
     @PostMapping("/api/boards")
-    public ResponseEntity<?> save(@RequestBody BoardRequest.SaveDTO reqDTO) {
+    public ResponseEntity<?> save(@Valid @RequestBody BoardRequest.SaveDTO reqDTO, Errors errors) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         BoardResponse.SaveDTO respDTO = boardService.boardSave(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil(respDTO));
