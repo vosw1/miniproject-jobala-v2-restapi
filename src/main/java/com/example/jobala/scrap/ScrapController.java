@@ -20,7 +20,7 @@ public class ScrapController {
     private final ScrapService scrapService;
 
     //스크랩 목록
-    @GetMapping("/api/scrap")
+    @GetMapping("/api/scraps")
     public ResponseEntity<?> ScrapForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser.getRole() == 1) { // 기업 스크랩 목록
@@ -33,7 +33,7 @@ public class ScrapController {
     }
 
     //스크랩
-    @RequestMapping(value = "/api/scrap", method = {RequestMethod.POST, RequestMethod.DELETE})
+    @RequestMapping(value = "/api/scraps", method = {RequestMethod.POST, RequestMethod.DELETE})
     public ResponseEntity<?> scrapResume(@RequestBody ScrapRequest.ScrapDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser.getRole() == 1) { // 기업이 스크랩

@@ -44,7 +44,6 @@ public class UserController {
     @PostMapping("/join")
     public ResponseEntity<?> join(@RequestBody UserRequest.JoinDTO reqDTO) {
         UserResponse.JoinDTO respDTO = userService.join(reqDTO);
-        // TODO : ?? - 찬혁
         return ResponseEntity.ok(new ApiUtil(respDTO.getCompDTO()));
     }
 
@@ -63,11 +62,5 @@ public class UserController {
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
-    // 기업,개인 - 채용공고 목록
-    @GetMapping("/api/jobSearch")
-    public ResponseEntity<?> jobSearch(HttpServletRequest req) {
-        List<JobopenResponse.ListDTO> respDTO = userService.findAll();
-        return ResponseEntity.ok(new ApiUtil(respDTO));
-    }
 }
  
