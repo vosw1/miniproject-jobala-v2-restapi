@@ -31,6 +31,7 @@ public class BoardController {
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
+    // TODO: 이름
     @PutMapping("/api/boards/{id}")
     public ResponseEntity<?> update(@PathVariable int id, @RequestBody BoardRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");

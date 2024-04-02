@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -41,12 +42,10 @@ public class CompController {
 
     // 기업 - 인재 명단 목록
     @GetMapping("/api/comp/scoutList")
-    public ResponseEntity<?> scoutList(HttpServletRequest req) {
+    public ResponseEntity<?> scoutList() {
         List<ResumeResponse.ScoutListDTO> respDTO = compService.listAllResumes();
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
-
-    // DEL: getResumeList 삭제
 
     //기업 - 마이페이지 - 공고 관리
     @GetMapping("/api/comp/mngForm")
@@ -58,17 +57,17 @@ public class CompController {
 
     //기업 - 마이페이지 - 프로필관리
     @GetMapping("/api/comp/profileForm")
-    public ResponseEntity<?> profileForm(HttpServletRequest req) {
+    public ResponseEntity<?> profileForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
         UserResponse.GuestProfile respSTO = compService.compProfile(sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil(respSTO));
     }
 
     //기업 - 마이페이지 프로필 업데이트
-    @PutMapping("/api/comp/updateProfile") // 주소 수정 필요!
-    public ResponseEntity<?> updateProfile(CompRequest.CompProfileUpdateDTO reqDTO) {
+    @PutMapping("/api/comp/profile")
+    public ResponseEntity<?> profileUpdate(@RequestBody CompRequest.CompProfileUpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        UserResponse.GuestProfile respSTO = compService.compUpdateProfile(reqDTO, sessionUser);
+        UserResponse.CompProfile respSTO = compService.compUpdateProfile(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil(respSTO));
 
     }

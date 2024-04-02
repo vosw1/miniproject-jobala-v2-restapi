@@ -5,13 +5,15 @@ import java.sql.Date;
 
 public class UserRequest {
 
-
+    //로그인
     @Data
     public static class LoginDTO {
         private String username;
         private String password;
     }
 
+
+    //회원가입 - 개인, 기업
     @Data
     public static class JoinDTO {
         private String compNum;

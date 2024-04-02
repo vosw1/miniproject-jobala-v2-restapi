@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 public class ApplyRequest {
 
+    // TODO: 이름
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
@@ -17,6 +18,7 @@ public class ApplyRequest {
         private String status;
     }
 
+    // TODO: 이름
     @Data
     @AllArgsConstructor
     public static class ApplyRequestDTO {

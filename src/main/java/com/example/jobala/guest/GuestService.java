@@ -12,7 +12,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.imageio.ImageIO;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -38,7 +41,7 @@ public class GuestService {
 
         //베이스 64로 들어오는 문자열을 바이트로 디코딩하기
         byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getImgFilename().getBytes());
-        String imageUUID = UUID.nameUUIDFromBytes(decodedBytes).randomUUID() + ".png";
+        String imageUUID = UUID.nameUUIDFromBytes(decodedBytes).randomUUID() +"_" + reqDTO.getImgTitle();
 
         Path imgPath = Paths.get("./image/" + imageUUID);
 

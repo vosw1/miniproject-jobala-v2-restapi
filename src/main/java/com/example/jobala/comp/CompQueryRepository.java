@@ -100,14 +100,7 @@ public class CompQueryRepository {
     }
 
 
-    public List<Resume> findResumeById(int userId) {
-        Query query = em.createNativeQuery("select * from resume_tb where user_id = ? order by id desc", Resume.class);
-        query.setParameter(1, userId);
-
-        List<Resume> resumeList2 = query.getResultList();
-        return resumeList2;
-    }
-
+    //TODO: 이름
     public List<ResumeResponse.ScoutListDTO> findResumeAll() {
         String q = """
                 SELECT rt.id, ut.name, rt.resume_title, rt.edu, rt.career, ut.img_filename
@@ -125,6 +118,8 @@ public class CompQueryRepository {
         return rm.list(query, ResumeResponse.ScoutListDTO.class);
     }
 
+
+    //기업 - 공고관리 목록
     public List<Jobopen> findJobopenByWithUserId(int id) {
         String q = """
                 select * from jobopen_tb where user_id= ? order by id desc;

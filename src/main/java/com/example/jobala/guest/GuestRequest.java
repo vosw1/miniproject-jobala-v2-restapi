@@ -19,6 +19,7 @@ public class GuestRequest {
         private String jobType;
     }
 
+    //개인 프로필 업데이트
     @Data
     public static class GuestProfileUpdateDTO {
         private String name;
@@ -27,6 +28,5 @@ public class GuestRequest {
         private String email;
         private String imgTitle;
         private String imgFilename;
-
     }
 }

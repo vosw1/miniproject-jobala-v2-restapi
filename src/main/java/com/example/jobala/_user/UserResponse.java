@@ -11,35 +11,41 @@ import java.util.List;
 
 public class UserResponse {
 
+    //기업 프로필
     @Data
     public static class CompProfile {
         private Integer id;
-        private String imgFilename;
         private String name;
         private String compname;
         private String email;
+        private String imgFilename;
 
         public CompProfile(User user) {
             this.id = user.getId();
-            this.imgFilename = user.getImgFilename();
             this.name = user.getName();
+            this.compname = user.getCompname();
             this.email = user.getEmail();
+            this.imgFilename = user.getImgFilename();
         }
     }
 
+    //개인 프로필
     @Data
     public static class GuestProfile {
         private Integer id;
         private String name;
         private String email;
+        private String imgFilename;
 
         public GuestProfile(User user) {
             this.id = user.getId();
             this.name = user.getName();
             this.email = user.getEmail();
+            this.imgFilename = user.getImgFilename();
         }
     }
 
+    // 회원가입 프로필
     @Data
     public static class JoinDTO {
         private GuestDTO guestDTO; // 개인 회원가입
@@ -91,7 +97,7 @@ public class UserResponse {
         }
     }
 
-
+    // 메인 홈
     @Data
     public static class MainDTO {
         private List<JobopenDTO> jobopenDTO = new ArrayList<>();
@@ -121,18 +127,6 @@ public class UserResponse {
                 this.edu = jobopen.getEdu();
                 this.endTime = String.valueOf(jobopen.getEndTime());
             }
-        }
-    }
-
-
-    @Data
-    public static class LoginResponseDTO {
-        private User user;
-        private Boolean isCheck;
-
-        public LoginResponseDTO(User user, Boolean isCheck) {
-            this.user = user;
-            this.isCheck = isCheck;
         }
     }
 }

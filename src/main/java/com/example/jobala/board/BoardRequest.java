@@ -5,6 +5,7 @@ import lombok.Data;
 
 public class BoardRequest {
 
+    // TODO: 이름
     @Data
     public static class SaveDTO {
         private String title;
@@ -20,6 +21,8 @@ public class BoardRequest {
             return board;
         }
     }
+
+    // TODO: 이름
     @Data
     public static class UpdateDTO {
         private String title;

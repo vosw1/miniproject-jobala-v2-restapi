@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 public class CompResponse {
 
+    //TODO: 이름
     @AllArgsConstructor
     @Data
     public static class SearchDTO {
@@ -17,6 +18,7 @@ public class CompResponse {
         private String hopeJob;
     }
 
+    //TODO: 이름
     @Data
     @AllArgsConstructor
     public static class ScoutListDTO{
@@ -27,6 +29,7 @@ public class CompResponse {
         private String career;
     }
 
+    //TODO: 이름
     @Data
     @AllArgsConstructor
     public static class CompProfileDTO {
@@ -41,6 +44,7 @@ public class CompResponse {
         private String imgTitle;
     }
 
+    //TODO: 이름
     @Data
     @AllArgsConstructor
     public static class CProfileUpdateDTO {
