@@ -16,7 +16,7 @@ import com.example.jobala._user.SessionUser;
 public class LoginInterceptor implements HandlerInterceptor{
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
+        System.out.println("request = " + request);
         // Bearer jwt토큰
         String jwt = request.getHeader("Authorization");
 
@@ -25,14 +25,16 @@ public class LoginInterceptor implements HandlerInterceptor{
         }
 
         jwt = jwt.replace("Bearer ", "");
-
+        System.out.println("jwt = " + jwt);
         // 검증
         try {
             SessionUser sessionUser = JwtUtil.verify(jwt);
-
+            System.out.println("sessionUser = " + sessionUser);
             // 임시 세션 (jsessionId는 필요 없음)
             HttpSession session = request.getSession();
+            System.out.println("session = " + session);
             session.setAttribute("sessionUser", sessionUser);
+
             return true;
         }catch (TokenExpiredException e){
             throw new Exception401("토큰 만료시간이 지났어요. 다시 로그인하세요");

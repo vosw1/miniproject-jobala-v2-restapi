@@ -40,7 +40,6 @@ public class UserController {
     @PostMapping("/join")
     public ResponseEntity<?> join(@Valid @RequestBody UserRequest.JoinDTO reqDTO) {
         UserResponse.JoinDTO respDTO = userService.join(reqDTO);
-        // TODO : ?? - 찬혁
         return ResponseEntity.ok(new ApiUtil(respDTO.getCompDTO()));
     }
 

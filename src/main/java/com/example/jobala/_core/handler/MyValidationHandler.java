@@ -8,13 +8,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
+
 @Aspect // AOP 등록
 @Component // IoC 등록
 public class MyValidationHandler {
 
     // Advice (부가 로직 메서드)
     // Advice가 수행될 위치 == PointCut
-    @Before("@annotation(org.springframework.web.bind.annotation.PostMapping)") // PointCut
+    @Before("@annotation(org.springframework.web.bind.annotation.PostMapping) || @annotation(org.springframework.web.bind.annotation.PutMapping)") // PointCut
     public void hello(JoinPoint jp) {
         Object[] args = jp.getArgs(); // Args: 파라미터 -> object를 리턴
         System.out.println("크기 : " + args.length);
