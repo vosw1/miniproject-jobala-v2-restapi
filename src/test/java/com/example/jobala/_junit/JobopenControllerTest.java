@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.example.jobala._user.SessionUser;
 import com.example.jobala.jobopen.JobopenRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,6 +38,8 @@ public class JobopenControllerTest {
 
     @Autowired
     private ObjectMapper om;
+    @Autowired
+    private EntityManager em;
 
     public String jwt() {
         String jwt = JWT
@@ -65,7 +68,7 @@ public class JobopenControllerTest {
 
     // 공고 삭제
     @Test
-    public void delete_test() throws Exception{
+    public void delete_test() throws Exception {
         // given
         int id = 1;
 
@@ -74,10 +77,11 @@ public class JobopenControllerTest {
                 .session(mockSession));
         String responseBody = resultActions.andReturn().getResponse().getContentAsString();
         System.out.println("delete_test : " + responseBody);
+//        em.flush();
+//        // then
 
-        // then
-//        resultActions.andExpect(jsonPath("$.body").value(null));
-//        resultActions.andExpect(status().isOk());
+        resultActions.andExpect(jsonPath("$.body").doesNotExist());
+        resultActions.andExpect(status().isOk());
     }
 
     // 공고 수정
@@ -145,13 +149,20 @@ public class JobopenControllerTest {
     @Test
     void detailForm_test() throws Exception {
         // given
-        int id = 12;
+        int id = 1;
         // when
         ResultActions resultActions = mvc
-                .perform(get("/api/comp/jobopens"+ id).session(mockSession));
-        // then
-//        resultActions.andExpect(jsonPath("$.body").exists());
-//        resultActions.andExpect(jsonPath("$.msg").value("성공"));
+                .perform(get("/api/jobopens/" + id).session(mockSession));
+        System.out.println("resultActions = " + resultActions);
 
+        // then
+        resultActions.andExpect(status().is2xxSuccessful());
+        resultActions.andExpect(status().isOk());
+//                .andExpect(result -> )
+//                   .andExpect(jsonPath("$.msg").value("성공")); // 응답 메시지가 "성공"인지 확인
+//                .andExpect(jsonPath("$.body").exists()) // 응답 본문이 존재하는지 확인
+//                .andExpect(jsonPath("$.body.id").value(id)) // 응답 본문에 공고의 ID가 있는지 및 값이 올바른지 확인
+//                .andExpect(jsonPath("$.body.title").exists()) // 공고의 제목이 응답 본문에 존재하는지 확인
+//                .andExpect(jsonPath("$.body.description").exists());
     }
 }
