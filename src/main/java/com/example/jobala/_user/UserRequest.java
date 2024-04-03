@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class UserRequest {
 
@@ -118,5 +119,59 @@ public class UserRequest {
 
         @NotEmpty(message = "사진경로는 공백일 수 없습니다")
         private String imgFilename;
+    }
+
+    @Data
+    public static class GuestJoinDTO {
+        private String name;
+        private String username;
+        private String email;
+        private String password;
+        private String address;
+        private Date age;
+        private String phone;
+        private int role;
+
+        public User toEntity() {
+            return User.builder()
+                    .address(address)
+                    .username(username)
+                    .email(email)
+                    .password(password)
+                    .name(name)
+                    .phone(phone)
+                    .age(age)
+                    .role(role)
+                    .build();
+        }
+    }
+
+    @Data
+    public static class CompJoinDTO {
+        private String compNum;
+        private String compname;
+        private String address;
+        private String username;
+        private String email;
+        private String name;
+        private String password;
+        private String phone;
+        private Date age;
+        private int role;
+
+        public User toEntity() {
+            return User.builder()
+                    .compname(compname)
+                    .compNum(compNum)
+                    .address(address)
+                    .username(username)
+                    .email(email)
+                    .name(name)
+                    .password(password)
+                    .phone(phone)
+                    .age(age)
+                    .role(role)
+                    .build();
+        }
     }
 }

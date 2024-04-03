@@ -46,54 +46,44 @@ public class UserResponse {
     }
 
     // 개인, 기업 - 회원가입
+
     @Data
-    public static class JoinDTO {
-        private GuestDTO guestDTO; // 개인 회원가입
-        private CompDTO compDTO; // 기업 회원가입
+    public static class GuestDTO {
+        private Integer userId;
+        private String username; // 아이디
+        private String name; // 이름
+        private String email; //이메일
+        private String address; //주소
+        private Integer role; // 0 -> guest, 1 -> comp
 
-        public JoinDTO(User user) {
-            this.guestDTO = new GuestDTO(user);
-            this.compDTO = new CompDTO(user);
+        public GuestDTO(User user) {
+            this.userId = user.getId();
+            this.username = user.getUsername();
+            this.name = user.getName();
+            this.email = user.getEmail();
+            this.address = user.getAddress();
+            this.role = user.getRole();
         }
+    }
 
-        @Data
-        public static class GuestDTO {
-            private Integer userId;
-            private String username; // 아이디
-            private String name; // 이름
-            private String email; //이메일
-            private String address; //주소
-            private Integer role; // 0 -> guest, 1 -> comp
+    @Data
+    public static class CompDTO {
+        private Integer uerId;
+        private String username; // 아이디
+        private String name; // 담당자 이름
+        private String compname; // 회사명
+        private String email; //이메일
+        private String ceo; // 기업 대표명
+        private Integer role; // 0 -> guest, 1 -> comp
 
-            public GuestDTO(User user) {
-                this.userId = user.getId();
-                this.username = user.getUsername();
-                this.name = user.getName();
-                this.email = user.getEmail();
-                this.address = user.getAddress();
-                this.role = user.getRole();
-            }
-        }
-
-        @Data
-        public static class CompDTO {
-            private Integer uerId ;
-            private String username; // 아이디
-            private String name; // 담당자 이름
-            private String compname; // 회사명
-            private String email; //이메일
-            private String ceo; // 기업 대표명
-            private Integer role; // 0 -> guest, 1 -> comp
-
-            public CompDTO(User user) {
-                this.uerId = user.getId();
-                this.username = user.getUsername();
-                this.name = user.getName();
-                this.compname = user.getCompname();
-                this.email = user.getEmail();
-                this.ceo = user.getCeo();
-                this.role = user.getRole();
-            }
+        public CompDTO(User user) {
+            this.uerId = user.getId();
+            this.username = user.getUsername();
+            this.name = user.getName();
+            this.compname = user.getCompname();
+            this.email = user.getEmail();
+            this.ceo = user.getCeo();
+            this.role = user.getRole();
         }
     }
 
@@ -109,7 +99,8 @@ public class UserResponse {
         @Data
         public static class JobopenDTO {
             private Integer userId;
-            private String imgFilename;; // 파일 패스
+            private String imgFilename;
+            ; // 파일 패스
             private Integer jobopenId; //private Integer jobopenId; //
             private String jobopenTitle; //공고제목
             private String compLocation; //
