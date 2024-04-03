@@ -1,9 +1,8 @@
 package com.example.jobala._user;
 
 import com.example.jobala._core.errors.apiException.ApiException400;
-import com.example.jobala._core.errors.exception.Exception401;
+import com.example.jobala._core.errors.apiException.ApiException401;
 import com.example.jobala._core.utill.JwtUtil;
-import com.example.jobala._core.utill.Paging;
 import com.example.jobala.guest.GuestRequest;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenJPARepository;
@@ -21,8 +20,6 @@ public class UserService {
     private final JobopenJPARepository jobopenJPARepository;
     private final UserJPARepository userJPARepository;
     private final UserQueryRepository userQueryRepository;
-    private final Paging paging;
-
 
     //기업,개인 - 채용공고 검색필터
     public List<JobopenResponse.ListDTO> jobopenSearch(String skills, GuestRequest.SearchDTO resDTO) {
@@ -43,8 +40,7 @@ public class UserService {
     // 로그인
     public String login(UserRequest.LoginDTO reqDTO) {
         User user = userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
-                .orElseThrow(() -> new Exception401("아이디, 비밀번호가 틀렸어요"));
-
+                .orElseThrow(() -> new ApiException401("아이디, 비밀번호가 틀렸어요"));
         String jwt = JwtUtil.create(user);
         return jwt;
     }

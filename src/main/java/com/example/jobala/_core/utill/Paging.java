@@ -23,9 +23,5 @@ public class Paging {
     public Pageable mainPaging(int page) {
         return PageRequest.of(page, 9, Sort.by(Sort.Direction.DESC, "id"));
     }
-    
-//TODO: 페이지 번호를 반환하는 기능 & get
-//    public int boardPaging(int page) getPageNumber를 DTO에 담아서 주면 될듯 하다.
-//        return PageRequest.of(page, 5, Sort.by(Sort.Direction.DESC, "id")).getPageNumber();
-//    }
+
 }
