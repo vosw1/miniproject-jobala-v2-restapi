@@ -16,7 +16,7 @@ public class JobopenController {
     private final JobopenService jobopenService;
 
     //공고 삭제
-    @DeleteMapping("/api/comp/jobopens/{id}")  // 주소 수정 필요
+    @DeleteMapping("/api/jobopens/{id}")  // 주소 수정 필요
     public ResponseEntity<?> delete(@PathVariable int id) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         jobopenService.jobopenDelete(id, sessionUser.getId());
@@ -24,7 +24,7 @@ public class JobopenController {
     }
 
     //공고 수정
-    @PutMapping("/api/comp/jobopens/{id}")  // 주소 수정 필요
+    @PutMapping("/api/jobopens/{id}")  // 주소 수정 필요
     public ResponseEntity<?> update(@Valid @PathVariable Integer id, @RequestBody JobopenRequest.UpdateDTO reqDTO) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         JobopenResponse.UpdateDTO respDTO = jobopenService.jobopenUpdate(id, sessionUser, reqDTO);
@@ -33,7 +33,7 @@ public class JobopenController {
 
 
     //공고 등록
-    @PostMapping("/api/comp/jobopens")  // 주소 수정 필요
+    @PostMapping("/api/jobopens")  // 주소 수정 필요
     public ResponseEntity<?> jobopenSave(@Valid @RequestBody JobopenRequest.SaveDTO reqDTO) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         JobopenResponse.SaveDTO respDTO = jobopenService.jobopenSave(reqDTO, sessionUser);
@@ -41,7 +41,7 @@ public class JobopenController {
     }
 
     //공고 보기
-    @GetMapping("/api/comp/jobopens/{id}")
+    @GetMapping("/api/jobopens/{id}")
     public ResponseEntity<?> detailForm(@PathVariable int id) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         // 채용공고 정보 가져오기

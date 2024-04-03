@@ -1,6 +1,7 @@
 package com.example.jobala.apply;
 
 import com.example.jobala._core.errors.apiException.ApiException403;
+import com.example.jobala._core.errors.apiException.ApiException404;
 import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
@@ -38,11 +39,13 @@ public class ApplyService {
     @Transactional
     public ApplyResponse.ApplicationDTO saveAfterApply(ApplyRequest.ApplyRequestDTO reqDTO, SessionUser sessionUser) {
         Jobopen jobopen = jobopenJPARepository.findById(reqDTO.getJobopenId())
-                .orElseThrow(() -> new ApiException403("공고를 찾을 수 없습니다."));
+                .orElseThrow(() -> new ApiException404("공고를 찾을 수 없습니다."));
 
         Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())
-                .orElseThrow(() -> new ApiException403("이력서를 찾을 수 없습니다."));
-        User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException403("회워정보를 찾을 수 없습니다."));
+                .orElseThrow(() -> new ApiException404("이력서를 찾을 수 없습니다."));
+
+        User user = userJPARepository.findById(sessionUser.getId())
+                .orElseThrow(() -> new ApiException404("해당하는 회원정보를 찾을 수 없습니다."));
 
         Apply apply = applyJPARepository.save(reqDTO.toEntity(resume, jobopen, user));
         return new ApplyResponse.ApplicationDTO(apply);

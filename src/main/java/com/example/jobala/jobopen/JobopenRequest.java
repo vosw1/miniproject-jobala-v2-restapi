@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.sql.Update;
 
+import javax.swing.text.html.HTML;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,8 @@ public class JobopenRequest {
 
         @NotEmpty(message = "마감일은 공백일 수 없습니다")
         private Date endTime;
+
+        @Pattern(regexp = "^(JAVA/JavaScript/HTML/jQuery/MySQL/Spring)$", message = "JAVA,JavaScript,HTML,jQuery,MySQL,Spring이외의 스킬은 입력할 수 없습니다.")
         private List<String> skills = new ArrayList<>(); //내용
     }
 

@@ -34,6 +34,7 @@ public class ResumeRequest {
         @Pattern(regexp = "^(고등학교 졸업|대학교 졸업)$", message = "학력은 공백일 수 없습니다")
         private String edu;
 
+        @Pattern(regexp = "^(JAVA/JavaScript/HTML/jQuery/MySQL/Spring)$", message = "JAVA,JavaScript,HTML,jQuery,MySQL,Spring이외의 스킬은 입력할 수 없습니다.")
         private List<String> skills = new ArrayList<>();
 
         public Resume toEntity(User user) {

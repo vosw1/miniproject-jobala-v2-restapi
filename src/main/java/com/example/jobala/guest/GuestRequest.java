@@ -38,11 +38,11 @@ public class GuestRequest {
     @Data
     public static class GuestProfileUpdateDTO {
         @NotEmpty(message = "이름이 공백일 수 없습니다")
-        @Size(min = 1, max = 3, message = "이름은 1자 이상 3자 이하여야 합니다")
+        @Size(min = 1, max = 20, message = "이름은 1자 이상 20자 이하여야 합니다")
         private String name;
 
         @NotEmpty(message = "비밀번호가 공백일 수 없습니다")
-        @Size(min = 4, message = "비밀번호는 최소 4자 이상이어야 합니다")
+        @Size(min = 1, max = 20, message = "비밀번호는 최소 20자 이상이어야 합니다")
         private String password;
 
         @NotEmpty(message = "전화번호가 공백일 수 없습니다")

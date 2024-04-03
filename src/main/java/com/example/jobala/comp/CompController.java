@@ -35,17 +35,19 @@ public class CompController {
     private final CompJPARepository compJPARepository;
 
     //기업 -인재 이력서 검색하기
-    @GetMapping("/api/comp/resumeSearch")
+    //TODO:/comp/를 지움.
+    @GetMapping("/api/resumeSearch")
     public ResponseEntity<?> resumeSearch(@RequestParam(value = "skills", defaultValue = "") String skills, CompRequest.SearchDTO resDTO) {
         List<ResumeResponse.ScoutListDTO> respDTO = compService.searchResumes(skills, resDTO);
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
-    // 기업 - 인재 명단 목록
-    @GetMapping("/api/comp/scoutList")
-    public ResponseEntity<?> scoutList() {
-        List<ResumeResponse.ScoutListDTO> respDTO = compService.listAllResumes();
-        return ResponseEntity.ok(new ApiUtil(respDTO));
-    }
+//TODO: 삭제예정
+//    // 기업 - 인재 명단 목록
+//    @GetMapping("/api/comp/scoutList")
+//    public ResponseEntity<?> scoutList() {
+//        List<ResumeResponse.ScoutListDTO> respDTO = compService.listAllResumes();
+//        return ResponseEntity.ok(new ApiUtil(respDTO));
+//    }
 
 }
