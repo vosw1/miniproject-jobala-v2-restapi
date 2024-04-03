@@ -2,7 +2,9 @@ package com.example.jobala._junit;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.example.jobala._core.utill.JwtUtil;
 import com.example.jobala._user.SessionUser;
+import com.example.jobala._user.User;
 import com.example.jobala.jobopen.JobopenRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
@@ -12,10 +14,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Collections;
 import java.util.Date;
@@ -29,8 +35,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Transactional
 @AutoConfigureMockMvc
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK,
+        classes = {TestConfig.class})
 public class JobopenControllerTest {
+
+
+
+
     @Autowired
     private MockMvc mvc;
 
@@ -53,18 +64,7 @@ public class JobopenControllerTest {
         return jwt;
     }
 
-    @BeforeEach // Test메서드 실행 직전마다 호출된다
-    public void setUp() {
-        // 세션 생성하기
-        SessionUser sessionUser = SessionUser.builder()
-                .id(12)
-                .username("com1")
-                .role(1)
-                .build();
 
-        mockSession = new MockHttpSession();
-        mockSession.setAttribute("user", sessionUser);
-    }
 
     // 공고 삭제
     @Test
@@ -145,24 +145,72 @@ public class JobopenControllerTest {
 
     }
 
+    //@BeforeEach // Test메서드 실행 직전마다 호출된다
+    public void setUp() {
+        // 세션 생성하기
+        SessionUser sessionUser = SessionUser.builder()
+                .id(12)
+                .username("com1")
+                .role(1)
+                .build();
+
+        mockSession = new MockHttpSession();
+        mockSession.setAttribute("sessionUser", sessionUser);
+    }
+
     //공고 보기
     @Test
-    void detailForm_test() throws Exception {
+    void detailForm_jwt_test() throws Exception {
         // given
-        int id = 1;
+        User user = User.builder()
+                .id(1)
+                .username("cos1")
+                .role(0)
+                .build();
         // when
+        String jwt = JwtUtil.create(user);
+
+
+        int id = 1;
+
         ResultActions resultActions = mvc
-                .perform(get("/api/jobopens/" + id).session(mockSession));
-        System.out.println("resultActions = " + resultActions);
+                .perform(get("/api/jobopens/" + id).header("Authorization", "Bearer "+jwt));
+
+
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println("테스트 : "+responseBody);
 
         // then
         resultActions.andExpect(status().is2xxSuccessful());
         resultActions.andExpect(status().isOk());
+
+
 //                .andExpect(result -> )
 //                   .andExpect(jsonPath("$.msg").value("성공")); // 응답 메시지가 "성공"인지 확인
 //                .andExpect(jsonPath("$.body").exists()) // 응답 본문이 존재하는지 확인
 //                .andExpect(jsonPath("$.body.id").value(id)) // 응답 본문에 공고의 ID가 있는지 및 값이 올바른지 확인
 //                .andExpect(jsonPath("$.body.title").exists()) // 공고의 제목이 응답 본문에 존재하는지 확인
 //                .andExpect(jsonPath("$.body.description").exists());
+    }
+
+    @Test
+    void detailForm_session_test() throws Exception {
+        // given
+        int id = 1;
+
+        ResultActions resultActions = mvc
+                .perform(get("/api/jobopens/" + id).session(mockSession));
+
+
+        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println("테스트 : "+responseBody);
+
+        // then
+        resultActions.andExpect(status().is2xxSuccessful());
+        resultActions.andExpect(status().isOk())
+                .andExpect(jsonPath("$.msg").value("성공")) // 응답 메시지가 "성공"인지 확인
+                .andExpect(jsonPath("$.body").exists()) // 응답 본문이 존재하는지 확인
+                .andExpect(jsonPath("$.body.id").value(id)); // 응답 본문에 공고의 ID가 있는지 및 값이 올바른지 확인
+
     }
 }

@@ -47,7 +47,7 @@ public class ApplyController {
         }
     }
 
-    // 기업 및 개인 - 이력서 지원 현황보기
+    // 기업이 
     @GetMapping("/api/applies/applyForm")
     public ResponseEntity<?> applyForm() {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");

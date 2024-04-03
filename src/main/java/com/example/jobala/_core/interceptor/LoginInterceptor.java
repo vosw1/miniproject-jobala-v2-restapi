@@ -2,6 +2,7 @@ package com.example.jobala._core.interceptor;
 
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.example.jobala._core.errors.apiException.ApiException500;
 import com.example.jobala._core.utill.JwtUtil;
 import com.example.jobala._core.errors.apiException.ApiException401;
 import com.example.jobala._user.User;
@@ -20,7 +21,7 @@ public class LoginInterceptor implements HandlerInterceptor{
         String jwt = request.getHeader("Authorization");
 
         if(jwt == null){
-            throw new Exception401("jwt 토큰을 전달해주세요");
+            throw new ApiException401("jwt 토큰을 전달해주세요");
         }
 
         jwt = jwt.replace("Bearer ", "");
@@ -34,11 +35,11 @@ public class LoginInterceptor implements HandlerInterceptor{
 
             return true;
         }catch (TokenExpiredException e){
-            throw new Exception401("토큰 만료시간이 지났어요. 다시 로그인하세요");
+            throw new ApiException401("토큰 만료시간이 지났어요. 다시 로그인하세요");
         }catch (JWTDecodeException e){
-            throw new Exception401("토큰이 유효하지 않습니다");
+            throw new ApiException401("토큰이 유효하지 않습니다");
         }catch (Exception e){
-            throw new Exception500(e.getMessage());
+            throw new ApiException500(e.getMessage());
         }
     }
 }

@@ -32,6 +32,7 @@ public class ApplyService {
 
         apply.setState(reqDTO.getStatus());
         applyJPARepository.save(apply);
+
         return new ApplyResponse.StatusUpdateDTO(apply);
     }
 
