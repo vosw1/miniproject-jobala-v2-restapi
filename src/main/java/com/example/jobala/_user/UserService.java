@@ -49,15 +49,26 @@ public class UserService {
         return jwt;
     }
 
-    // 회원가입
+    // 개인 회원가입
     @Transactional
-    public UserResponse.JoinDTO join(UserRequest.JoinDTO reqDTO) {
+    public UserResponse.GuestDTO joinGuest(UserRequest.GuestJoinDTO reqDTO) {
         Optional<User> userOP = userJPARepository.findByUsername(reqDTO.getUsername());
         if (userOP.isPresent()) {
             throw new ApiException400("중복된 유저네임입니다.");
         }
-        User user = userJPARepository.save(reqDTO.toCompEntity());
-        return new UserResponse.JoinDTO(user);
+        User user = userJPARepository.save(reqDTO.toEntity());
+        return new UserResponse.GuestDTO(user);
+    }
+
+    // 기업 회원가입
+    @Transactional
+    public UserResponse.CompDTO joinComp(UserRequest.CompJoinDTO reqDTO) {
+        Optional<User> userOP = userJPARepository.findByUsername(reqDTO.getUsername());
+        if (userOP.isPresent()) {
+            throw new ApiException400("중복된 유저네임입니다.");
+        }
+        User user = userJPARepository.save(reqDTO.toEntity());
+        return new UserResponse.CompDTO(user);
     }
 
 }
