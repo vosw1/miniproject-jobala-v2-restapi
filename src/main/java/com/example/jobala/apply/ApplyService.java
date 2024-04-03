@@ -51,22 +51,22 @@ public class ApplyService {
         return new ApplyResponse.ApplicationDTO(apply);
     }
 
-    // 개인의 포지션 제안 현황 조회
+    // 개인이 보는 포지션 제안 현황
     public List<ApplyResponse.GuestPositionDTO> findPositionGuestByUserId(int userId) {
         return applyJPARepository.findPositionGuestByUserId(userId);
     }
 
-    // 기업의 포지션 제안 현황 조회
+    // 기업이 포지션 제안한 현황
     public List<ApplyResponse.CompPositionDTO> findPositionCompByUserId(int userId) {
         return applyJPARepository.findPositionCompByUserId(userId);
     }
 
-    // 개인의 이력서 지원 현황 조회
+    // 개인이 지원한 이력서 현황
     public List<ApplyResponse.GuestApplyDTO> findApplyGuestByUserId(int userId) {
         return applyJPARepository.findApplyGuestByUserId(userId);
     }
 
-    // 기업의 이력서 지원 현황 조회
+    // 기업이 보는 지원자 현황
     public List<ApplyResponse.CompApplyDTO> findApplyCompByUserId(int userId) {
         return applyJPARepository.findApplyCompByUserId(userId);
     }

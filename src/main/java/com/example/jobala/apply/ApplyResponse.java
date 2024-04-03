@@ -77,7 +77,7 @@ public class ApplyResponse {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class GuestApplyDTO {
-        private Integer userId;
+        private Integer id;
         private Integer resumeId;
         private Integer jobopenId;
         private String jobopenTitle;
@@ -86,7 +86,7 @@ public class ApplyResponse {
         private String state;
 
         public GuestApplyDTO(Apply apply) {
-            this.userId = apply.getId();
+            this.id = apply.getId();
             this.resumeId = apply.getResume().getId();
             this.jobopenId = apply.getJobopen().getId();
             this.jobopenTitle = apply.getJobopen().getJobopenTitle();
@@ -125,7 +125,7 @@ public class ApplyResponse {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class GuestPositionDTO {
-        private Integer userId;
+        private Integer id;
         private Integer jobopenId;
         private Integer resumeId;
         private String jobopenTitle;
@@ -134,7 +134,7 @@ public class ApplyResponse {
         private String state;
 
         public GuestPositionDTO(Apply apply) {
-            this.userId = apply.getId();
+            this.id = apply.getId();
             this.jobopenId = apply.getJobopen().getId();
             this.resumeId = apply.getResume().getId();
             this.jobopenTitle = apply.getJobopen().getJobopenTitle();

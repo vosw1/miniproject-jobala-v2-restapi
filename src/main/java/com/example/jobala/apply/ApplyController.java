@@ -38,10 +38,10 @@ public class ApplyController {
     @GetMapping("/api/applies/positionForm")
     public ResponseEntity<?> positionForm() {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        if (sessionUser.getRole() == 0) { // 개인
+        if (sessionUser.getRole() == 0) { // 개인이 보는 포지션 제안 현황
             List<ApplyResponse.GuestPositionDTO> respDTO = applyService.findPositionGuestByUserId(sessionUser.getId());
             return ResponseEntity.ok(new ApiUtil<>(respDTO));
-        } else { // 기업
+        } else { // 기업이 포지션 제안한 현황
             List<ApplyResponse.CompPositionDTO> respDTO = applyService.findPositionCompByUserId(sessionUser.getId());
             return ResponseEntity.ok(new ApiUtil<>(respDTO));
         }
@@ -51,10 +51,10 @@ public class ApplyController {
     @GetMapping("/api/applies/applyForm")
     public ResponseEntity<?> applyForm() {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        if (sessionUser.getRole() == 0) { // 개인
+        if (sessionUser.getRole() == 0) { // 개인이 지원한 이력서 현황
             List<ApplyResponse.GuestApplyDTO> respDTO = applyService.findApplyGuestByUserId(sessionUser.getId());
             return ResponseEntity.ok(new ApiUtil<>(respDTO));
-        } else { // 기업
+        } else { // 기업이 보는 지원자 현황
             List<ApplyResponse.CompApplyDTO> respDTO = applyService.findApplyCompByUserId(sessionUser.getId());
             return ResponseEntity.ok(new ApiUtil<>(respDTO));
         }
