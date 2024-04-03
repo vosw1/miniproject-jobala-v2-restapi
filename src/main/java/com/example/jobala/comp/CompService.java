@@ -2,10 +2,7 @@ package com.example.jobala.comp;
 
 import com.example.jobala._core.errors.apiException.ApiException400;
 import com.example.jobala._core.errors.apiException.ApiException403;
-import com.example.jobala._user.SessionUser;
-import com.example.jobala._user.User;
-import com.example.jobala._user.UserJPARepository;
-import com.example.jobala._user.UserResponse;
+import com.example.jobala._user.*;
 import com.example.jobala.apply.ApplyJPARepository;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenResponse;
@@ -67,7 +64,7 @@ public class CompService {
 
     //기업 - 프로필업데이트
     @Transactional
-    public UserResponse.CompProfile compUpdateProfile(CompRequest.CompProfileUpdateDTO reqDTO, SessionUser sessionUser) {
+    public UserResponse.CompProfile compUpdateProfile(UserRequest.UserUpdateDTO reqDTO, SessionUser sessionUser) {
         User user = compJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException403("수정할 프로필이 없습니다."));
 
         try {
@@ -80,7 +77,7 @@ public class CompService {
             Files.write(imgPath, decodedBytes);
             String webImgPath = imgPath.toString().replace("\\", "/");
             webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
-            user.setCompProfileUpdateDTO(reqDTO, webImgPath);
+            user.setProfileUpdateDTO(reqDTO, webImgPath);
 
         } catch (IOException e) {
             throw new ApiException400("올바른 저장 경로를 찾지 못했습니다.");

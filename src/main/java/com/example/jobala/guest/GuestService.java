@@ -3,10 +3,7 @@ package com.example.jobala.guest;
 import com.example.jobala._core.errors.apiException.ApiException400;
 import com.example.jobala._core.errors.apiException.ApiException403;
 import com.example.jobala._core.utill.Paging;
-import com.example.jobala._user.SessionUser;
-import com.example.jobala._user.User;
-import com.example.jobala._user.UserJPARepository;
-import com.example.jobala._user.UserResponse;
+import com.example.jobala._user.*;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeJPARepository;
 import com.example.jobala.resume.ResumeResponse;
@@ -33,7 +30,7 @@ public class GuestService {
 
     // 개인 - 프로필업데이트
     @Transactional
-    public UserResponse.GuestProfile guestUpdateProfile(GuestRequest.GuestProfileUpdateDTO reqDTO, SessionUser sessionUser) {
+    public UserResponse.GuestProfile guestUpdateProfile(UserRequest.UserUpdateDTO reqDTO, SessionUser sessionUser) {
         User user = guestJPARepository.findById(sessionUser.getId())
                 .orElseThrow(() -> new ApiException403("수정할 프로필이 없습니다.")).getUser();
 
@@ -47,7 +44,7 @@ public class GuestService {
             String webImgPath = imgPath.toString().replace("\\", "/");
             webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
 
-            user.setGuestProfileUpdateDTO(reqDTO, webImgPath);
+            user.setProfileUpdateDTO(reqDTO, webImgPath);
 
         } catch (IOException e) {
             throw new ApiException400("올바른 저장 경로를 찾지 못했습니다.");

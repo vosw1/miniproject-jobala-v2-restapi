@@ -1,12 +1,14 @@
 package com.example.jobala._user;
 
 import com.example.jobala._core.utill.ApiUtil;
+import com.example.jobala.comp.CompRequest;
 import com.example.jobala.comp.CompService;
 import com.example.jobala.guest.GuestRequest;
 import com.example.jobala.guest.GuestService;
 import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.ResumeResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -75,6 +77,31 @@ public class UserController {
         }
     }
 
+    // 마이페이지 - 프로필
+    @GetMapping("/api/profile")
+    public ResponseEntity<?> profileForm() {
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        if (sessionUser.getRole() == 0) { // 개인 프로필
+            UserResponse.GuestProfile respDTO = guestService.guestProgile(sessionUser);
+            return ResponseEntity.ok(new ApiUtil(respDTO));
+        } else { // 기업 프로필
+            UserResponse.GuestProfile respSTO = compService.compProfile(sessionUser);
+            return ResponseEntity.ok(new ApiUtil(respSTO));
+        }
+    }
+
+    // 마이페이지 프로필 업데이트
+    @PutMapping("/api/profile")
+    public ResponseEntity<?> profileUpdate(@Valid @RequestBody UserRequest.UserUpdateDTO reqDTO) {
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        if (sessionUser.getRole() == 0) { // 개인 프로필 업데이트
+            UserResponse.GuestProfile respDTO = guestService.guestUpdateProfile(reqDTO, sessionUser);
+            return ResponseEntity.ok(new ApiUtil(respDTO));
+        } else { // 기업 프로필 업데이트
+            UserResponse.CompProfile respSTO = compService.compUpdateProfile(reqDTO, sessionUser);
+            return ResponseEntity.ok(new ApiUtil(respSTO));
+        }
+    }
 
 }
  
