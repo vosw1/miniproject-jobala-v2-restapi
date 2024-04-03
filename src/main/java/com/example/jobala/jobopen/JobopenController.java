@@ -41,7 +41,7 @@ public class JobopenController {
     }
 
     //공고 보기
-    @GetMapping("/api/jobopens/{id}")
+    @GetMapping("/api/jobopens/{id}/detail")
     public ResponseEntity<?> detailForm(@PathVariable int id) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         // 채용공고 정보 가져오기
