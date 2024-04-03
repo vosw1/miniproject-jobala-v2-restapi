@@ -1,9 +1,12 @@
 package com.example.jobala._user;
 
 import com.example.jobala._core.utill.ApiUtil;
+import com.example.jobala.comp.CompService;
 import com.example.jobala.guest.GuestRequest;
+import com.example.jobala.guest.GuestService;
 import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.jobopen.JobopenResponse;
+import com.example.jobala.resume.ResumeResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +18,10 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class UserController {
-    private final UserService userService;
-    private final JobopenJPARepository jobopenJPARepository;
     private final HttpSession session;
+    private final UserService userService;
+    private final GuestService guestService;
+    private final CompService compService;
 
     // TODO : 중복체크 로직 삭제
 
@@ -57,6 +61,20 @@ public class UserController {
         List<JobopenResponse.ListDTO> respDTO = userService.jobopenSearch(skills, resDTO);
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
+
+    // 마이페이지 - 이력서, 공고 관리
+    @GetMapping("/api/mngForm")
+    public ResponseEntity<?> mngForm(@RequestParam(defaultValue = "0") int page) {
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        if (sessionUser.getRole() == 0) { // 개인 마이페이지
+            ResumeResponse.MngDTO respDTO = guestService.guestResumesMng(page, sessionUser);
+            return ResponseEntity.ok(new ApiUtil(respDTO));
+        } else { // 기업 마이페이지
+            List<JobopenResponse.MngDTO> respDTO = compService.compJobopenMng(sessionUser);
+            return ResponseEntity.ok(new ApiUtil(respDTO));
+        }
+    }
+
 
 }
  

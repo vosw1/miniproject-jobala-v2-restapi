@@ -15,7 +15,6 @@ public class SessionUser {
     private String email;
     private Timestamp createdAt;
     private Integer role;
-    private User user;
 
     @Builder
     public SessionUser(Integer id, String username, String email, Timestamp createdAt, Integer role) {

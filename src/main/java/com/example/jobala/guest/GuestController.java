@@ -20,15 +20,6 @@ public class GuestController {
     private final HttpSession session;
     private final GuestService guestService;
 
-    // TODO : /api/mngForm 으로 변경 -> 기업 개인 합쳐서 분기처리 -> UserController
-    //이력서 관리 페이징
-    @GetMapping("/api/guest/mngForm")
-    public ResponseEntity<?> mngForm(@RequestParam(defaultValue = "0") int page) {
-        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        ResumeResponse.MngDTO respDTO = guestService.guestResumesMng(page, sessionUser);
-        return ResponseEntity.ok(new ApiUtil(respDTO));
-    }
-
     // TODO : /api/profile 으로 변경 -> 기업 개인 합쳐서 분기처리 -> UserController
     // 개인 - 마이페이지 - 프로필
     @GetMapping("/api/guest/profileForm")

@@ -15,6 +15,7 @@ public class JwtUtil {
                 .withExpiresAt(new Date(System.currentTimeMillis() + 1000*60*60*24))
                 .withClaim("id", user.getId())
                 .withClaim("username", user.getUsername())
+                .withClaim("role",user.getRole())
                 .sign(Algorithm.HMAC512("jobala"));
 
         return jwt;
@@ -28,10 +29,12 @@ public class JwtUtil {
         int id = decodedJWT.getClaim("id").asInt();
         System.out.println("id = " + id);
         String username = decodedJWT.getClaim("username").asString();
+        int role = decodedJWT.getClaim("role").asInt();
 
         return SessionUser.builder()
                 .id(id)
                 .username(username)
+                .role(role)
                 .build();
     }
 }
