@@ -3,6 +3,7 @@ package com.example.jobala.guest;
 import com.example.jobala._core.errors.apiException.ApiException400;
 import com.example.jobala._core.errors.apiException.ApiException404;
 import com.example.jobala._core.utill.Paging;
+import com.example.jobala._core.utill.UpdateProfileUtil;
 import com.example.jobala._user.*;
 import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeJPARepository;
@@ -27,6 +28,7 @@ public class GuestService {
     private final UserJPARepository userJPARepository;
     private final ResumeJPARepository resumeJPARepository;
     private final Paging paging;
+    private final UpdateProfileUtil updateProfileUtil;
 
     // 개인 - 프로필업데이트
     @Transactional
@@ -34,18 +36,10 @@ public class GuestService {
         User user = guestJPARepository.findById(sessionUser.getId())
                 .orElseThrow(() -> new ApiException404("수정할 프로필이 없습니다.")).getUser();
 
-        byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getImgFilename().getBytes());
-        String imageUUID = UUID.randomUUID() + "_" + reqDTO.getImgTitle();
-
-        Path imgPath = Paths.get("./image/" + imageUUID);
-
         try {
-            Files.write(imgPath, decodedBytes);
-            String webImgPath = imgPath.toString().replace("\\", "/");
-            webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
-
-            user.setProfileUpdateDTO(reqDTO, webImgPath);
-
+            String imgFilename = reqDTO.getImgFilename(); // 이미지 파일 이름 가져오기
+            String imgTitle = reqDTO.getImgTitle(); // 이미지 타이틀 가져오기
+            updateProfileUtil.fileUpdate(imgFilename, imgTitle); // 파일 업데이트 수행
         } catch (IOException e) {
             throw new ApiException400("올바른 저장 경로를 찾지 못했습니다.");
         }
