@@ -1,6 +1,7 @@
 package com.example.jobala.scrap;
 
 import com.example.jobala._core.errors.apiException.ApiException403;
+import com.example.jobala._core.errors.apiException.ApiException404;
 import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
