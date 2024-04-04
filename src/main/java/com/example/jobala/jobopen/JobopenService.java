@@ -25,12 +25,7 @@ public class JobopenService {
     private final ResumeJPARepository resumeJPARepository;
     private final UserJPARepository userJPARepository;
 
-    // 공고목록보기
-    public List<Jobopen> jobopenFindAll() {
-        return jobopenJPARepository.findAll();
-    }
-
-    // 공고등록임
+    // 공고 등록
     @Transactional
     public JobopenResponse.SaveDTO jobopenSave(JobopenRequest.SaveDTO reqDTO, SessionUser sessionUser) {
         User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException403("해당하는 회원정보를 찾을 수 없습니다."));
@@ -93,12 +88,4 @@ public class JobopenService {
         return respDTO;
     }
 
-    //TODO: 이건 쓰는 건가? 찬혁?
-    public JobopenResponse.CheckBoxDTO getCheckedSkills(Integer id) {
-        Jobopen jobopen = jobopenJPARepository.findById(id).orElseThrow(() -> new ApiException403("공고를 찾을 수 없습니다."));
-        String skillsStr = jobopen.getSkills();
-        skillsStr = skillsStr.substring(1, skillsStr.length() - 1).trim();
-        List<String> skills = Arrays.asList(skillsStr.split(","));
-        return new JobopenResponse.CheckBoxDTO(skills);
-    }
 }

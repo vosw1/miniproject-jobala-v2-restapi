@@ -15,12 +15,7 @@ import java.util.List;
 
 public class JobopenRequest {
 
-    @AllArgsConstructor
-    @Data
-    public static class DeleteDTO {
-        private int id;
-    }
-
+    //공고 상세
     @AllArgsConstructor
     @Data
     public static class JobopenDetailDTO {
@@ -57,6 +52,7 @@ public class JobopenRequest {
         private List<String> skills = new ArrayList<>(); //내용
     }
 
+    //공고 업데이트
     @AllArgsConstructor
     @Data
     public static class UpdateDTO {
@@ -91,6 +87,7 @@ public class JobopenRequest {
 
     }
 
+    //공고 등록
     @AllArgsConstructor
     @Data
     public static class SaveDTO {
