@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 public class ReplyRequest {
+
+    // 댓글 쓰기
     @Data
     public static class SaveDTO {
         @NotNull(message = "댓글은 공백일 수 없습니다")
