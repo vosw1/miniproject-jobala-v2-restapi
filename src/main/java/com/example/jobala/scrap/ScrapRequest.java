@@ -8,7 +8,7 @@ import lombok.Data;
 
 public class ScrapRequest {
 
-    //공고를 스크랩
+    // 스크랩하기
     @AllArgsConstructor
     @Data
     public static class ScrapDTO {
@@ -17,6 +17,7 @@ public class ScrapRequest {
 
         private Integer resumeId;
 
+        // 개인이 채용공고 스크랩
         public Scrap toEntity(Jobopen jobopen, User user) {
             return Scrap.builder()
                     .user(user)
@@ -26,6 +27,7 @@ public class ScrapRequest {
                     .build();
         }
 
+        // 기업이 인재 스크랩
         public Scrap toEntity(Resume resume, User user) {
             return Scrap.builder()
                     .user(user)
