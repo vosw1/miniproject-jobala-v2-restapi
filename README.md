@@ -11,17 +11,9 @@
 - PPT 브라우저로 보기[바로가기](https://www.canva.com/design/DAGBPq1glcU/4HFpBjmpfg75Di9BTtV3mA/view?utm_content=DAGBPq1glcU&utm_campaign=designshare&utm_medium=link&utm_source=editor)
 
 
+> ## 프로젝트 소개 및 목표 달성률
 
-> ## 프로젝트 소개
-<img src="https://github.com/kjh5848/miniproject-JOBALR/assets/161176345/8bc39efd-533f-4696-ae5c-99b07c0e1462"><br>
-
-"JOBARA"는 트렌디하고 현대적인 디자인의 이력서 공유 플랫폼으로, 사용자들이 자신의 이력서를 업로드하고 공유할 수 있는 공간입니다. 
-
-이 플랫폼을 통해 기업들은 재능 있는 인재들을 발견하고 면접을 제안할 수 있습니다.
- 
-"JOBARA"의 로고와 메시지는 긍정적이고 밝은 분위기를 조성하여, 지원자들의 유연성과 긍정적인 태도를 부각시킵니다.
-
-JOBARA 이력서 플랫폼을 통해 당신만의 독특한 경험과 능력을 등록하고 새로운 기회의 문을 열어보세요!
+![JObala자바라 프로젝트 목표 달성률](https://github.com/kjh5848/miniproject-jobala-v2-restapi/assets/153582123/e5bdb418-04c2-4306-87e9-0ba1fc10d768)
 
 
 > ## 프로젝트 기간
@@ -75,9 +67,7 @@ JOBARA 이력서 플랫폼을 통해 당신만의 독특한 경험과 능력을 
 - [x]  커뮤니티 고객센터 구현 **API 전환**
 
 
-> ## 프로젝트 목표 및 달성률
 
-![JObala자바라 프로젝트 목표 달성률](https://github.com/kjh5848/miniproject-jobala-v2-restapi/assets/153582123/e5bdb418-04c2-4306-87e9-0ba1fc10d768)
 
 
 > ## API 문서
