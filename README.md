@@ -1,13 +1,13 @@
 # JOBARA 이력서 홈페이지
 
 > ## 시연영상(Youtube)
-<a href = "https://www.youtube.com/watch?v=naFTFuDls_g&t=3s">![JObala자바라](https://github.com/kjh5848/miniproject-JOBALR/assets/153582123/b865354f-ac5e-4e35-97bb-57d3236aa196)
+<a href = "">![JObala자바라 2차 리드미](https://github.com/kjh5848/miniproject-jobala-v2-restapi/assets/153582123/1528e8d9-6730-414b-9313-f4546ed47d63)
 
 
 > ## 발표자료
 
-- PPT 파일 다운로드[바로가기](https://github.com/kjh5848/miniproject-JOBALR/files/14646973/JObala.pdf)
-- PPT 브라우저로 보기[바로가기](https://www.canva.com/design/DAF_HI7NqS0/q4sPPCKaMPlK14mIjdzc-w/view?utm_content=DAF_HI7NqS0&utm_campaign=designshare&utm_medium=link&utm_source=editor)
+- PPT 파일 다운로드[바로가기]()
+- PPT 브라우저로 보기[바로가기](https://www.canva.com/design/DAGBPq1glcU/4HFpBjmpfg75Di9BTtV3mA/view?utm_content=DAGBPq1glcU&utm_campaign=designshare&utm_medium=link&utm_source=editor)
 
 
 > ## 프로젝트 소개
@@ -40,8 +40,8 @@ JOBARA 이력서 플랫폼을 통해 당신만의 독특한 경험과 능력을 
    
   <h3><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Eyes.png" width=30" /> 사용기술</h3>
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
-<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>
-<img src="https://img.shields.io/badge/mustache-F7DF1E?style=for-the-badge&logo=Mustache&logoColor=white"/>
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>
+  <img src="https://img.shields.io/badge/mustache-F7DF1E?style=for-the-badge&logo=Mustache&logoColor=white"/>
 
   <h3><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Eyes.png" width=30" /> 언어</h3>
   <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/>
@@ -74,40 +74,18 @@ JOBARA 이력서 플랫폼을 통해 당신만의 독특한 경험과 능력을 
 
 <img src="https://github.com/kjh5848/miniproject-JOBALR/assets/161176345/8603e1fd-b37c-4049-aec5-d8089e0dde19" width="50%">
 
-> ## 담당 기능
+> ## 프로젝트 목표 및 달성률
 
-- **김주혁 (팀장)** 
-    - 전체적인 프로젝트 세팅
-    - (기업) 채용공고 관리 - 보기, 등록, 수정, 삭제
-    - (기업) 관심 구직자 - 구독 북마크, 스크랩
+![JObala자바라 프로젝트 목표 달성률](https://github.com/kjh5848/miniproject-jobala-v2-restapi/assets/153582123/e5bdb418-04c2-4306-87e9-0ba1fc10d768)
 
-- **박선규**
-    - (기업, 개인) 등록 및 로그인 회원가입 아이디 중복체크
-    - (기업, 개인) 커뮤니티 게시판 - 보기, 글쓰기, 수정, 삭제
-    - (기업, 개인) 댓글 - 목록 보기, 삭제
-    - (기업) 인재채용 - 목록 보기
 
-- **박찬혁**
-    - (개인) 이력서 관리 - 보기, 등록, 수정, 삭제
-    - (기업, 개인) 기술스택 - 매칭 리스트 보기
-    - (기업) 관심 구직자 - 구독(북마크,스크랩)
-    - (기업) 지원받은 이력서 - 합격, 불합격
+> ## API 문서
+ - 노션 [바로가기](https://getinthere.notion.site/API-1e71f4db9ec448e89fb288d0c93fccd8?pvs=4)
 
-- **송민경**
-    - (기업) 공고 이미지 - 보기, 수정
-    - (개인) 이력서 이미지 - 보기, 등록, 수정
-    - (기업, 개인) 커뮤니티 댓글 - 등록
- 
-- **장유진**
-    - (기업) 지원자 관리 - 보기
-    - (개인) 모달창의 입사 지원하기
-    - (기업, 개인) 게시판 상세보기 - 수정 삭제
-    - (기업, 개인) 마이페이지 - 프로필보기 업데이트
- 
+![JObala자바라 API 문서](https://github.com/kjh5848/miniproject-jobala-v2-restapi/assets/153582123/2e749d0e-6690-4ef1-92ea-74b2b80d0383)
 
-> ## 사용자 시나리오
- 
-- 브라우저로 보기[바로가기](https://www.canva.com/design/DAF_729hKrI/k744ZxnE_iwlpjigoLMexQ/view?utm_content=DAF_729hKrI&utm_campaign=designshare&utm_medium=link&utm_source=editor)
+
+
 
 
 > ## 후기
