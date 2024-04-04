@@ -36,7 +36,7 @@ public class ResumeController {
     @PostMapping("/api/resumes")
     public ResponseEntity<?> save(@Valid @RequestBody ResumeRequest.SaveDTO resumeSaveDTO) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        ResumeResponse.ASaveDTO respDTO = resumeService.resumeSave(resumeSaveDTO, sessionUser);
+        ResumeResponse.SaveDTO respDTO = resumeService.resumeSave(resumeSaveDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 

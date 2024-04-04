@@ -79,7 +79,7 @@ public class JobopenService {
 
         // isScrap
         if (sessionUser != null) {
-            // 모달 공고 목록 조회
+            // 모달 이력서 목록 조회
             List<Resume> applyResumeList = resumeJPARepository.findByUserId(sessionUser.getId());
             // 스크랩 했는지 안했는지 조회
             Optional<Scrap> scrap = scrapJPARepository.findGuestScrapByJobopenIdAndUserId(jobopenId, sessionUser.getId());

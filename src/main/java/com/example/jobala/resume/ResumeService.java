@@ -28,11 +28,11 @@ public class ResumeService {
 
     // 이력서등록
     @Transactional
-    public ResumeResponse.ASaveDTO resumeSave(ResumeRequest.SaveDTO reqDTO, SessionUser sessionUser) {
+    public ResumeResponse.SaveDTO resumeSave(ResumeRequest.SaveDTO reqDTO, SessionUser sessionUser) {
         User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException403("해당하는 회원정보를 찾을 수 없습니다."));
 
         Resume resume = resumeJPARepository.save(reqDTO.toEntity(user));
-        return new ResumeResponse.ASaveDTO(resume, user);
+        return new ResumeResponse.SaveDTO(resume, user);
     }
 
     // 이력서삭제
@@ -80,13 +80,4 @@ public class ResumeService {
         return respDTO;
     }
 
-
-    //TODO: 찬혁? 이거 쓰는건가?
-    public ResumeResponse.CheckBoxDTO getCheckedSkills(Integer id) {
-        Resume resume = resumeJPARepository.findById(id).orElseThrow(() -> new ApiException403("이력서를 찾을 수 없습니다."));
-        String skillsStr = resume.getSkills();
-        skillsStr = skillsStr.substring(1, skillsStr.length() - 1);
-        List<String> skills = Arrays.asList(skillsStr.split(","));
-        return new ResumeResponse.CheckBoxDTO(skills);
-    }
 }

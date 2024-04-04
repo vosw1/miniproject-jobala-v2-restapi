@@ -58,9 +58,9 @@ public class GuestService {
         return new UserResponse.GuestProfile(user);
     }
 
-    //이력서 페이징 하기 위한 목록 조회
+    //개인 - 이력서 리스트
     public ResumeResponse.MngDTO guestResumesMng(int page, SessionUser sessionUser) {
-        List<Resume> resumes = resumeJPARepository.findResumeByWithUserId(sessionUser.getId());
+        List<Resume> resumes = resumeJPARepository.findByUserId(sessionUser.getId());
         return new ResumeResponse.MngDTO(sessionUser.getId(), resumes);
     }
 }

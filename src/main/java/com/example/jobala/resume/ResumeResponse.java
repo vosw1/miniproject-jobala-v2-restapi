@@ -13,9 +13,10 @@ import java.util.List;
 
 public class ResumeResponse {
 
-    //TODO: 이름들 좀 적어줘~!!!!!선규 그리고 ASave는 뭐여??
+
+    //이력서 쓰기 응답
     @Data
-    public static class ASaveDTO {
+    public static class SaveDTO {
         private Integer userId;
         private Integer resumeId;
         private String resumeTitle;
@@ -26,7 +27,7 @@ public class ResumeResponse {
         private String edu;
         private List<String> skills = new ArrayList<>();
 
-        public ASaveDTO(Resume resume, User user) {
+        public SaveDTO(Resume resume, User user) {
             this.userId = user.getId();
             this.resumeId = resume.getId();
             this.resumeTitle = resume.getResumeTitle();
@@ -63,7 +64,7 @@ public class ResumeResponse {
         }
     }
 
-
+    //이력서 스크랩 DTO
     @AllArgsConstructor
     @Data
     public static class ScrapDTO {
@@ -94,28 +95,7 @@ public class ResumeResponse {
     }
 
 
-    // update시 체크되도록하는 DTO
-    @Data
-    @AllArgsConstructor
-    public static class CheckBoxDTO {
-        private Boolean java;
-        private Boolean JavaScript;
-        private Boolean spring;
-        private Boolean html;
-        private Boolean jquery;
-        private Boolean mysql;
-
-        public CheckBoxDTO(List<String> skillList) {
-            this.java = skillList.contains("Java");
-            this.JavaScript = skillList.contains(" JavaScript");
-            this.spring = skillList.contains(" Spring");
-            this.html = skillList.contains(" HTML");
-            this.jquery = skillList.contains(" jQuery");
-            this.mysql = skillList.contains(" MySQL");
-        }
-    }
-
-
+    //인재 명단 이력서 DTO
     @AllArgsConstructor
     @Data
     public static class ScoutListDTO {
@@ -128,7 +108,7 @@ public class ResumeResponse {
 
     }
 
-
+    //이력서 상세보기 DTO
     @AllArgsConstructor
     @Data
     public static class DetailDTO {
@@ -203,6 +183,7 @@ public class ResumeResponse {
         }
     }
 
+    //이력서 업데이트
     @AllArgsConstructor
     @Data
     public static class UpdateDTO {

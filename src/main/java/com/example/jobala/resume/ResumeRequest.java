@@ -12,6 +12,7 @@ import java.util.List;
 
 public class ResumeRequest {
 
+    //이력서 쓰기
     @AllArgsConstructor
     @Data
     public static class SaveDTO {
@@ -54,6 +55,8 @@ public class ResumeRequest {
 
     }
 
+
+    //이력서 수정
     @AllArgsConstructor
     @Data
     public static class UpdateDTO {
