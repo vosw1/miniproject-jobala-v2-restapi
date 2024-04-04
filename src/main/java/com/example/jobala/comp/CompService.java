@@ -2,6 +2,7 @@ package com.example.jobala.comp;
 
 import com.example.jobala._core.errors.apiException.ApiException400;
 import com.example.jobala._core.errors.apiException.ApiException404;
+import com.example.jobala._core.utill.UpdateProfileUtil;
 import com.example.jobala._user.*;
 import com.example.jobala.apply.ApplyJPARepository;
 import com.example.jobala.jobopen.Jobopen;
@@ -13,12 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Base64;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +24,7 @@ public class CompService {
     private final CompQueryRepository compQueryRepository;
     private final CompJPARepository compJPARepository;
     private final ApplyJPARepository applyJPARepository;
+    private final UpdateProfileUtil updateProfileUtil;
 
     //기업 - 인재채용 검색필터
     public List<ResumeResponse.ScoutListDTO> searchResumes(String skills, CompRequest.SearchDTO resDTO) {
@@ -68,21 +65,13 @@ public class CompService {
         User user = compJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException404("수정할 프로필이 없습니다."));
 
         try {
-            //베이스 64로 들어오는 문자열을 바이트로 디코딩하기
-            byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getImgFilename().getBytes());
-            String imageUUID = UUID.randomUUID() + "_" + reqDTO.getImgTitle();
-
-            // 이미지 파일의 저장 경로 설정
-            Path imgPath = Paths.get("./image/" + imageUUID);
-            Files.write(imgPath, decodedBytes);
-            String webImgPath = imgPath.toString().replace("\\", "/");
-            webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
-            user.setProfileUpdateDTO(reqDTO, webImgPath);
-
+            String imgFilename = reqDTO.getImgFilename(); // 이미지 파일 이름 가져오기
+            String imgTitle = reqDTO.getImgTitle(); // 이미지 타이틀 가져오기
+            updateProfileUtil.fileUpdate(imgFilename, imgTitle); // 파일 업데이트 수행
         } catch (IOException e) {
             throw new ApiException400("올바른 저장 경로를 찾지 못했습니다.");
         }
         return new UserResponse.CompProfile(user);
-    }
 
+    }
 }
