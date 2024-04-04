@@ -23,7 +23,7 @@ public class ReplyController {
     public ResponseEntity<?> save(@Valid @RequestBody ReplyRequest.SaveDTO reqDTO) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
 
-        ReplyResponse.ReplyDTO respDTO = replyService.replySave(reqDTO, sessionUser);
+        ReplyResponse.DTO respDTO = replyService.replySave(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 

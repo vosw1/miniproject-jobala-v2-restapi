@@ -17,9 +17,6 @@ public interface BoardJPARepository extends JpaRepository<Board, Integer> {
     Optional<Board> findByIdJoinUser(@Param("id") int id);
 
     // 글 목록
-    @Query("select new com.example.jobala.board.BoardResponse$BoardDTO(b) from Board b order by b.id DESC")
-    List<BoardResponse.BoardDTO> findBoardAll();
-
-    //페이징
-    Page<Board> findAll(Pageable pageable);
+    @Query("select new com.example.jobala.board.BoardResponse$DTO(b) from Board b order by b.id DESC")
+    List<BoardResponse.DTO> findBoardAll();
 }

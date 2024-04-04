@@ -7,7 +7,6 @@ import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.jobopen.JobopenJPARepository;
-import com.example.jobala.jobopen.JobopenQueryRepository;
 import com.example.jobala.scrap.Scrap;
 import com.example.jobala.scrap.ScrapJPARepository;
 import jakarta.transaction.Transactional;
@@ -23,7 +22,6 @@ import java.util.Optional;
 public class ResumeService {
     private final ResumeJPARepository resumeJPARepository;
     private final JobopenJPARepository jobopenJPARepository;
-    private final JobopenQueryRepository jobopenQueryRepository;
     private final ScrapJPARepository scrapJPARepository;
     private final UserJPARepository userJPARepository;
 

@@ -61,13 +61,6 @@ public class BoardService {
         return new BoardResponse.UpdateDTO(board);
     }
 
-    // 글조회
-    public BoardResponse.BoardDTO boardFindById(int boardId) {
-        Board board = boardJPARepository.findById(boardId)
-                .orElseThrow(() -> new ApiException404("게시글을 찾을 수 없습니다."));
-        return new BoardResponse.BoardDTO(board);
-    }
-
     // 글쓰기
     @Transactional
     public BoardResponse.SaveDTO boardSave(BoardRequest.SaveDTO reqDTO, SessionUser sessionUser) {
@@ -81,8 +74,8 @@ public class BoardService {
 
 
     //글 목록
-    public List<BoardResponse.BoardDTO> boardFindAll() { // 글목록조회
-        List<BoardResponse.BoardDTO> boardList = boardJPARepository.findBoardAll();
+    public List<BoardResponse.DTO> boardFindAll() { // 글목록조회
+        List<BoardResponse.DTO> boardList = boardJPARepository.findBoardAll();
         return boardList;
     }
 }

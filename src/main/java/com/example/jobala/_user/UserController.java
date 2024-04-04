@@ -27,9 +27,8 @@ public class UserController {
 
     //메인에서 공고목록보기
     @GetMapping("/")
-    public ResponseEntity<?> mainForm(@RequestParam(defaultValue = "0") Integer page) {
-        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        UserResponse.MainDTO respDTO = userService.mainJobopenList(page, sessionUser);
+    public ResponseEntity<?> mainForm() {
+        UserResponse.MainDTO respDTO = userService.mainJobopenList();
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
@@ -71,10 +70,10 @@ public class UserController {
 
     // 마이페이지 - 이력서, 공고 관리
     @GetMapping("/api/mngForm")
-    public ResponseEntity<?> mngForm(@RequestParam(defaultValue = "0") int page) {
+    public ResponseEntity<?> mngForm() {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         if (sessionUser.getRole() == 0) { // 개인 마이페이지
-            ResumeResponse.MngDTO respDTO = guestService.guestResumesMng(page, sessionUser);
+            ResumeResponse.MngDTO respDTO = guestService.guestResumesMng(sessionUser);
             return ResponseEntity.ok(new ApiUtil(respDTO));
         } else { // 기업 마이페이지
             List<JobopenResponse.MngDTO> respDTO = compService.compJobopenMng(sessionUser);

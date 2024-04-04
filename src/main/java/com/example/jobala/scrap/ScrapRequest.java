@@ -11,7 +11,7 @@ public class ScrapRequest {
     // 스크랩하기
     @AllArgsConstructor
     @Data
-    public static class ScrapDTO {
+    public static class DTO {
 
         private Integer jobopenId;
 

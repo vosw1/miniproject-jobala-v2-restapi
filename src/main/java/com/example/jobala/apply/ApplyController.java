@@ -2,7 +2,6 @@ package com.example.jobala.apply;
 
 import com.example.jobala._core.utill.ApiUtil;
 import com.example.jobala._user.SessionUser;
-import com.example.jobala._user.User;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

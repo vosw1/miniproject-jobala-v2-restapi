@@ -1,12 +1,9 @@
 package com.example.jobala.apply;
 
-import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

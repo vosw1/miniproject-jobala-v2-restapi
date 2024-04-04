@@ -1,6 +1,5 @@
 package com.example.jobala.scrap;
 
-import com.example.jobala._core.errors.apiException.ApiException403;
 import com.example.jobala._core.errors.apiException.ApiException404;
 import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;
@@ -27,7 +26,7 @@ public class ScrapService {
 
     // 기업이 인재 스크랩
     @Transactional
-    public ScrapResponse.CompDTO scrapByComp(ScrapRequest.ScrapDTO reqDTO, SessionUser sessionUser) {
+    public ScrapResponse.CompDTO scrapByComp(ScrapRequest.DTO reqDTO, SessionUser sessionUser) {
         User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException404("해당하는 회원정보를 찾을 수 없습니다."));
 
         Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())
@@ -46,7 +45,7 @@ public class ScrapService {
 
     // 개인이 채용공고 스크랩
     @Transactional
-    public ScrapResponse.GuestDTO scrapByGuest(ScrapRequest.ScrapDTO reqDTO, SessionUser sessionUser) {
+    public ScrapResponse.GuestDTO scrapByGuest(ScrapRequest.DTO reqDTO, SessionUser sessionUser) {
         User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException404("해당하는 회원정보를 찾을 수 없습니다."));
 
         Jobopen jobopen = jobopenJPARepository.findById(reqDTO.getJobopenId())
@@ -64,7 +63,7 @@ public class ScrapService {
     }
 
     // 기업이 스크랩한 인재 조회
-    public List<ResumeResponse.ScrapDTO> scrapResumeBycomp(SessionUser sessionUser) {
+    public List<ResumeResponse.ScrapDTO> scrapResumeByComp(SessionUser sessionUser) {
         List<ResumeResponse.ScrapDTO> respDTO = resumeJPARepository.findByUserIdJoinScrap(sessionUser.getId());
         return respDTO;
     }

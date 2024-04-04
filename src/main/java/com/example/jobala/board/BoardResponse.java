@@ -92,7 +92,7 @@ public class BoardResponse {
 
     // 글 조회
     @Data
-    public static class BoardDTO {
+    public static class DTO {
         private Integer boardId;
         private String title;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
@@ -100,7 +100,7 @@ public class BoardResponse {
         private Integer userId;
         private String username;
 
-        public BoardDTO(Board board) {
+        public DTO(Board board) {
             this.boardId = board.getId();
             this.title = board.getTitle();
             this.createdAt = board.getCreatedAt();

@@ -23,7 +23,7 @@ public class ScrapController {
     public ResponseEntity<?> ScrapForm() {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         if (sessionUser.getRole() == 1) { // 기업 스크랩 목록
-            List<ResumeResponse.ScrapDTO> respDTO = scrapService.scrapResumeBycomp(sessionUser);
+            List<ResumeResponse.ScrapDTO> respDTO = scrapService.scrapResumeByComp(sessionUser);
             return ResponseEntity.ok(new ApiUtil<>(respDTO));
         } else { // 개인 스크랩 목록
             List<JobopenResponse.ScrapDTO> respDTO = scrapService.scrapJobopenByGuest(sessionUser);
@@ -33,7 +33,7 @@ public class ScrapController {
 
     // 스크랩하기
     @RequestMapping(value = "/api/scraps", method = {RequestMethod.POST, RequestMethod.DELETE})
-    public ResponseEntity<?> scrapResume(@Valid @RequestBody ScrapRequest.ScrapDTO reqDTO) {
+    public ResponseEntity<?> scrapResume(@Valid @RequestBody ScrapRequest.DTO reqDTO) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         if (sessionUser.getRole() == 1) { // 기업이 스크랩
             ScrapResponse.CompDTO respDTO = scrapService.scrapByComp(reqDTO, sessionUser);

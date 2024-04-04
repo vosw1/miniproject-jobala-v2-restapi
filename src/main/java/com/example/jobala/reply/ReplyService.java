@@ -20,7 +20,7 @@ public class ReplyService {
 
     // 댓글쓰기
     @Transactional
-    public ReplyResponse.ReplyDTO replySave(ReplyRequest.SaveDTO reqDTO, SessionUser sessionUser) {
+    public ReplyResponse.DTO replySave(ReplyRequest.SaveDTO reqDTO, SessionUser sessionUser) {
         User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException404("해당하는 회원정보를 찾을 수 없습니다."));
 
         Board board = boardJPARepository.findById(reqDTO.getBoardId())
@@ -28,7 +28,7 @@ public class ReplyService {
 
         Reply reply = reqDTO.toEntity(user, board);
         replyJPARepository.save(reply);
-        return new ReplyResponse.ReplyDTO(reply, user);
+        return new ReplyResponse.DTO(reply, user);
     }
 
     // 댓글삭제

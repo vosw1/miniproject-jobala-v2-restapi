@@ -9,14 +9,14 @@ public class ReplyResponse {
     //댓글 쓰기
     @AllArgsConstructor
     @Data
-    public static class ReplyDTO {
+    public static class DTO {
         private Integer replyId;
         private Integer userId;
         private String comment;
         private String username;
         private Boolean replyOwner; // 게시글 주인 여부
 
-        public ReplyDTO(Reply reply, User sessionUser) {
+        public DTO(Reply reply, User sessionUser) {
             this.replyId = reply.getId();
             this.userId = reply.getUser().getId();
             this.comment = reply.getComment();

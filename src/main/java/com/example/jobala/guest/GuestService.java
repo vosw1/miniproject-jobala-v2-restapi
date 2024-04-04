@@ -2,7 +2,6 @@ package com.example.jobala.guest;
 
 import com.example.jobala._core.errors.apiException.ApiException400;
 import com.example.jobala._core.errors.apiException.ApiException404;
-import com.example.jobala._core.utill.Paging;
 import com.example.jobala._core.utill.UpdateProfileUtil;
 import com.example.jobala._user.*;
 import com.example.jobala.resume.Resume;
@@ -13,12 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Base64;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +21,6 @@ public class GuestService {
     private final GuestJPARepository guestJPARepository;
     private final UserJPARepository userJPARepository;
     private final ResumeJPARepository resumeJPARepository;
-    private final Paging paging;
     private final UpdateProfileUtil updateProfileUtil;
 
     // 개인 - 프로필업데이트
@@ -53,7 +46,7 @@ public class GuestService {
     }
 
     //개인 - 이력서 리스트
-    public ResumeResponse.MngDTO guestResumesMng(int page, SessionUser sessionUser) {
+    public ResumeResponse.MngDTO guestResumesMng(SessionUser sessionUser) {
         List<Resume> resumes = resumeJPARepository.findByUserId(sessionUser.getId());
         return new ResumeResponse.MngDTO(sessionUser.getId(), resumes);
     }

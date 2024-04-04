@@ -26,13 +26,8 @@ public class UserService {
         return userQueryRepository.findAll(skills, resDTO);
     }
 
-    // 기업,개인 - 채용공고 목록
-    public List<JobopenResponse.ListDTO> findAll() {
-        return userQueryRepository.findByJoboopenAll();
-    }
-
     //메인 공고 목록조회
-    public UserResponse.MainDTO mainJobopenList(Integer page, SessionUser sessionUser) {
+    public UserResponse.MainDTO mainJobopenList() {
         List<Jobopen> jobopenList = jobopenJPARepository.main();
         return new UserResponse.MainDTO(jobopenList);
     }

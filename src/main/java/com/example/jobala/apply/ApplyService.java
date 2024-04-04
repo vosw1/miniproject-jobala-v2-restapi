@@ -1,6 +1,5 @@
 package com.example.jobala.apply;
 
-import com.example.jobala._core.errors.apiException.ApiException403;
 import com.example.jobala._core.errors.apiException.ApiException404;
 import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;

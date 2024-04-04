@@ -1,14 +1,12 @@
 package com.example.jobala._user;
 
 import com.example.jobala.guest.GuestRequest;
-import com.example.jobala.guest.GuestResponse;
 import com.example.jobala.jobopen.JobopenResponse;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,21 +14,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserQueryRepository {
     private final EntityManager em;
-
-    //공고목록
-    public List<JobopenResponse.ListDTO> findByJoboopenAll() {
-        String q = """
-                select jb.id, jb.jobopen_title, jb.comp_location, jb.career, jb.edu, ut.img_filename 
-                from jobopen_tb jb 
-                join user_tb ut on jb.user_id = ut.id
-                order by jb.id desc;      
-                """;
-        Query query = em.createNativeQuery(q);
-
-        JpaResultMapper rm = new JpaResultMapper();
-        List<JobopenResponse.ListDTO> jobopenList = rm.list(query, JobopenResponse.ListDTO.class);
-        return jobopenList;
-    }
 
     //채용공고 검색필터
     public List<JobopenResponse.ListDTO> findAll(String skills, GuestRequest.SearchDTO resDTO) {

@@ -28,7 +28,7 @@ public class BoardController {
     // 글 목록보기 완료
     @GetMapping("api/boards")
     public ResponseEntity<?> board() {
-        List<BoardResponse.BoardDTO> respDTO = boardService.boardFindAll();
+        List<BoardResponse.DTO> respDTO = boardService.boardFindAll();
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
