@@ -6,6 +6,7 @@ import lombok.Data;
 
 public class ReplyResponse {
 
+    //댓글 쓰기
     @AllArgsConstructor
     @Data
     public static class ReplyDTO {
