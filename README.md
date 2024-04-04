@@ -2,6 +2,8 @@
 
 > ## 시연영상(Youtube)
 <a href = "">![JObala자바라 2차 리드미](https://github.com/kjh5848/miniproject-jobala-v2-restapi/assets/153582123/1528e8d9-6730-414b-9313-f4546ed47d63)
+  <br>
+  <br>
 
 
 
@@ -9,11 +11,15 @@
 
 - PPT 파일 다운로드[바로가기]()
 - PPT 브라우저로 보기[바로가기](https://www.canva.com/design/DAGBPq1glcU/4HFpBjmpfg75Di9BTtV3mA/view?utm_content=DAGBPq1glcU&utm_campaign=designshare&utm_medium=link&utm_source=editor)
-
+  <br>
+  <br>
+  
 
 > ## 프로젝트 소개 및 목표 달성률
 
 ![JObala자바라 프로젝트 목표 달성률](https://github.com/kjh5848/miniproject-jobala-v2-restapi/assets/153582123/e5bdb418-04c2-4306-87e9-0ba1fc10d768)
+  <br>
+  <br>
 
 
 > ## 프로젝트 기간
@@ -52,7 +58,8 @@
 <img src="https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white"/>
 <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"/>
 </span>
-
+  <br>
+  <br>
 
 > ## 요구 사항
 
@@ -65,6 +72,8 @@
 - [x]  [구직자] 기업 기술스택 매칭 리스트 보기 **API 전환**
 - [x]  [구직자] 관심 공고 구독(북마크,스크랩) **API 전환**
 - [x]  커뮤니티 고객센터 구현 **API 전환**
+  <br>
+  <br>
 
 
 
