@@ -3,9 +3,6 @@ package com.example.jobala._user;
 
 import com.example.jobala.jobopen.Jobopen;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.domain.Page;
-
 import java.util.ArrayList;
 import java.util.List;
 

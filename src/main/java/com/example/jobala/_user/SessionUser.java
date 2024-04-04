@@ -1,11 +1,8 @@
 package com.example.jobala._user;
 
-import jakarta.persistence.Column;
 import lombok.Builder;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 // 임시 세션

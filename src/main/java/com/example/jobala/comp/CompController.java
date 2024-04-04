@@ -2,9 +2,7 @@ package com.example.jobala.comp;
 
 
 import com.example.jobala._core.utill.ApiUtil;
-import com.example.jobala.apply.ApplyJPARepository;
 import com.example.jobala.resume.ResumeResponse;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

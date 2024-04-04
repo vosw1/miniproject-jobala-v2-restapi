@@ -1,7 +1,6 @@
 package com.example.jobala.comp;
 
 import com.example.jobala.jobopen.Jobopen;
-import com.example.jobala.resume.Resume;
 import com.example.jobala.resume.ResumeResponse;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;

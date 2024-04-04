@@ -1,7 +1,5 @@
 package com.example.jobala._user;
 
-import com.example.jobala.comp.CompRequest;
-import com.example.jobala.guest.GuestRequest;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;

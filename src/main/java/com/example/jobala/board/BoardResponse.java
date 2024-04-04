@@ -3,14 +3,12 @@ package com.example.jobala.board;
 import com.example.jobala._user.User;
 import com.example.jobala.reply.Reply;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
 public class BoardResponse {
 
 

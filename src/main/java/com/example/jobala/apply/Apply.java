@@ -1,6 +1,5 @@
 package com.example.jobala.apply;
 
-import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;
 import com.example.jobala.jobopen.Jobopen;
 import com.example.jobala.resume.Resume;
@@ -9,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+
 import java.sql.Timestamp;
 
 @NoArgsConstructor

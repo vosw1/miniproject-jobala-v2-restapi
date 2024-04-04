@@ -1,14 +1,11 @@
 package com.example.jobala._user;
 
 import com.example.jobala._core.utill.ApiUtil;
-import com.example.jobala.comp.CompRequest;
 import com.example.jobala.comp.CompService;
 import com.example.jobala.guest.GuestRequest;
 import com.example.jobala.guest.GuestService;
-import com.example.jobala.jobopen.JobopenJPARepository;
 import com.example.jobala.jobopen.JobopenResponse;
 import com.example.jobala.resume.ResumeResponse;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

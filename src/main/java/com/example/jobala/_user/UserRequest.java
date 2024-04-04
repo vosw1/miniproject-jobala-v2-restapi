@@ -4,7 +4,6 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 public class UserRequest {
 
