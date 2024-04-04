@@ -1,7 +1,7 @@
 package com.example.jobala.comp;
 
 import com.example.jobala._core.errors.apiException.ApiException400;
-import com.example.jobala._core.errors.apiException.ApiException403;
+import com.example.jobala._core.errors.apiException.ApiException404;
 import com.example.jobala._user.*;
 import com.example.jobala.apply.ApplyJPARepository;
 import com.example.jobala.jobopen.Jobopen;
@@ -38,7 +38,7 @@ public class CompService {
     public List<ResumeResponse.ScoutListDTO> listAllResumes() {
         List<ResumeResponse.ScoutListDTO> resumes = compQueryRepository.findResumeAll();
         if (resumes.isEmpty()) {
-            throw new ApiException403("이력서가 없습니다.");
+            throw new ApiException404("이력서가 없습니다.");
         }
         return resumes;
     }
@@ -57,7 +57,7 @@ public class CompService {
 
     // 기업 - 프로필관리
     public UserResponse.GuestProfile compProfile(SessionUser sessionUser) {
-        User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException403("유저를 찾을 수 없습니다."));
+        User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException404("유저를 찾을 수 없습니다."));
 
         return new UserResponse.GuestProfile(user);
     }
@@ -65,7 +65,7 @@ public class CompService {
     //기업 - 프로필업데이트
     @Transactional
     public UserResponse.CompProfile compUpdateProfile(UserRequest.UserUpdateDTO reqDTO, SessionUser sessionUser) {
-        User user = compJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException403("수정할 프로필이 없습니다."));
+        User user = compJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException404("수정할 프로필이 없습니다."));
 
         try {
             //베이스 64로 들어오는 문자열을 바이트로 디코딩하기

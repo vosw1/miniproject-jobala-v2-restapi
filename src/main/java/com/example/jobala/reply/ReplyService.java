@@ -1,6 +1,7 @@
 package com.example.jobala.reply;
 
 import com.example.jobala._core.errors.apiException.ApiException403;
+import com.example.jobala._core.errors.apiException.ApiException404;
 import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
@@ -20,10 +21,10 @@ public class ReplyService {
     // 댓글쓰기
     @Transactional
     public ReplyResponse.ReplyDTO replySave(ReplyRequest.SaveDTO reqDTO, SessionUser sessionUser) {
-        User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException403("해당하는 회원정보를 찾을 수 없습니다."));
+        User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException404("해당하는 회원정보를 찾을 수 없습니다."));
 
         Board board = boardJPARepository.findById(reqDTO.getBoardId())
-                .orElseThrow(() -> new ApiException403("없는 게시글에 댓글을 작성 할 수 없습니다."));
+                .orElseThrow(() -> new ApiException404("없는 게시글에 댓글을 작성 할 수 없습니다."));
 
         Reply reply = reqDTO.toEntity(user, board);
         replyJPARepository.save(reply);
@@ -34,7 +35,7 @@ public class ReplyService {
     @Transactional
     public void replyDelete(int replyId, SessionUser sessionUser) {
         Reply reply = replyJPARepository.findById(replyId)
-                .orElseThrow(() -> new ApiException403("없는 댓글을 삭제할 수 없어요"));
+                .orElseThrow(() -> new ApiException404("없는 댓글을 삭제할 수 없어요"));
 
         if (reply.getUser().getId() != sessionUser.getId()) {
             throw new ApiException403("댓글을 삭제할 권한이 없어요");

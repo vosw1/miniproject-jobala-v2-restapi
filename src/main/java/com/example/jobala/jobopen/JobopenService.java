@@ -1,6 +1,7 @@
 package com.example.jobala.jobopen;
 
 import com.example.jobala._core.errors.apiException.ApiException403;
+import com.example.jobala._core.errors.apiException.ApiException404;
 import com.example.jobala._user.SessionUser;
 import com.example.jobala._user.User;
 import com.example.jobala._user.UserJPARepository;
@@ -28,7 +29,7 @@ public class JobopenService {
     // 공고 등록
     @Transactional
     public JobopenResponse.SaveDTO jobopenSave(JobopenRequest.SaveDTO reqDTO, SessionUser sessionUser) {
-        User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException403("해당하는 회원정보를 찾을 수 없습니다."));
+        User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException404("해당하는 회원정보를 찾을 수 없습니다."));
 
         Jobopen jobopen = jobopenJPARepository.save(reqDTO.toEntity(user));
         return new JobopenResponse.SaveDTO(jobopen, user);
@@ -38,7 +39,7 @@ public class JobopenService {
     @Transactional
     public Jobopen jobopenDelete(Integer jobopenId, Integer sessionUserId) {
         Jobopen jobopen = jobopenJPARepository.findById(jobopenId)
-                .orElseThrow(() -> new ApiException403("공고를 찾을 수 없습니다."));
+                .orElseThrow(() -> new ApiException404("공고를 찾을 수 없습니다."));
 
         if (sessionUserId != jobopen.getUser().getId()) {
             throw new ApiException403("공고를 삭제할 권한이 없습니다.");
@@ -52,7 +53,7 @@ public class JobopenService {
     public JobopenResponse.UpdateDTO jobopenUpdate(int jobOpenId, SessionUser sessionUser, JobopenRequest.UpdateDTO reqDTO) {
         //1.조회 및 예외 처리
         Jobopen jobopen = jobopenJPARepository.findById(jobOpenId)
-                .orElseThrow(() -> new ApiException403("공고를 찾을 수 없습니다."));
+                .orElseThrow(() -> new ApiException404("공고를 찾을 수 없습니다."));
         //2.권한 처리
         if (sessionUser.getId() != jobopen.getUser().getId()) {
             throw new ApiException403("공고를 수정할 권한이 없습니다.");
@@ -64,10 +65,10 @@ public class JobopenService {
 
     // 공고보기
     public JobopenResponse.DetailDTO findJobopenById(Integer jobopenId, SessionUser sessionUser) {
-        User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException403("해당하는 회원정보를 찾을 수 없습니다."));
+        User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException404("해당하는 회원정보를 찾을 수 없습니다."));
 
         Jobopen jobopen = jobopenJPARepository.findByJobopenIdWithUser(jobopenId)
-                .orElseThrow(() -> new ApiException403("공고를 찾을 수 없습니다"));
+                .orElseThrow(() -> new ApiException404("공고를 찾을 수 없습니다"));
 
         List<String> skills = Arrays.stream(jobopen.getSkills().replaceAll("[\\[\\]\"]", "").split(",")).toList();
         String skillsString = String.join(", ", skills);

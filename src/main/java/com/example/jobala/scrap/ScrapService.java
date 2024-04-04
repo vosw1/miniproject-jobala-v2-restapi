@@ -27,10 +27,10 @@ public class ScrapService {
     // 기업이 인재 스크랩
     @Transactional
     public ScrapResponse.CompDTO scrapByComp(ScrapRequest.ScrapDTO reqDTO, SessionUser sessionUser) {
-        User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException403("해당하는 회원정보를 찾을 수 없습니다."));
+        User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException404("해당하는 회원정보를 찾을 수 없습니다."));
 
         Resume resume = resumeJPARepository.findById(reqDTO.getResumeId())
-                .orElseThrow(() -> new ApiException403("스크랩 하려는 이력서를 찾을 수 없습니다."));
+                .orElseThrow(() -> new ApiException404("스크랩 하려는 이력서를 찾을 수 없습니다."));
 
         Scrap scrap = scrapJPARepository.findCompScrapByResumeIdAndUserId(reqDTO.getResumeId(), sessionUser.getId())
                 .orElse(null);
@@ -46,10 +46,10 @@ public class ScrapService {
     // 개인이 채용공고 스크랩
     @Transactional
     public ScrapResponse.GuestDTO scrapByGuest(ScrapRequest.ScrapDTO reqDTO, SessionUser sessionUser) {
-        User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException403("해당하는 회원정보를 찾을 수 없습니다."));
+        User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException404("해당하는 회원정보를 찾을 수 없습니다."));
 
         Jobopen jobopen = jobopenJPARepository.findById(reqDTO.getJobopenId())
-                .orElseThrow(() -> new ApiException403("스크랩 하려는 공고를 찾을 수 없습니다."));
+                .orElseThrow(() -> new ApiException404("스크랩 하려는 공고를 찾을 수 없습니다."));
 
         Scrap scrap = scrapJPARepository.findGuestScrapByJobopenIdAndUserId(reqDTO.getJobopenId(), sessionUser.getId())
                 .orElse(null);

@@ -23,7 +23,7 @@ public class BoardService {
     // 글삭제하기
     public void boardDelete(int boardId, Integer sessionUserId) {
         Board board = boardJPARepository.findById(boardId)
-                .orElseThrow(() -> new ApiException403("게시글을 찾을 수 없습니다."));
+                .orElseThrow(() -> new ApiException404("게시글을 찾을 수 없습니다."));
 
         if (sessionUserId != board.getUser().getId()) {
             throw new ApiException403("게시글을 삭제 할 권한이 없습니다.");
@@ -34,9 +34,9 @@ public class BoardService {
     // 글상세보기
     public BoardResponse.DetailDTO boardDetail(int boardId, SessionUser sessionUser) {
         Board board = boardJPARepository.findByIdJoinUser(boardId)
-                .orElseThrow(() -> new ApiException403("게시글을 찾을 수 없습니다"));
+                .orElseThrow(() -> new ApiException404("게시글을 찾을 수 없습니다"));
         User user = userJPARepository.findById(sessionUser.getId())
-                .orElseThrow(() -> new ApiException403("해당하는 회원정보를 찾을 수 없습니다."));
+                .orElseThrow(() -> new ApiException404("해당하는 회원정보를 찾을 수 없습니다."));
 
         List<Reply> replyList = replyJPARepository.findByUserId(boardId);
 
@@ -48,7 +48,7 @@ public class BoardService {
     public BoardResponse.UpdateDTO boardUpdate(int boardId, int sessionUserId, BoardRequest.UpdateDTO reqDTO) {
         // 1. 조회 및 예외처리
         Board board = boardJPARepository.findById(boardId)
-                .orElseThrow(() -> new ApiException403("게시글을 찾을 수 없습니다"));
+                .orElseThrow(() -> new ApiException404("게시글을 찾을 수 없습니다"));
         // 2. 권한 처리
         if (sessionUserId != board.getUser().getId()) {
             throw new ApiException403("게시글을 수정할 권한이 없습니다");
@@ -63,7 +63,7 @@ public class BoardService {
     // 글조회
     public BoardResponse.BoardDTO boardFindById(int boardId) {
         Board board = boardJPARepository.findById(boardId)
-                .orElseThrow(() -> new ApiException403("게시글을 찾을 수 없습니다."));
+                .orElseThrow(() -> new ApiException404("게시글을 찾을 수 없습니다."));
         return new BoardResponse.BoardDTO(board);
     }
 
@@ -71,7 +71,7 @@ public class BoardService {
     @Transactional
     public BoardResponse.SaveDTO boardSave(BoardRequest.SaveDTO reqDTO, SessionUser sessionUser) {
         User user = userJPARepository.findById(sessionUser.getId())
-                .orElseThrow(() -> new ApiException403("해당하는 회원정보를 찾을 수 없습니다."));
+                .orElseThrow(() -> new ApiException404("해당하는 회원정보를 찾을 수 없습니다."));
 
         Board board = boardJPARepository.save(reqDTO.toEntity(user));
 

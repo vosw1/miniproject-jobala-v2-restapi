@@ -28,7 +28,7 @@ public class ApplyService {
     // 상태수정
     public ApplyResponse.StatusUpdateDTO statusUpdate(ApplyRequest.ApplyStatusUpdateRequestDTO reqDTO, SessionUser sessionUser) {
         Apply apply = applyJPARepository.findById(reqDTO.getApplyId())
-                .orElseThrow(() -> new ApiException403("해당 지원정보를 찾을 수 없습니다."));
+                .orElseThrow(() -> new ApiException404("해당 지원정보를 찾을 수 없습니다."));
 
         apply.setState(reqDTO.getStatus());
         applyJPARepository.save(apply);

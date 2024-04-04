@@ -1,7 +1,7 @@
 package com.example.jobala.guest;
 
 import com.example.jobala._core.errors.apiException.ApiException400;
-import com.example.jobala._core.errors.apiException.ApiException403;
+import com.example.jobala._core.errors.apiException.ApiException404;
 import com.example.jobala._core.utill.Paging;
 import com.example.jobala._user.*;
 import com.example.jobala.resume.Resume;
@@ -32,7 +32,7 @@ public class GuestService {
     @Transactional
     public UserResponse.GuestProfile guestUpdateProfile(UserRequest.UserUpdateDTO reqDTO, SessionUser sessionUser) {
         User user = guestJPARepository.findById(sessionUser.getId())
-                .orElseThrow(() -> new ApiException403("수정할 프로필이 없습니다.")).getUser();
+                .orElseThrow(() -> new ApiException404("수정할 프로필이 없습니다.")).getUser();
 
         byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getImgFilename().getBytes());
         String imageUUID = UUID.randomUUID() + "_" + reqDTO.getImgTitle();
@@ -54,7 +54,7 @@ public class GuestService {
 
     // 개인 - 프로필관리
     public UserResponse.GuestProfile guestProgile(SessionUser sessionUser) {
-        User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException403("유저의 정보를 찾을 수 없습니다."));
+        User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException404("유저의 정보를 찾을 수 없습니다."));
         return new UserResponse.GuestProfile(user);
     }
 
