@@ -24,7 +24,7 @@ public class ScrapService {
     private final JobopenJPARepository jobopenJPARepository;
     private final UserJPARepository userJPARepository;
 
-    // 회사가스크랩
+    // 기업이 인재 스크랩
     @Transactional
     public ScrapResponse.CompDTO scrapByComp(ScrapRequest.ScrapDTO reqDTO, SessionUser sessionUser) {
         User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException403("해당하는 회원정보를 찾을 수 없습니다."));
@@ -43,7 +43,7 @@ public class ScrapService {
         }
     }
 
-    // 게스트가스크랩
+    // 개인이 채용공고 스크랩
     @Transactional
     public ScrapResponse.GuestDTO scrapByGuest(ScrapRequest.ScrapDTO reqDTO, SessionUser sessionUser) {
         User user = userJPARepository.findById(sessionUser.getId()).orElseThrow(() -> new ApiException403("해당하는 회원정보를 찾을 수 없습니다."));
@@ -62,13 +62,13 @@ public class ScrapService {
         }
     }
 
-    // 회사가스크앱한이력서조회
+    // 기업이 스크랩한 인재 조회
     public List<ResumeResponse.ScrapDTO> scrapResumeBycomp(SessionUser sessionUser) {
         List<ResumeResponse.ScrapDTO> respDTO = resumeJPARepository.findByUserIdJoinScrap(sessionUser.getId());
         return respDTO;
     }
 
-    // 게스트가스크랩한공고조회
+    // 개인이 스크랩한 채용공고 조회
     public List<JobopenResponse.ScrapDTO> scrapJobopenByGuest(SessionUser sessionUser) {
         List<JobopenResponse.ScrapDTO> respDTO = jobopenJPARepository.findByUserIdJoinScrap(sessionUser.getId());
         return respDTO;

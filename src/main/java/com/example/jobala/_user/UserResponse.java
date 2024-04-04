@@ -45,8 +45,7 @@ public class UserResponse {
         }
     }
 
-    // 개인, 기업 - 회원가입
-
+    // 개인, - 회원가입
     @Data
     public static class GuestDTO {
         private Integer userId;
@@ -66,6 +65,7 @@ public class UserResponse {
         }
     }
 
+    // 기업 - 회원가입
     @Data
     public static class CompDTO {
         private Integer uerId;

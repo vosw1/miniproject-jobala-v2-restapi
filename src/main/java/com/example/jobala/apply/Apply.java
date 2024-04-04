@@ -36,8 +36,6 @@ public class Apply {
     @CreationTimestamp
     private Timestamp createdAt;
 
-
-
     @Builder
     public Apply(Integer id, Resume resume, Jobopen jobopen, User user, String state, Integer role, Timestamp createdAt) {
         this.id = id;

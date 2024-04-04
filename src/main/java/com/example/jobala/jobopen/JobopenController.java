@@ -15,6 +15,7 @@ public class JobopenController {
     private final HttpSession session;
     private final JobopenService jobopenService;
 
+
     //공고 삭제
     @DeleteMapping("/api/jobopens/{id}")  // 주소 수정 필요
     public ResponseEntity<?> delete(@PathVariable int id) {
@@ -22,6 +23,7 @@ public class JobopenController {
         jobopenService.jobopenDelete(id, sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil(null));
     }
+
 
     //공고 수정
     @PutMapping("/api/jobopens/{id}")  // 주소 수정 필요
@@ -40,8 +42,9 @@ public class JobopenController {
         return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
+
     //공고 보기
-    @GetMapping("/api/jobopens/{id}")
+    @GetMapping("/api/jobopens/{id}/detail")
     public ResponseEntity<?> detailForm(@PathVariable int id) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         // 채용공고 정보 가져오기

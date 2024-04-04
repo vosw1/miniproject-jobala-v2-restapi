@@ -15,12 +15,7 @@ import java.util.List;
 
 public class JobopenRequest {
 
-    @AllArgsConstructor
-    @Data
-    public static class DeleteDTO {
-        private int id;
-    }
-
+    //공고 상세
     @AllArgsConstructor
     @Data
     public static class JobopenDetailDTO {
@@ -57,6 +52,7 @@ public class JobopenRequest {
         private List<String> skills = new ArrayList<>(); //내용
     }
 
+    //공고 업데이트
     @AllArgsConstructor
     @Data
     public static class UpdateDTO {
@@ -91,6 +87,7 @@ public class JobopenRequest {
 
     }
 
+    //공고 등록
     @AllArgsConstructor
     @Data
     public static class SaveDTO {
@@ -116,7 +113,6 @@ public class JobopenRequest {
         @NotEmpty(message = "근무지역은 공백일 수 없습니다")
         private String compLocation; //근무지역
 
-        @NotEmpty(message = "마감일은 공백일 수 없습니다")
         private Date endTime; //내용
 
         private List<String> skills = new ArrayList<>(); //내용

@@ -40,7 +40,7 @@ public class JobopenResponse {
         }
     }
 
-    //TODO: 이름
+    //공고 수정
     @Data
     public static class UpdateDTO {
         private Integer id;
@@ -67,8 +67,8 @@ public class JobopenResponse {
             this.endTime = jobopen.getEndTime();
         }
     }
-    //TODO: 이름
 
+    //채용공고 검색
     @AllArgsConstructor
     @NoArgsConstructor
     @Data
@@ -80,6 +80,7 @@ public class JobopenResponse {
         private String edu;
         private String imgFilename;
     }
+
 
     //공고 쓰기 응답 dto
     @Data
@@ -111,8 +112,7 @@ public class JobopenResponse {
         }
     }
 
-
-    //TODO: 이름
+    //공고 상세보기
     @AllArgsConstructor
     @Data
     public static class DetailDTO {
@@ -204,17 +204,7 @@ public class JobopenResponse {
         }
     }
 
-    @AllArgsConstructor
-    @Data
-    public static class SearchDTO {
-        private Integer id;
-        private String jobopenTitle;
-        private String compLocation;
-        private String career;
-        private String edu;
-        private Date endTime;
-    }
-
+    //공고 스크랩
     @AllArgsConstructor
     @Data
     public static class ScrapDTO {

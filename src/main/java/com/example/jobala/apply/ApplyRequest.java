@@ -18,7 +18,6 @@ public class ApplyRequest {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class ApplyStatusUpdateRequestDTO {
-
         private Integer applyId;
 
         @Pattern(regexp = "^(열람전|합격|불합격|수락|거절)$", message = "status는 공백일 수 없습니다")

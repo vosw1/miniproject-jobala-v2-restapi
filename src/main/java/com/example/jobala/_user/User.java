@@ -68,7 +68,6 @@ public class User {
     }
 
     //프로필 업데이트 setter
-
     public void setProfileUpdateDTO(UserRequest.UserUpdateDTO reqDTO, String imgFilename) {
         this.name = reqDTO.getName();
         this.password = reqDTO.getPassword();

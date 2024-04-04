@@ -79,8 +79,7 @@ public class BoardService {
     }
 
 
-    //DEL: 글조호 삭제
-    // TODO: 이름
+    //글 목록
     public List<BoardResponse.BoardDTO> boardFindAll() { // 글목록조회
         List<BoardResponse.BoardDTO> boardList = boardJPARepository.findBoardAll();
         return boardList;
