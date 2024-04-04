@@ -18,7 +18,7 @@ public class ScrapController {
     private final HttpSession session;
     private final ScrapService scrapService;
 
-    //스크랩 목록
+    // 스크랩 목록보기
     @GetMapping("/api/scraps")
     public ResponseEntity<?> ScrapForm() {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
@@ -31,7 +31,7 @@ public class ScrapController {
         }
     }
 
-    //스크랩
+    // 스크랩하기
     @RequestMapping(value = "/api/scraps", method = {RequestMethod.POST, RequestMethod.DELETE})
     public ResponseEntity<?> scrapResume(@Valid @RequestBody ScrapRequest.ScrapDTO reqDTO) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
