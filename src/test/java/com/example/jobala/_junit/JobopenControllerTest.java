@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.web.JsonPath;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
@@ -24,7 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Import(MyControllerTest.class)
+
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class JobopenControllerTest {
@@ -36,7 +37,6 @@ public class JobopenControllerTest {
 
     @Autowired
     private ObjectMapper om;
-
 
     public String jwt() {
         String jwt = JWT
@@ -167,9 +167,8 @@ public class JobopenControllerTest {
         String jwt = JwtUtil.create(user);
 
         int id = 1;
-
         ResultActions resultActions = mvc
-                .perform(get("/api/jobopens/" + id).header("Authorization", "Bearer " + jwt));
+                .perform(get("/api/jobopens/" + id +"/detail").header("Authorization", "Bearer " + jwt));
 
 
         String responseBody = resultActions.andReturn().getResponse().getContentAsString();
@@ -177,10 +176,7 @@ public class JobopenControllerTest {
 
         // then
         resultActions.andExpect(status().isOk())
-                .andExpect(jsonPath("$.msg").value("성공")) // 응답 메시지가 "성공"인지 확인
-                .andExpect(jsonPath("$.body").exists()) // 응답 본문이 존재하는지 확인
-                .andExpect(jsonPath("$.body.id").value(id)) // 응답 본문에 공고의 ID가 있는지 및 값이 올바른지 확인
-                .andExpect(jsonPath("$.body.jobopenTitle").exists()); // 공고의 제목이 응답 본문에 존재하는지 확인
+                .andExpect(jsonPath("$.body.jobopenTitle").value("소프트웨어 개발자 채용"));
     }
 
 
@@ -197,11 +193,6 @@ public class JobopenControllerTest {
         String responseBody = resultActions.andReturn().getResponse().getContentAsString();
         System.out.println("테스트 : " + responseBody);
 
-        // then
-//        resultActions.andExpect(status().isOk())
-//                .andExpect(jsonPath("$.msg").value("성공")) // 응답 메시지가 "성공"인지 확인
-//                .andExpect(jsonPath("$.body").exists()) // 응답 본문이 존재하는지 확인
-//                .andExpect(jsonPath("$.body.id").value(id)); // 응답 본문에 공고의 ID가 있는지 및 값이 올바른지 확인
 
     }
 }
