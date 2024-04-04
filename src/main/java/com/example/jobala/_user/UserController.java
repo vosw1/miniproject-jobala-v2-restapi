@@ -25,8 +25,6 @@ public class UserController {
     private final GuestService guestService;
     private final CompService compService;
 
-    // TODO : 중복체크 로직 삭제
-
     //메인에서 공고목록보기
     @GetMapping("/")
     public ResponseEntity<?> mainForm(@RequestParam(defaultValue = "0") Integer page) {
