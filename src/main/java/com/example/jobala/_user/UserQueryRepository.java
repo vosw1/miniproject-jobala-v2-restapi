@@ -17,6 +17,7 @@ import java.util.List;
 public class UserQueryRepository {
     private final EntityManager em;
 
+    //공고목록
     public List<JobopenResponse.ListDTO> findByJoboopenAll() {
         String q = """
                 select jb.id, jb.jobopen_title, jb.comp_location, jb.career, jb.edu, ut.img_filename 
@@ -31,6 +32,7 @@ public class UserQueryRepository {
         return jobopenList;
     }
 
+    //채용공고 검색필터
     public List<JobopenResponse.ListDTO> findAll(String skills, GuestRequest.SearchDTO resDTO) {
         String skillQuery = """
                SELECT jb.id, jb.jobopen_title, jb.comp_location, jb.career, jb.edu, ut.img_filename 
@@ -168,25 +170,5 @@ public class UserQueryRepository {
         return jobopenList;
     }
 
-    public List<JobopenResponse.ListDTO> findAll() {
-        String q = """
-                select jb.id, jb.jobopen_title, jb.comp_location, jb.career, jb.edu 
-                from jobopen_tb jb order by id desc;              
-                """;
-        Query query = em.createNativeQuery(q);
 
-        JpaResultMapper rm = new JpaResultMapper();
-        List<JobopenResponse.ListDTO> jobopenList = rm.list(query, JobopenResponse.ListDTO.class);
-        return jobopenList;
-    }
-
-    public User findById(int id) {
-        String q = """
-                select * from user_tb where id = ?
-                """;
-        Query query = em.createNativeQuery(q,User.class);
-        query.setParameter(1, id);
-        User user = (User) query.getSingleResult();
-        return user;
-    }
 }

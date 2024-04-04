@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 public class GuestResponse {
 
-
+    //인재검색
     @Data
     @AllArgsConstructor
     @NoArgsConstructor

@@ -93,6 +93,7 @@ public class UserRequest {
         }
     }
 
+    // 프로필 업데이트
     @Data
     public static class UserUpdateDTO {
         @NotEmpty(message = "이름이 공백일 수 없습니다")
@@ -121,6 +122,7 @@ public class UserRequest {
         private String imgFilename;
     }
 
+    //개인 회원가입
     @Data
     public static class GuestJoinDTO {
         private String name;
@@ -146,6 +148,7 @@ public class UserRequest {
         }
     }
 
+    //기업 회원가입
     @Data
     public static class CompJoinDTO {
         private String compNum;

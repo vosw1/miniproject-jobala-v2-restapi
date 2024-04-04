@@ -42,13 +42,6 @@ public class UserController {
         return ResponseEntity.ok().header("Authorization", jwt).body(new ApiUtil(null));
     }
 
-    // 회원가입
-//    @PostMapping("/join")
-//    public ResponseEntity<?> join(@Valid @RequestBody UserRequest.JoinDTO reqDTO) {
-//        UserResponse.JoinDTO respDTO = userService.join(reqDTO);
-//        return ResponseEntity.ok(new ApiUtil(respDTO.getCompDTO()));
-//    }
-
     // 개인 회원가입 - params = "role=0" -> 개인
     @PostMapping(value = "/join", params = "role=0")
     public ResponseEntity<?> joinGuest(@Valid @RequestBody UserRequest.GuestJoinDTO reqDTO) {

@@ -34,7 +34,7 @@ public class ApplyController {
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
-    // 기업 및 개인 - 포지션 제안 현황보기
+    // 기업 및 개인 - 포지션 폼
     @GetMapping("/api/applies/positionForm")
     public ResponseEntity<?> positionForm() {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
@@ -47,7 +47,7 @@ public class ApplyController {
         }
     }
 
-    // 기업이 
+    // 기업 ,개인 - 지원폼
     @GetMapping("/api/applies/applyForm")
     public ResponseEntity<?> applyForm() {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");

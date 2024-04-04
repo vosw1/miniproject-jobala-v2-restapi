@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+// 임시 세션
 @Data
 public class SessionUser {
     private Integer id;

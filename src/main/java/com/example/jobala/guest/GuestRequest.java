@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class GuestRequest {
 
-    //TODO: 이름
+    //인재검색
     @AllArgsConstructor
     @NoArgsConstructor
     @Data

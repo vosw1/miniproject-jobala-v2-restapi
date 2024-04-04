@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class CompRequest {
 
-    //TODO: 이름
+    //검색하기
     @AllArgsConstructor
     @Data
     public static class SearchDTO {
@@ -27,7 +27,7 @@ public class CompRequest {
 
     // DEL: Response에서 ScoutListDTO 만듬
 
-    //TODO: 이름
+    //기업 프로필 업데이트
     @Getter
     @AllArgsConstructor
     public static class CompProfileUpdateDTO {

@@ -44,7 +44,7 @@ public class BoardResponse {
         }
     }
 
-    // TODO: 이름
+    // 글 상세
     @Data
     public static class DetailDTO {
         private int boardId;

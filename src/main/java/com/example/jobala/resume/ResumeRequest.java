@@ -77,15 +77,5 @@ public class ResumeRequest {
         private String edu;
 
         private List<String> skills = new ArrayList<>();
-
-        public void setResumeUpdateDTO(UpdateDTO reqDTO) {
-            this.resumeTitle = resumeTitle;
-            this.hopeJob = hopeJob;
-            this.career = career;
-            this.license = license;
-            this.content = content;
-            this.edu = edu;
-            this.skills = skills;
-        }
     }
 }
