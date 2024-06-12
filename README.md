@@ -1,92 +1,78 @@
-# JOBARA 이력서 홈페이지
+# I am
+| 이름 | 사진 | 역할 |  
+|:--:|:--:|:---------------:|
+| 송민경 | <img src="https://avatars.githubusercontent.com/u/153582401?v=4" width="150px"/> | 테이블 설계<br/>화면 디자인 및 구현<br>(마이페이지에 속한 화면)<br/>이미지(공고, 이력서)<br/>커뮤니티 댓글<br/>단위 테스트<br/>유효성 검사|
 
-> ## 시연영상(Youtube)
-<a href = "">![JObala자바라 2차 리드미](https://github.com/kjh5848/miniproject-jobala-v2-restapi/assets/153582123/1528e8d9-6730-414b-9313-f4546ed47d63)
-  <br>
-  <br>
+---
 
+# Project v1
 
+<img src="https://github.com/kjh5848/miniproject-JOBALR/assets/161176345/8bc39efd-533f-4696-ae5c-99b07c0e1462"><br>
 
-> ## 발표자료
+백엔드 서버의 기초인 CRUD 와 Session을 기반으로 한 이력서 공유 플랫폼으로, 사용자들이 자신의 이력서를 업로드하고 공유할 수 있는 공간입니다. 
 
-- PPT 파일 다운로드[바로가기]()
-- PPT 브라우저로 보기[바로가기](https://www.canva.com/design/DAGBPq1glcU/4HFpBjmpfg75Di9BTtV3mA/view?utm_content=DAGBPq1glcU&utm_campaign=designshare&utm_medium=link&utm_source=editor)
-  <br>
-  <br>
-  
+기간 : 2024.02.21 ~ 2023.03.10 ( __총 29일__ )
 
-> ## 프로젝트 소개 및 목표 달성률
+---
 
-![JObala자바라 프로젝트 목표 달성률](https://github.com/kjh5848/miniproject-jobala-v2-restapi/assets/153582123/e5bdb418-04c2-4306-87e9-0ba1fc10d768)
-  <br>
-  <br>
+# Team
 
+<img src="https://github.com/kjh5848/miniproject-JOBALR/assets/161176345/8bc39efd-533f-4696-ae5c-99b07c0e1462"><br>
+개발자가 되기 위한 비전공자들이 모인 자바라입니다.
 
-> ## 프로젝트 기간
+## Teammates
+| Team-Leader | Team-Member | Team-Member | Team-Member | Team-Member |
+|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
+| <img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/d20420bf-008c-4fd0-a7e0-8983d7606c7c" alt="profile" width="100" height="100"> | <img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/c4180860-481a-46f0-a0e2-df05bdf8a586" alt="profile" width="100" height="100"> | <img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/9d7395db-e810-466e-bd9d-9216d18d0395" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/153582401?v=4" alt="profile" width="100" height="100"> | <img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/84715293-8f3a-4939-8122-c85438791364" alt="profile" width="100" height="100"> |
+| 김주혁 | 박선규 | 박찬혁 | 송민경 | 장유진 |
 
+---
 
+# Service
 
+| 기업 회원가입 | 개인 회원가입 |
+|:-----------------:|:-------------------:|
+| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/5fc671ef-9683-4b38-a7be-b5c268044d92" width="300" height="227"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/446cf17d-bf99-4075-a5e9-19fd48014bb5" width="300" height="227"/></p> |
+| 기업 채용공고 관리 | 개인 이력서 관리 |
+| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/ef063154-58e3-4b18-a755-348af90cc724" width="300" height="256"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/a555aec9-2f69-4df8-a308-f7a29e39d906" width="300" height="227"/></p> |
+| 개인 채용공고 검색 및 지원 | 기업 지원자 합격 |
+| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/dea17a88-28f6-42a3-8bc1-b7c9347cfc69" width="300" height="256"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/cedf7bac-6728-490c-8d95-ed7f17eaa2be" width="300" height="227"/></p> |
+| 기업 인재 검색 및 포지션 제안 | 개인 포지션 제안 수락 |
+| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/d9d6de44-a066-44d8-a994-5b46b0dbe937" width="300" height="256"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/79cc6946-1d7f-483b-943e-841616d18448" width="300" height="227"/></p> |
+| 개인 채용공고 찜 | 커뮤니티 이용 |
+| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/c8d2db4c-4779-4384-9dd6-bc2be4a06a49" width="300" height="256"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/aabdf11b-b08e-459b-a650-ab0939711045" width="300" height="227"/></p> |
 
-> ## 기술 스택
-<span>
- <h3><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Eyes.png" width=30" /> IDE</h3>
- <img src="https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white"/>
-<img src="https://img.shields.io/badge/postman-0078D4?style=for-the-badge&logo=postman&logoColor=white"/>
- 
-  <h3><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Eyes.png" width=30" /> FrameWork</h3>
- <img src="https://img.shields.io/badge/Springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"/>
- 
-  <h3><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Eyes.png" width=30" /> DB</h3>
-   <img src="https://img.shields.io/badge/H2-FFA500?style=for-the-badge&logo=H2&logoColor=white"/>
-   <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white"/>
-   
-  <h3><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Eyes.png" width=30" /> 사용기술</h3>
-  <img src="https://img.shields.io/badge/junitTest-E34F26?style=for-the-badge&logo=junitTest&logoColor=white"/>
-  <img src="https://img.shields.io/badge/restapi-ED8B00?style=for-the-badge&logo=restapi&logoColor=white"/>
-  <img src="https://img.shields.io/badge/base64-FFA500?style=for-the-badge&logo=base64&logoColor=white"/>
-  <img src="https://img.shields.io/badge/json-0078D4?style=for-the-badge&logo=json&logoColor=white"/>
-  
+---
 
-  <h3><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Eyes.png" width=30" /> 언어</h3>
-  <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/>
+# Tech Stack
 
- </span>
- <br>
-  <br>
-  <span>
- <h3>💻협업 툴</h3>
-<img src="https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white"/>
-<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"/>
-</span>
-  <br>
-  <br>
+### FrameWork
+![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-brightgreen?logo=spring&logoColor=white)
+![REST API](https://img.shields.io/badge/restapi-ED8B00?style=flat&logo=restapi&logoColor=white)
+![Session](https://img.shields.io/badge/Session-ffcd00.svg?style=flat&logo=session&logoColor=white)
+![JUnit Test](https://img.shields.io/badge/junitTest-E34F26?style=flat&logo=junit&logoColor=white)
+![Base64](https://img.shields.io/badge/base64-FFA500?style=flat&logo=base64&logoColor=white)
+![JSON](https://img.shields.io/badge/json-0078D4?style=flat&logo=json&logoColor=white)
 
-> ## 요구 사항
+### DB
+![H2](https://img.shields.io/badge/-H2-orange?logo=amazondocumentdb&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-005C84?style=flat&logo=mysql&logoColor=white)
 
-- [x]  [기업 및 구직자] 등록 및 로그인 API 전환 **API 전환**
-- [x]  [기업] 채용공고 관리 - 보기/등록/수정/삭제 **API 전환**
-- [x]  [기업] 지원현황 관리 - 보기/합격/불합격 **API 전환**
-- [x]  [기업] 구직자 기술스택 매칭 리스트 보기 **API 전환**
-- [x]  [기업] 관심 구직자 구독(북마크,스크랩) **API 전환**
-- [x]  [구직자] 이력서 관리 - 보기/등록/수정/삭제 **API 전환**
-- [x]  [구직자] 기업 기술스택 매칭 리스트 보기 **API 전환**
-- [x]  [구직자] 관심 공고 구독(북마크,스크랩) **API 전환**
-- [x]  커뮤니티 고객센터 구현 **API 전환**
-  <br>
-  <br>
+### DevOps  
+![Apache Tomcat](https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=flat&logo=apache-tomcat&logoColor=black)
+![GitHub Actions](https://img.shields.io/badge/Github_Actions-2088FF?style=flat&logo=githubactions&logoColor=white)
+![AWS](https://img.shields.io/badge/Amazonaws-232F3E?style=flat&logo=amazonaws&logoColor=white)
 
+### Tools
+![Notion](https://img.shields.io/badge/-Notion-black?logo=notion&logoColor=white)
+![Git](https://img.shields.io/badge/-Git-red?logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/-GitHub-black?logo=github&logoColor=white)
+![Slack](https://img.shields.io/badge/-Slack-purple?logo=slack&logoColor=white)
+![KakaoTalk](https://img.shields.io/badge/kakaotalk-ffcd00.svg?style=flat&logo=kakaotalk&logoColor=white)
 
+---
 
-
-
-> ## API 문서
+## API 문서
  - 노션 [바로가기](https://getinthere.notion.site/API-1e71f4db9ec448e89fb288d0c93fccd8?pvs=4)
 
 ![JObala자바라 API 문서](https://github.com/kjh5848/miniproject-jobala-v2-restapi/assets/153582123/2e749d0e-6690-4ef1-92ea-74b2b80d0383)
-
-
-
-
-
-> ## 후기
-
