@@ -1,17 +1,17 @@
 # I am
 | 이름 | 사진 | 역할 |  
-|:--:|:--:|:---------------:|
-| 송민경 | <img src="https://avatars.githubusercontent.com/u/153582401?v=4" width="150px"/> | 테이블 설계<br/>화면 디자인 및 구현<br>(마이페이지에 속한 화면)<br/>이미지(공고, 이력서)<br/>커뮤니티 댓글<br/>단위 테스트<br/>유효성 검사|
+|:--:|:--:|:--|
+| 송민경 | <img src="https://avatars.githubusercontent.com/u/153582401?v=4" width="150px"/> | 테이블 수정<br>사용자 이미지 (보기, 수정, 삭제)<br>게시판 (목록, 상세보기, 글쓰기, 수정, 삭제)<br>댓글 (보기, 등록, 삭제)<br>이력서 삭제<br>채용공고 상세보기<br>단위 테스트<br>유효성 검사|
 
 ---
 
-# Project v1
+# Project v2
 
 <img src="https://github.com/kjh5848/miniproject-JOBALR/assets/161176345/8bc39efd-533f-4696-ae5c-99b07c0e1462"><br>
 
-백엔드 서버의 기초인 CRUD 와 Session을 기반으로 한 이력서 공유 플랫폼으로, 사용자들이 자신의 이력서를 업로드하고 공유할 수 있는 공간입니다. 
+v1 프로젝트를 리팩토링하여 Stateless기반의 Rest API로 전환한 프로젝트입니다.
 
-기간 : 2024.02.21 ~ 2023.03.10 ( __총 29일__ )
+기간 : 2024.03.22 ~ 2023.04.03 ( __총 14일__ )
 
 ---
 
@@ -30,17 +30,17 @@
 
 # Service
 
-| 기업 회원가입 | 개인 회원가입 |
+| 기업 회원가입 및 로그인 | 개인 회원가입 및 로그 |
 |:-----------------:|:-------------------:|
-| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/5fc671ef-9683-4b38-a7be-b5c268044d92" width="300" height="227"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/446cf17d-bf99-4075-a5e9-19fd48014bb5" width="300" height="227"/></p> |
+| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/ae047240-7848-4372-91f4-3e5df302f74b" width="300" height="220"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/bfd06c3d-24c0-42b1-9f4e-b3449c2b7daa" width="300" height="220"/></p> |
 | 기업 채용공고 관리 | 개인 이력서 관리 |
-| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/ef063154-58e3-4b18-a755-348af90cc724" width="300" height="256"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/a555aec9-2f69-4df8-a308-f7a29e39d906" width="300" height="227"/></p> |
+| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/e7d55541-98fe-45f7-91c9-9b7f3fd10134" width="300" height="220"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/2a3f5ddf-b2f7-4b6c-80ec-38cbaaabc1ed" width="300" height="220"/></p> |
 | 개인 채용공고 검색 및 지원 | 기업 지원자 합격 |
-| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/dea17a88-28f6-42a3-8bc1-b7c9347cfc69" width="300" height="256"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/cedf7bac-6728-490c-8d95-ed7f17eaa2be" width="300" height="227"/></p> |
-| 기업 인재 검색 및 포지션 제안 | 개인 포지션 제안 수락 |
-| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/d9d6de44-a066-44d8-a994-5b46b0dbe937" width="300" height="256"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/79cc6946-1d7f-483b-943e-841616d18448" width="300" height="227"/></p> |
+| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/f0351c06-a91f-45ee-bf83-7d3679df8306" width="300" height="220"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/9f7dd8fa-f9d2-4921-8345-620492e64411" width="300" height="220"/></p> |
+| 기업 인재 검색 및 포지션 제안 수락 | 기업 인재 스크랩 |
+| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/07781096-0f37-4573-930b-914f0ba2c46c" width="300" height="220"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/be7a72a7-b2fe-4450-b6de-cf719d792449" width="300" height="220"/></p> |
 | 개인 채용공고 찜 | 커뮤니티 이용 |
-| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/c8d2db4c-4779-4384-9dd6-bc2be4a06a49" width="300" height="256"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/aabdf11b-b08e-459b-a650-ab0939711045" width="300" height="227"/></p> |
+| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/7fd60978-84c8-4e9b-aa41-d03425d5ab2f" width="300" height="220"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/e0753fe3-737e-4fed-939b-0bea59e1e5ee" width="300" height="220"/></p> |
 
 ---
 
@@ -72,7 +72,5 @@
 
 ---
 
-## API 문서
- - 노션 [바로가기](https://getinthere.notion.site/API-1e71f4db9ec448e89fb288d0c93fccd8?pvs=4)
+# API Document
 
-![JObala자바라 API 문서](https://github.com/kjh5848/miniproject-jobala-v2-restapi/assets/153582123/2e749d0e-6690-4ef1-92ea-74b2b80d0383)
