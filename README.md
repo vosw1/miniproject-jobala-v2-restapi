@@ -71,6 +71,5 @@ v1 프로젝트를 리팩토링하여 Stateless기반의 Rest API로 전환한 �
 ![KakaoTalk](https://img.shields.io/badge/kakaotalk-ffcd00.svg?style=flat&logo=kakaotalk&logoColor=white)
 
 ---
-
-# API Document
-
+## API Document
+[ JObara의 API 문서 👆 ](https://valuable-garnet-407.notion.site/API-aeb68f07e90a477a917edcffff774f27)
