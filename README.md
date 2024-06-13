@@ -31,28 +31,12 @@
 
 # Tech Stack
 
-### FrameWork
-![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-brightgreen?logo=spring&logoColor=white)
-![REST API](https://img.shields.io/badge/restapi-ED8B00?style=flat&logo=restapi&logoColor=white)
-![JWT](https://img.shields.io/badge/JWT-ffcd00.svg?style=flat&logo=jwt&logoColor=white)
-![JUnit Test](https://img.shields.io/badge/junitTest-E34F26?style=flat&logo=junit&logoColor=white)
-![Base64](https://img.shields.io/badge/base64-FFA500?style=flat&logo=base64&logoColor=white)
-![JSON](https://img.shields.io/badge/json-0078D4?style=flat&logo=json&logoColor=white)
+| FrameWork | ![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-brightgreen?logo=spring&logoColor=white) ![REST API](https://img.shields.io/badge/restapi-ED8B00?style=flat&logo=restapi&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-ffcd00.svg?style=flat&logo=jwt&logoColor=white) ![JUnit Test](https://img.shields.io/badge/junitTest-E34F26?style=flat&logo=junit&logoColor=white) ![Base64](https://img.shields.io/badge/base64-FFA500?style=flat&logo=base64&logoColor=white) ![JSON](https://img.shields.io/badge/json-0078D4?style=flat&logo=json&logoColor=white) |
+| :-------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|    DB     | ![H2](https://img.shields.io/badge/-H2-orange?logo=amazondocumentdb&logoColor=white)                                                                                                                                                                                                                           |
+|  DevOps   | ![Apache Tomcat](https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=flat&logo=apache-tomcat&logoColor=black) ![AWS](https://img.shields.io/badge/Amazonaws-232F3E?style=flat&logo=amazonaws&logoColor=white)                                                                                                                                                                                 |
+|   Tools   | ![Notion](https://img.shields.io/badge/-Notion-black?logo=notion&logoColor=white) ![Git](https://img.shields.io/badge/-Git-red?logo=git&logoColor=white) ![Slack](https://img.shields.io/badge/-Slack-purple?logo=slack&logoColor=white) |
 
-### DB
-![H2](https://img.shields.io/badge/-H2-orange?logo=amazondocumentdb&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-005C84?style=flat&logo=mysql&logoColor=white)
-
-### DevOps  
-![Apache Tomcat](https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=flat&logo=apache-tomcat&logoColor=black)
-![AWS](https://img.shields.io/badge/Amazonaws-232F3E?style=flat&logo=amazonaws&logoColor=white)
-
-### Tools
-![Notion](https://img.shields.io/badge/-Notion-black?logo=notion&logoColor=white)
-![Git](https://img.shields.io/badge/-Git-red?logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/-GitHub-black?logo=github&logoColor=white)
-![Slack](https://img.shields.io/badge/-Slack-purple?logo=slack&logoColor=white)
-![KakaoTalk](https://img.shields.io/badge/kakaotalk-ffcd00.svg?style=flat&logo=kakaotalk&logoColor=white)
 
 ---
 
