@@ -29,6 +29,38 @@
 
 ---
 
+# Tech Stack
+
+### FrameWork
+![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-brightgreen?logo=spring&logoColor=white)
+![REST API](https://img.shields.io/badge/restapi-ED8B00?style=flat&logo=restapi&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-ffcd00.svg?style=flat&logo=jwt&logoColor=white)
+![JUnit Test](https://img.shields.io/badge/junitTest-E34F26?style=flat&logo=junit&logoColor=white)
+![Base64](https://img.shields.io/badge/base64-FFA500?style=flat&logo=base64&logoColor=white)
+![JSON](https://img.shields.io/badge/json-0078D4?style=flat&logo=json&logoColor=white)
+
+### DB
+![H2](https://img.shields.io/badge/-H2-orange?logo=amazondocumentdb&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-005C84?style=flat&logo=mysql&logoColor=white)
+
+### DevOps  
+![Apache Tomcat](https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=flat&logo=apache-tomcat&logoColor=black)
+![AWS](https://img.shields.io/badge/Amazonaws-232F3E?style=flat&logo=amazonaws&logoColor=white)
+
+### Tools
+![Notion](https://img.shields.io/badge/-Notion-black?logo=notion&logoColor=white)
+![Git](https://img.shields.io/badge/-Git-red?logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/-GitHub-black?logo=github&logoColor=white)
+![Slack](https://img.shields.io/badge/-Slack-purple?logo=slack&logoColor=white)
+![KakaoTalk](https://img.shields.io/badge/kakaotalk-ffcd00.svg?style=flat&logo=kakaotalk&logoColor=white)
+
+---
+
+## API Document
+[ JObara의 API 문서 👆 ](https://valuable-garnet-407.notion.site/API-aeb68f07e90a477a917edcffff774f27)
+
+---
+
 # Service
 
 | 기업 회원가입 및 로그인 | 개인 회원가입 및 로그 |
@@ -42,35 +74,3 @@
 | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/07781096-0f37-4573-930b-914f0ba2c46c" width="300" height="220"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/be7a72a7-b2fe-4450-b6de-cf719d792449" width="300" height="220"/></p> |
 | 개인 채용공고 찜 | 커뮤니티 이용 |
 | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/7fd60978-84c8-4e9b-aa41-d03425d5ab2f" width="300" height="220"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/e0753fe3-737e-4fed-939b-0bea59e1e5ee" width="300" height="220"/></p> |
-
----
-
-# Tech Stack
-
-### FrameWork
-![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-brightgreen?logo=spring&logoColor=white)
-![REST API](https://img.shields.io/badge/restapi-ED8B00?style=flat&logo=restapi&logoColor=white)
-![Session](https://img.shields.io/badge/Session-ffcd00.svg?style=flat&logo=session&logoColor=white)
-![JUnit Test](https://img.shields.io/badge/junitTest-E34F26?style=flat&logo=junit&logoColor=white)
-![Base64](https://img.shields.io/badge/base64-FFA500?style=flat&logo=base64&logoColor=white)
-![JSON](https://img.shields.io/badge/json-0078D4?style=flat&logo=json&logoColor=white)
-
-### DB
-![H2](https://img.shields.io/badge/-H2-orange?logo=amazondocumentdb&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-005C84?style=flat&logo=mysql&logoColor=white)
-
-### DevOps  
-![Apache Tomcat](https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=flat&logo=apache-tomcat&logoColor=black)
-![GitHub Actions](https://img.shields.io/badge/Github_Actions-2088FF?style=flat&logo=githubactions&logoColor=white)
-![AWS](https://img.shields.io/badge/Amazonaws-232F3E?style=flat&logo=amazonaws&logoColor=white)
-
-### Tools
-![Notion](https://img.shields.io/badge/-Notion-black?logo=notion&logoColor=white)
-![Git](https://img.shields.io/badge/-Git-red?logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/-GitHub-black?logo=github&logoColor=white)
-![Slack](https://img.shields.io/badge/-Slack-purple?logo=slack&logoColor=white)
-![KakaoTalk](https://img.shields.io/badge/kakaotalk-ffcd00.svg?style=flat&logo=kakaotalk&logoColor=white)
-
----
-## API Document
-[ JObara의 API 문서 👆 ](https://valuable-garnet-407.notion.site/API-aeb68f07e90a477a917edcffff774f27)
