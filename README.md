@@ -1,47 +1,36 @@
-# I am
-| 이름 | 사진 | 역할 |  
-|:--:|:--:|:---------------:|
-| 송민경 | <img src="https://avatars.githubusercontent.com/u/153582401?v=4" width="150px"/> | 테이블 수정</br></br>개인, 기업) 이미지 업로드, 수정, 삭제<br>기업, 개인) 커뮤니티 목록, 상세보기, 글쓰기, 수정, 삭제</br>기업, 개인) 커뮤니티 댓글 보기, 등록, 삭제</br>개인) 이력서 삭제</br>개인) 채용공고 상세보기</br></br>관련 단위 테스트</br></br>유효성 검사|
+# Project
 
----
-
-# Project v2
-
-<img src="https://github.com/kjh5848/miniproject-JOBALR/assets/161176345/8bc39efd-533f-4696-ae5c-99b07c0e1462"><br>
+<img src="https://github.com/kjh5848/miniproject-JOBALR/assets/161176345/8bc39efd-533f-4696-ae5c-99b07c0e1462" height=90> 기간 : 2024.03.22 ~ 2023.04.03 ( __총 14일__ )
 
 다음 프로젝트(앱과의 통신)를 위해 v1 프로젝트를 리팩토링하여 Stateless 기반의 REST API로 전환하였습니다.
 <br>이 과정에서 Session 대신 JWT를 사용하고, DTO와 Stream API를 활용하였으며, API 문서화를 완료하였습니다.
 
-기간 : 2024.03.22 ~ 2023.04.03 ( __총 14일__ )
-
 ---
 
 # Team
-
-<img src="https://github.com/kjh5848/miniproject-JOBALR/assets/161176345/8bc39efd-533f-4696-ae5c-99b07c0e1462"><br>
-개발자가 되기 위한 비전공자들이 모인 자바라입니다.
+<img src="https://github.com/kjh5848/miniproject-JOBALR/assets/161176345/8bc39efd-533f-4696-ae5c-99b07c0e1462" height=90>
+꿈을 잡기 위해 노력하는 비전공자 개발자들이 모인 자바라입니다.
 
 ## Teammates
 | Team-Leader | Team-Member | Team-Member | Team-Member | Team-Member |
 |:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
 | <img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/d20420bf-008c-4fd0-a7e0-8983d7606c7c" alt="profile" width="100" height="100"> | <img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/c4180860-481a-46f0-a0e2-df05bdf8a586" alt="profile" width="100" height="100"> | <img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/9d7395db-e810-466e-bd9d-9216d18d0395" alt="profile" width="100" height="100"> | <img src="https://avatars.githubusercontent.com/u/153582401?v=4" alt="profile" width="100" height="100"> | <img src="https://github.com/vosw1/miniproject-jobala-v2-ssr/assets/153582401/84715293-8f3a-4939-8122-c85438791364" alt="profile" width="100" height="100"> |
-| 김주혁 | 박선규 | 박찬혁 | 송민경 | 장유진 | 
+| 김주혁 | 박선규 | 박찬혁 | 송민경 | 장유진 |
 
 ---
 
+#  I am 팀원
+| 테이블 수정 | 기능 | 단위 테스트 | API 문서|
+|:--:|:---------------:|:---------------:|:--:|
+|| 개인, 기업) 이미지 업로드, 수정, 삭제<br/>개인, 기업) 커뮤니티 목록, 상세보기, </br>개인, 기업) 커뮤니티 글쓰기, 수정, 삭제<br/>개인, 기업) 커뮤니티 댓글 보기, 등록, 삭제<br/><br/>개인) 이력서 삭제<br/><br/>기업) 채용공고 상세보기|이미지 업로드<br/>이미지 수정<br/>이미지 삭제|[ Jobara의 API 문서 보기👆 ](https://valuable-garnet-407.notion.site/API-aeb68f07e90a477a917edcffff774f27)|
+
 # Tech Stack
 
-| FrameWork | ![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-brightgreen?logo=spring&logoColor=white) ![REST API](https://img.shields.io/badge/restapi-ED8B00?style=flat&logo=restapi&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-ffcd00.svg?style=flat&logo=jwt&logoColor=white) ![JUnit Test](https://img.shields.io/badge/junitTest-E34F26?style=flat&logo=junit&logoColor=white) ![Base64](https://img.shields.io/badge/base64-FFA500?style=flat&logo=base64&logoColor=white) ![JSON](https://img.shields.io/badge/json-0078D4?style=flat&logo=json&logoColor=white) |
+| FrameWork | ![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?style=flat&logo=openjdk&logoColor=white) ![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-brightgreen?logo=spring&logoColor=white) ![Rest API](https://img.shields.io/badge/RestAPI-ED8B00?style=flat&logo=restapi&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-ffcd00.svg?style=flat&logo=jwt&logoColor=white) ![JUnit Test](https://img.shields.io/badge/JUnitTest-E34F26?style=flat&logo=junit&logoColor=white) ![Base64](https://img.shields.io/badge/base64-FFA500?style=flat&logo=base64&logoColor=white) ![JSON](https://img.shields.io/badge/json-0078D4?style=flat&logo=json&logoColor=white) |
 | :-------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 |    DB     | ![H2](https://img.shields.io/badge/-H2-orange?logo=amazondocumentdb&logoColor=white)                                                                                                                                                                                                                           |
 |  DevOps   | ![Apache Tomcat](https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=flat&logo=apache-tomcat&logoColor=black) ![AWS](https://img.shields.io/badge/Amazonaws-232F3E?style=flat&logo=amazonaws&logoColor=white)                                                                                                                                                                                 |
 |   Tools   | ![Notion](https://img.shields.io/badge/-Notion-black?logo=notion&logoColor=white) ![Git](https://img.shields.io/badge/-Git-red?logo=git&logoColor=white) ![Slack](https://img.shields.io/badge/-Slack-purple?logo=slack&logoColor=white) |
-
-
----
-
-## API Document
-[ JObara의 API 문서 👆 ](https://valuable-garnet-407.notion.site/API-aeb68f07e90a477a917edcffff774f27)
 
 ---
 
