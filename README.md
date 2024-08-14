@@ -2,8 +2,10 @@
 
 <img src="https://github.com/kjh5848/miniproject-JOBALR/assets/161176345/8bc39efd-533f-4696-ae5c-99b07c0e1462" height=90> 기간 : 2024.03.22 ~ 2023.04.03 ( __총 14일__ )
 
-다음 프로젝트(앱과의 통신)를 위해 v1 프로젝트를 리팩토링하여 Stateless 기반의 REST API로 전환하였습니다.
-<br>이 과정에서 Session 대신 JWT를 사용하고, DTO와 Stream API를 활용하였으며, API 문서화를 완료하였습니다.
+- Java로 SpringBoot를 이용한 JWT 기반의 Web Site를 다음 프로젝트(앱과의 통신)를 위해 Stateless 기반의 REST API로 전환
+- HTML의 GET, POST, PUT, DELETE 메서드를 이용한 CRUD
+- Exception Handler로 오류 처리
+- DTO와 Stream API를 활용
 
 ---
 
