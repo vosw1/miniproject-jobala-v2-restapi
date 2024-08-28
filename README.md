@@ -1,6 +1,6 @@
 # Project
 
-<img src="https://github.com/kjh5848/miniproject-JOBALR/assets/161176345/8bc39efd-533f-4696-ae5c-99b07c0e1462" height=90> 기간 : 2024.03.22 ~ 2023.04.03 ( __총 14일__ )
+<img src="https://github.com/kjh5848/miniproject-JOBALR/assets/161176345/8bc39efd-533f-4696-ae5c-99b07c0e1462" height=90> 기간 : 2024.03.22 ~ 2024.04.03 ( __총 14일__ )
 
 - Java로 SpringBoot를 이용한 Web Site를 다음 프로젝트(앱과의 통신)를 위해 JWT 기반의 (Stateless) REST API로 전환
 - HTML의 GET, POST, PUT, DELETE 메서드를 이용한 CRUD
