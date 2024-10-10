@@ -36,15 +36,15 @@
 
 | 기업 회원가입 및 로그인 | 개인 회원가입 및 로그 |
 |:-----------------:|:-------------------:|
-| <p align="center"><img src="https://github.com/user-attachments/assets/f87b0d17-4c2e-4d67-bc67-b4edcdb48c75" width="700" height="400"/></p> | <p align="center"><img src="https://github.com/user-attachments/assets/36800152-f1bb-474d-9119-67b504191d05" width="700" height="400"/></p> |
+| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/ae047240-7848-4372-91f4-3e5df302f74b" width="400" height="300"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/bfd06c3d-24c0-42b1-9f4e-b3449c2b7daa" width="400" height="300"/></p> |
 | 기업 채용공고 관리 | 개인 이력서 관리 |
-| <p align="center"><img src="https://github.com/user-attachments/assets/0a7e7776-a20c-41cc-a32a-55f10846d34a" width="700" height="400"/></p> | <p align="center"><img src="https://github.com/user-attachments/assets/e2c1afde-d05f-4e55-b20d-eeb10ba04db9" width="700" height="400"/></p> |
+| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/e7d55541-98fe-45f7-91c9-9b7f3fd10134" width="400" height="300"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/2a3f5ddf-b2f7-4b6c-80ec-38cbaaabc1ed" width="400" height="300"/></p> |
 | 개인 채용공고 검색 및 지원 | 기업 지원자 합격 |
-| <p align="center"><img src="!https://github.com/user-attachments/assets/46ea48bf-a201-4150-a908-17b6e4fa7d7b" width="700" height="400"/></p> | <p align="center"><img src="https://github.com/user-attachments/assets/dec508ee-cbb0-4948-88d1-251d139701f5" width="700" height="400"/></p> |
+| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/f0351c06-a91f-45ee-bf83-7d3679df8306" width="400" height="300"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/be7a72a7-b2fe-4450-b6de-cf719d792449" width="400" height="300"/></p> |
 | 기업 인재 검색 및 포지션 제안 수락 | 기업 인재 스크랩 |
-| <p align="center"><img src="https://github.com/user-attachments/assets/8a202484-1fbd-4834-87c1-d135a3133e9b" width="700" height="400"/></p> | <p align="center"><img src="https://github.com/user-attachments/assets/3f12aaf2-f26d-48ce-b9d8-81f0b46e633a" width="700" height="400"/></p> |
+| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/07781096-0f37-4573-930b-914f0ba2c46c" width="400" height="300"/></p> | <p align="center"><img src="https://github.com/user-attachments/assets/3f12aaf2-f26d-48ce-b9d8-81f0b46e633a" width="400" height="300"/></p> |
 | 개인 채용공고 찜 | 커뮤니티 이용 |
-| <p align="center"><img src="https://github.com/user-attachments/assets/d9757479-79a6-4d78-86d1-64e63a4fdb6a" width="700" height="400"/></p> | <p align="center"><img src="https://github.com/user-attachments/assets/fd5104ac-7091-4eaa-b510-76c1437a9e44" width="700" height="400"/></p> |
+| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/7fd60978-84c8-4e9b-aa41-d03425d5ab2f" width="400" height="300"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/e0753fe3-737e-4fed-939b-0bea59e1e5ee" width="400" height="300"/></p> |
 
 
 ---
@@ -52,5 +52,5 @@
 #  Features implemented by me
 | 테이블 수정 | 기능 | 단위 테스트 | API 문서|
 |:--:|:---------------:|:---------------:|:--:|
-|개인<br/>기업<br/>이력서<br/>채용공고<br/>사진<br/>기술스택<br/>자유게시판<br/>댓글| 개인, 기업) 이미지 업로드, 수정, 삭제<br/>개인, 기업) 커뮤니티 목록, 상세보기, </br>개인, 기업) 커뮤니티 글쓰기, 수정, 삭제<br/>개인, 기업) 커뮤니티 댓글 보기, 등록, 삭제<br/><br/>개인) 이력서 삭제<br/><br/>기업) 채용공고 상세보기|이미지 업로드<br/>이미지 수정<br/>이미지 삭제|[ Jobara의 API 문서 보기👆 ](https://valuable-garnet-407.notion.site/API-aeb68f07e90a477a917edcffff774f27)|
+|개인<br/>기업<br/>이력서<br/>채용공고<br/>사진<br/>기술스택<br/>자유게시판<br/>댓글| 개인, 기업) 이미지 업로드, 수정, 삭제<br/>개인, 기업) 커뮤니티 목록, 상세보기, </br>개인, 기업) 커뮤니티 글쓰기, 수정, 삭제<br/>개인, 기업) 커뮤니티 댓글 보기, 등록, 삭제<br/><br/>개인) 이력서 삭제<br/><br/>기업) 채용공고 상세보기|이미지 업로드<br/>이미지 수정<br/>이미지 삭제|[ Jobara의 API 문서 보기👆 ](https://sunset-knuckle-4bc.notion.site/Jobara-API-11b1c3a25c8b8025a18fdf7c2da866b0?pvs=4)|
 
