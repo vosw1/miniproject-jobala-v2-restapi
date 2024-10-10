@@ -42,7 +42,7 @@
 | 개인 채용공고 검색 및 지원 | 기업 지원자 합격 |
 | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/f0351c06-a91f-45ee-bf83-7d3679df8306" width="400" height="300"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/be7a72a7-b2fe-4450-b6de-cf719d792449" width="400" height="300"/></p> |
 | 기업 인재 검색 및 포지션 제안 수락 | 기업 인재 스크랩 |
-| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/07781096-0f37-4573-930b-914f0ba2c46c" width="400" height="300"/></p> | <p align="center"><img src="https://github.com/user-attachments/assets/3f12aaf2-f26d-48ce-b9d8-81f0b46e633a" width="400" height="300"/></p> |
+| <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/07781096-0f37-4573-930b-914f0ba2c46c" width="400" height="300"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/be7a72a7-b2fe-4450-b6de-cf719d792449" width="400" height="300"/></p> |
 | 개인 채용공고 찜 | 커뮤니티 이용 |
 | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/7fd60978-84c8-4e9b-aa41-d03425d5ab2f" width="400" height="300"/></p> | <p align="center"><img src="https://github.com/vosw1/miniproject-jobala-v2-restapi/assets/153582401/e0753fe3-737e-4fed-939b-0bea59e1e5ee" width="400" height="300"/></p> |
 
